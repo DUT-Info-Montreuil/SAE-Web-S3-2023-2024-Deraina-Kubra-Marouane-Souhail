@@ -9,6 +9,7 @@ class Connexion {
 		self::$bdd = new PDO ($dsn, $user, $password);
 	}
 
+	
 
 
 }
