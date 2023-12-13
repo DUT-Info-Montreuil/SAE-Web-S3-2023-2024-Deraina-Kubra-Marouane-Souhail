@@ -8,7 +8,7 @@ class ControleurAccueil{
         $this->vue = new VueAccueil();
     }
     
-    public function accueil() {
+    public function exec() {
         $this->vue->afficherAccueil();
     }
 }

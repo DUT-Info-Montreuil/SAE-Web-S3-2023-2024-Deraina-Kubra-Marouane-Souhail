@@ -88,7 +88,7 @@
 <nav>
   <a href="index.php">Home</a>
   <a href="defense.php">Defense</a>
-  <a href="enemies.php">Enemies</a>
+  <a href="ennemis.php">Ennemis</a>
   <a href="profile.php">Profil</a>
   <a href="map.php">Carte</a>
   <a href="login.php">Connexion</a>
