@@ -3,7 +3,7 @@ class VueCompMenu extends VueCompGenerique {
 
 	public function __construct(){
 		$this->affichage .= '<nav div="nav"> <a href="index.php?module=defense">Defense</a>';
-		$this->affichage .= '<a href="index.php?module=ennemis">Ennemis</a>';
+		$this->affichage .= '<a href="index.php?module=ennemi">Ennemi</a>';
 		$this->affichage .= '<a href="index.php?module=profile">Profil</a>';
 		$this->affichage .= '<a href="index.php?module=map">Carte</a>';
 		$utilisateurConnecte = false;

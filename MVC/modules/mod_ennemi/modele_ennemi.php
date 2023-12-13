@@ -1,5 +1,5 @@
 <?php
-require_once "modules/mod_accueil/controleur_accueil.php"; // Assurez-vous que le chemin est correct
+require_once "modules/mod_ennemi/controleur_ennemi.php"; // Assurez-vous que le chemin est correct
 
 class ModEnnemi extends ModuleGenerique {
     

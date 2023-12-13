@@ -87,13 +87,18 @@
 </head>
 <body>
 
-    <?php 
+    <?php echo $menu->getAffichage() ?>
 
-    echo $menu->getAffichage() .
-    '<header>
-    <img src="Images/imageTitre.png" alt="Image à effet de coupe" style="float: right;">
-    <h1>Fantasy Fortress: The Return</h1>
-    </header>'; ?>
+    <header>
+        <img src="Images/imageTitre.png" onclick = "redirectToHome()" alt="Image à effet de coupe" style="float: right;">
+        <h1>Fantasy Fortress: The Return</h1>
+    </header>
+
+    <script>
+    function redirectToHome() {
+        window.location.href = "index.php";
+    }
+    </script>'; 
 
 
 <main>
