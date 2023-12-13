@@ -1,5 +1,5 @@
 <?php
-require_once "modules/mod_accueil/vue_ennemi.php"; 
+require_once "modules/mod_ennemi/vue_ennemi.php"; 
 
 class ControleurEnnemi{
     private $vue;
@@ -8,8 +8,8 @@ class ControleurEnnemi{
         $this->vue = new VueEnnemi();
     }
     
-    public function accueil() {
-        $this->vue->afficherAccueil();
+    public function exec() {
+        $this->vue->afficher();
     }
 }
 ?>
