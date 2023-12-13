@@ -13,7 +13,9 @@ class Site {
             case "profil" :
             case "map" :
             case "connexion" :
-            case "inscription" :
+				require_once "modules/mod_".$this->module_name."/modele_".$this->module_name.".php";
+				break;
+            case "inscription" :	
             case "accueil" :
 				require_once "modules/mod_".$this->module_name."/modele_".$this->module_name.".php";
 				break;

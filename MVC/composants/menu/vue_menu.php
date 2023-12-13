@@ -6,13 +6,16 @@ class VueCompMenu extends VueCompGenerique {
 		$this->affichage .= '<a href="index.php?module=ennemis">Ennemis</a>';
 		$this->affichage .= '<a href="index.php?module=profile">Profil</a>';
 		$this->affichage .= '<a href="index.php?module=map">Carte</a>';
-		$this->affichage .= '<a href="index.php?module=inscription">Inscription</a>';
-		if (isset($_SESSION['login'])) {
-			$this->affichage .= '<a href="index.php?module=connexion&action=deconnexion">Déconnexion</a>';
-		}
-		else {
-			$this->affichage .= '<a href="index.php?module=connexion&action=form_connexion">Connexion</a>';
-		}
+		$utilisateurConnecte = false;
+		if (isset($_SESSION['user_id'])) {
+            $utilisateurConnecte = true;
+        }
+        if ($utilisateurConnecte) {
+            $this->affichage .= '<a href="index.php?module=connexion&action=deconnexion">Déconnexion</a>';
+        } else {
+            $this->affichage .= '<a href="index.php?module=connexion&action=connexion">Connexion</a>';
+            $this->affichage .= '<a href="index.php?module=connexion&action=afficher">Inscription</a>';
+        }
 		$this->affichage .= "</nav>";
 
 	}	
