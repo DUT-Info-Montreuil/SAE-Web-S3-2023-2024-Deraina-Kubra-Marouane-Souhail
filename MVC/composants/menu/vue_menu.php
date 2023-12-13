@@ -2,19 +2,18 @@
 class VueCompMenu extends VueCompGenerique {
 
 	public function __construct(){
-		$this->affichage .= '<ul><li><a href="index.php?module=defense">Defense</a></li>';
-		$this->affichage .= '<li><a href="index.php?module=ennemis">ennemis</a></li>';
-		$this->affichage .= '<ul><li><a href="index.php?module=profile">profile</a></li>';
-		$this->affichage .= '<li><a href="index.php?module=map">map</a></li>';
-		//$this->affichage .= '<ul><li><a href="index.php?module=connexion">connexion</a></li>';
-		$this->affichage .= '<li><a href="index.php?module=inscription">inscription</a></li>';
+		$this->affichage .= '<nav div="nav"> <a href="index.php?module=defense">Defense</a>';
+		$this->affichage .= '<a href="index.php?module=ennemis">Ennemis</a>';
+		$this->affichage .= '<a href="index.php?module=profile">Profil</a>';
+		$this->affichage .= '<a href="index.php?module=map">Carte</a>';
+		$this->affichage .= '<a href="index.php?module=inscription">Inscription</a>';
 		if (isset($_SESSION['login'])) {
-			$this->affichage .= '<li><a href="index.php?module=connexion&action=deconnexion">Déconnexion</a></li>';
+			$this->affichage .= '<a href="index.php?module=connexion&action=deconnexion">Déconnexion</a>';
 		}
 		else {
-			$this->affichage .= '<li><a href="index.php?module=connexion&action=form_connexion">Connexion</a></li>';
+			$this->affichage .= '<a href="index.php?module=connexion&action=form_connexion">Connexion</a>';
 		}
-		$this->affichage .= "</ul>";
+		$this->affichage .= "</nav>";
 
 	}	
 

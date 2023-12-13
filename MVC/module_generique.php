@@ -11,8 +11,8 @@ class ModuleGenerique {
 	}
 	
 	public function exec () {
+		
 		$this->controleur->exec();
-		echo'Hello';
 		$this->affichage = ob_get_clean();
 	
 	}

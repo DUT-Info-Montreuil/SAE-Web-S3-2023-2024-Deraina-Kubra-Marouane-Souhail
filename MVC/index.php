@@ -20,9 +20,8 @@ $footer = new ComposantFooter();
 
 
 $module_html = $site->get_module()->get_affichage();
-// var_dump($module_html);
-// exit;
-//include_once "template.php";
+
+include_once "template.php";
 
 
 

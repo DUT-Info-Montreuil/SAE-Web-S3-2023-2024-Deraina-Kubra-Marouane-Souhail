@@ -1,3 +1,4 @@
+<html>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -82,36 +83,22 @@
   #welcome {
     padding: 20px;
   }
-</style>
+  </style>
 </head>
 <body>
-<nav>
-  <a href="index.php">Home</a>
-  <a href="defense.php">Defense</a>
-  <a href="ennemis.php">Ennemis</a>
-  <a href="profile.php">Profil</a>
-  <a href="map.php">Carte</a>
-  <a href="login.php">Connexion</a>
-  <a href="signup.php">S'inscrire</a>
-</nav>
-<header>
-  <img src="imageTitre.png" alt="Image à effet de coupe" style="float: right;">
-  <h1>Fantasy Fortress: The Return</h1>
-</header>
+
+    <?php 
+
+    echo $menu->getAffichage() .
+    '<header>
+    <img src="imageTitre.png" alt="Image à effet de coupe" style="float: right;">
+    <h1>Fantasy Fortress: The Return</h1>
+    </header>'; ?>
+
+
 <main>
-<section id="welcome" class="content-container">
-    <img class="welcome-image" src="map.png" alt="Image à gauche de la description"> <!-- Remplacez par le chemin de votre image -->
-    <div class="welcome-text">
-    <h2>Description</h2>
-    <p>Bienvenue dans l’univers de “Fantasy Fortress: The Return”, un tower defense haut en couleur. 
-
-Votre mission est de défendre votre base contre les vagues d’ennemis qui cherchent à s’y infiltrer, et cela pendant plusieurs vagues. 
-
-Mais attention, dans ce jeu, les ennemis ne suivent pas un chemin prédéfini. Au contraire, le parcours de ces intrus est déterminé au fur et à mesure que vous posez vos tourelles. Plongez-vous dans un monde cartoon, avec des tourelles coloré et des ennemis tout aussi extravagants. </p>
-  </section>
+<?=$module_html?>
 </main>
-<footer>
-  <p>Copyright - Novembre 2023 - Kubra, Deraina, Marouane, Souhail</p>
-</footer>
+
+<footer><?php echo $footer->getAffichage();?></footer>
 </body>
-</html>

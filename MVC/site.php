@@ -25,8 +25,6 @@ class Site {
 	public function exec_module() {
 		$module_class = "Mod".$this->module_name;
 		$this->module = new $module_class();
-        // var_dump($this->module);
-        // exit;
 		$this->module->exec();
         
 	}

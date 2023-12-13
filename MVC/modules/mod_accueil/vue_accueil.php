@@ -7,8 +7,7 @@ class VueAccueil extends VueGenerique{
 	}
 
     public function afficherAccueil() {
-        echo 'Hello';
-        include_once('templates/accueil.php'); 
+       include_once('view/accueil.php'); 
     }
 }
 ?>
