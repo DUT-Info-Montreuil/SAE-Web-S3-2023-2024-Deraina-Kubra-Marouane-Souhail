@@ -91,7 +91,7 @@
 
     echo $menu->getAffichage() .
     '<header>
-    <img src="imageTitre.png" alt="Image à effet de coupe" style="float: right;">
+    <img src="Images/imageTitre.png" alt="Image à effet de coupe" style="float: right;">
     <h1>Fantasy Fortress: The Return</h1>
     </header>'; ?>
 

@@ -1,6 +1,6 @@
 <main>
 <section id="welcome" class="content-container">
-    <img class="welcome-image" src="map.png" alt="Image à gauche de la description"> <!-- Remplacez par le chemin de votre image -->
+    <img class="welcome-image" src="Images/map.png" alt="Image à gauche de la description"> <!-- Remplacez par le chemin de votre image -->
     <div class="welcome-text">
     <h2>Description</h2>
     <p>Bienvenue dans l’univers de “Fantasy Fortress: The Return”, un tower defense haut en couleur. 
