@@ -1,8 +1,8 @@
 <?php 
 class Connexion {
-	protected static $bdd;
+	public static $bdd;
 	
-	public function init_connexion() {
+	public static function init_connexion() {
 		$dsn = "mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw20164";
 		$user = "dutinfopw20164";
 		$password = "rytutyta";
