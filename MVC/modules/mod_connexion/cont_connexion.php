@@ -108,8 +108,6 @@ class ContConnexion {
         return $logo; // Retourner la valeur de $logo
     }
     
-    
-    
 
     public function deconnexion() {
         unset($_SESSION['user_id']);
