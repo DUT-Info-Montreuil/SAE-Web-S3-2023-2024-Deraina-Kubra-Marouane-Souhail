@@ -3,7 +3,7 @@ require_once 'mod_connexion.php';
 require_once 'vue_connexion.php';
 require_once '././fonction.php';
 
-class ContConnexion {
+class ControleurConnexion {
     public $vue_connexion;
     public $modele_connexion;
     private $action;
@@ -24,9 +24,8 @@ class ContConnexion {
     
             if ($utilisateur !== null && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
                 // Les informations de connexion sont correctes, initialisation de la session
-                $_SESSION['user_id'] = $utilisateur['id'];
+                $_SESSION['user_id'] = $utilisateur['idJoueur'];
                 echo "Connexion réussie !";
-                // Redirigez l'utilisateur vers une page d'accueil ou autre page après la connexion
                 header('Location: index.php');
                 exit;
             } else {
@@ -79,7 +78,7 @@ class ContConnexion {
             if ($this->modele_connexion->ajouterUtilisateur($nom, $mot_de_passe_hash, $logo)) {
                 echo "Inscription réussie !";
                 // Connectez l'utilisateur et redirigez-le vers la page d'accueil ou autre
-                $_SESSION['user_id'] = $this->modele_connexion->getUserIdByNom($nom);
+                $_SESSION['user_id'] = $this->modele_connexion->verifierLoginExistant($nom);
                 header('Location: index.php'); // Assurez-vous que ce chemin est correct
                 exit;
             } else {
@@ -112,6 +111,7 @@ class ContConnexion {
     public function deconnexion() {
         unset($_SESSION['user_id']);
         echo "Vous êtes déconnecté.";
+        header('Location: index.php');
     }
    
 
@@ -140,9 +140,7 @@ class ContConnexion {
                 $this->deconnexion();
                 break;
             default:
-                // Action par défaut si l'action n'est pas reconnue
-                $this->inscription();
-                break;
+                die ("Action inexistante");
         }
     }
 }

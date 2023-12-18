@@ -5,7 +5,7 @@ class ModeleConnexion extends Connexion {
   
     public function verifierLoginExistant($nom) {
 		try {
-			$query = self::$bdd->prepare("SELECT id, mot_de_passe FROM joueurs WHERE Nom = :nom");
+			$query = self::$bdd->prepare("SELECT idJoueur, mot_de_passe FROM Joueur WHERE Nom = :nom");
 			$query->bindParam(':nom', $nom, PDO::PARAM_STR);
 			$query->execute();
 			return $query->fetch(PDO::FETCH_ASSOC);
@@ -17,7 +17,7 @@ class ModeleConnexion extends Connexion {
 public function ajouterUtilisateur($nom, $mot_de_passe_hash, $logo) {
     try {
         // Préparation de la requête avec le champ Argent inclus
-        $stmt = self::$bdd->prepare("INSERT INTO joueurs (Nom, Mot_de_passe, Logo, Argent) VALUES (:nom, :mot_de_passe, :logo, :argent)");
+        $stmt = self::$bdd->prepare("INSERT INTO Joueur (Nom, Mot_de_passe, Logo, Argent) VALUES (:nom, :mot_de_passe, :logo, :argent)");
 
         // Liaison des paramètres
         $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
