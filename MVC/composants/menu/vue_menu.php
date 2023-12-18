@@ -5,7 +5,7 @@ class VueCompMenu extends VueCompGenerique {
 		$this->affichage .= '<nav div="nav"> <a href="index.php?module=defense">Defense</a>';
 		$this->affichage .= '<a href="index.php?module=ennemi">Ennemi</a>';
 		$this->affichage .= '<a href="index.php?module=profile">Profil</a>';
-		$this->affichage .= '<a href="index.php?module=carte">Carte</a>';
+		$this->affichage .= '<a href="index.php?module=carte&action=afficher">Carte</a>';
 		$utilisateurConnecte = false;
 		if (isset($_SESSION['user_id'])) {
             $utilisateurConnecte = true;

@@ -1,21 +1,17 @@
 <?php
 require_once 'vue_generique.php';
 
-class VueConnexion extends VueGenerique {
+class VueCarte extends VueGenerique {
     
     public function __construct() {
         parent::__construct();
     }
 
-    public function form_inscription($token) {
+    public function carte($cartes) {
          include_once('view/carte.php');
     }   
 
 
-    public function form_connexion() {
-        include_once('view/details.php');
-    }
-    
 
 }
 

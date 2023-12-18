@@ -9,12 +9,20 @@ class ControleurCarte {
     private $action;
 
     public function __construct() {
-        $this->vue_carte = new VueConnexion();
+        $this->vue_carte = new VueCarte();
         $this->modele_carte = new ModeleCarte();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'bienvenue';
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'afficher';
     }
-
+    
+    public function getImagesCartes () {
+        return $this->modele_carte->getCartes();
+    }
  
+    public function afficher() {
+        $cartes = $this->modele_carte->getCartes(); 
+        $this->vue_carte->carte($cartes);
+    }
+    
     
 
   
@@ -25,13 +33,7 @@ class ControleurCarte {
     public function exec() {
         switch ($this->action) {
             case 'afficher':
-                $this->form_inscription();
-                break;
-            case'inscription':
-                $this->inscription();
-                break;
-            case 'connexion':
-                $this->connexion();
+                $this->afficher();
                 break;
             default:
                 die ("Action inexistante");
