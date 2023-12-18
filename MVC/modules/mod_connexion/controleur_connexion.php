@@ -11,7 +11,7 @@ class ControleurConnexion {
     public function __construct() {
         $this->vue_connexion = new VueConnexion();
         $this->modele_connexion = new ModeleConnexion();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'bienvenue';
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'connexion';
     }
 
     public function connexion() {
