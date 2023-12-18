@@ -98,7 +98,7 @@
     function redirectToHome() {
         window.location.href = "index.php";
     }
-    </script>'; 
+    </script> 
 
 
 <main>
