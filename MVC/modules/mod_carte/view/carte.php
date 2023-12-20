@@ -22,7 +22,7 @@
             right: 0;
             bottom: 0;
             z-index: -1; /* Placez le pseudo-élément en arrière-plan */
-            background: url('././Images/lesCartes.png') no-repeat center center fixed; 
+            background: url('././Images/fondCarte.png') no-repeat center center fixed; 
             background-size: cover;
             filter: blur(5px); /* Réglez ceci pour l'intensité du flou */
         }
