@@ -51,7 +51,6 @@
     display: flex; /* Utilise Flexbox pour aligner les enfants de main */
     flex-direction: column; /* Empile les enfants de main verticalement */
     justify-content: center; /* Centre verticalement dans main */
-    align-items: center; /* Centre horizontalement dans main */
     height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
     text-align: center; /* Centre le texte à l'intérieur de main */
   }
@@ -87,13 +86,19 @@
 </head>
 <body>
 
-    <?php 
+    <?php echo $menu->getAffichage() ?>
 
-    echo $menu->getAffichage() .
-    '<header>
-    <img src="Images/imageTitre.png" alt="Image à effet de coupe" style="float: right;">
-    <h1>Fantasy Fortress: The Return</h1>
-    </header>'; ?>
+    <header>
+        <img src="Images/imageTitre.png" onclick = "redirectToHome()" alt="Image à effet de coupe" style="float: right;">
+        <h1>Fantasy Fortress: The Return</h1>
+    </header>
+
+    <script>
+    function redirectToHome() {
+        window.location.href = "index.php";
+    }
+    </script>
+
 
 
 <main>

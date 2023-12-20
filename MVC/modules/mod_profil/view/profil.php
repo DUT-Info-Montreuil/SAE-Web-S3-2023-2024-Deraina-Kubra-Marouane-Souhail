@@ -211,7 +211,7 @@ p {
         <div class="blue-square">
             <div class="vertical-rectangle"></div>
             <div class="text-above">Partie Jouées</div>
-            30
+            <?php //echo ModeleProfil::NbPartieJouee(); ?>
         </div>
 
         <div class="blue-square">
