@@ -12,6 +12,7 @@ class ControleurProfil{
 
         if(isset($_SESSION['user_id'])) {
         $this->vue->afficherProfil();
+        
         }else{
             header("Location: index.php?module=connexion&action=connexion"); 
             exit();

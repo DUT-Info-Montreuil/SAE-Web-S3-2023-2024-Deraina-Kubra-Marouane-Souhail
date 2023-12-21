@@ -3,6 +3,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400&display=swap');
 
+
+
   /* Styles des boutons */
   .custom-button {
     background-color: #6F6B47;
@@ -195,9 +197,14 @@ p {
     transform: skewX(30deg);
 }
 
+.custom-font {
+  font-family: 'Julius Sans One', sans-serif;
+}
+
 </style>
 
-<body>
+<?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
+?>
 
 <body>  
 
@@ -205,30 +212,35 @@ p {
         <div class="blue-square">
             <div class="vertical-rectangle"></div>
             <div class="text-above">Partie Gagnée</div>
-            30
+            <?php
+            echo ModeleProfil::NbPartieGagnee(); ?>
         </div>
 
         <div class="blue-square">
             <div class="vertical-rectangle"></div>
             <div class="text-above">Partie Jouées</div>
-            <?php //echo ModeleProfil::NbPartieJouee(); ?>
+            <?php
+            echo ModeleProfil::NbPartieJouee(); ?>
         </div>
 
         <div class="blue-square">
             <div class="vertical-rectangle"></div>
             <div class="text-above">Partie Perdues</div>
-            30
+            <?php
+            echo ModeleProfil::NbPartiePerdu(); ?>
         </div>
 
         <div class="blue-square bottom-blue-square">
         <div class="vertical-rectangle"></div>
             <div class="text-above">Argent</div>
-            30
+            <?php
+            echo ModeleProfil::NbArgent(); ?>
         </div>
 
         <div class="rectangleReussite">
           <div class="text-reu">Réussite</div>
-          %
+          <?php
+            echo ModeleProfil::reussite();?>%
         </div>
     </div>
 
@@ -257,8 +269,10 @@ p {
 
             <div class="text-tournoi">
                 <p class="tournament-info">A participé à</p>
+                <p><span class="custom-font"><?php echo ModeleProfil::participeTournoi(); ?></span></p>
                 <p class="tournament-info">tournois</p><br></br>
                 <p class="tournament-info">A créé</p>
+                <p><span class="custom-font"><?php echo ModeleProfil::creerTournoi(); ?></span></p>
                 <p class="tournament-info">tournois</p>
             </div>
         </div>
