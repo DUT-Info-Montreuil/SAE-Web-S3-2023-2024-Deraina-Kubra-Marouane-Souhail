@@ -11,13 +11,29 @@
             padding: 0;
         }
 
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #333;
+
+        .back-button {
+             position: absolute; 
+             top: 200px; 
+            right: 20px; 
         }
 
+        .button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }   
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+
         .defense-container {
+            position: relative;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -57,6 +73,9 @@
     </style>
 </head>
 <body>
+    <div class="back-button">
+         <a href="index.php?module=defense" class="button">Retour à la Défense</a>
+    </div>
     <h1>Détails des Pièges</h1>
     <div class="defense-container">
         <?php foreach ($detailsPiege as $piege) : ?>

@@ -10,7 +10,7 @@
     padding: 0; /* Aucun espacement intérieur */
     background-color: #f0f0f0; /* Couleur de fond de la page */
     color: #333; /* Couleur de texte par défaut */
-}
+    }
 
      
      a {
@@ -71,13 +71,13 @@
     <!-- Section Pièges -->
     <a href="index.php?module=defense&action=piege" class="defense-item">
         <h2>PIÈGES</h2>
-        <img src="./Images/piege.png" alt="Pièges">
+        <img src="./Images/piege1.png" alt="Pièges">
     </a>
 
     <!-- Section Tourelles -->
     <a href="index.php?module=defense&action=tourelle" class="defense-item">
         <h2>TOURELLES</h2>
-        <img src="./Images/tourelle.png" alt="Tourelles">
+        <img src="./Images/tourelle1.png" alt="Tourelles">
     </a>
 
 </div>
