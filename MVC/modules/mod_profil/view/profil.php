@@ -2,6 +2,7 @@
   /* Styles CSS */
   @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 
 
@@ -201,12 +202,45 @@ p {
   font-family: 'Julius Sans One', sans-serif;
 }
 
+.image_circulaire {
+        width: 100px; 
+        height: 100px; 
+        border-radius: 50%; 
+        overflow: hidden; 
+    }
+
+.image_circulaire img {
+    width: 100%; 
+    height: auto; 
+}
+
+.pseudo-font {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 17px;
+    margin-top:10px;
+}
 </style>
 
 <?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
 ?>
 
 <body>  
+
+    <div class="pseudo">
+      <p><span class="pseudo-font"><?php echo ModeleProfil::pseudo(); ?></span></p>
+    </div>
+
+    <div class="photo_profil">
+    <?php
+        $cheminImage = ModeleProfil::photoDeProfil();
+        if (is_string($cheminImage) && !empty($cheminImage)) {
+            echo '<div class="image_circulaire"><img src="' . $cheminImage . '" alt="Photo de profil"></div>';
+        } else {
+            echo 'Pas de photo de profil';
+        }
+        ?>
+    </div>
+
 
     <div class="blue-squares-container">
         <div class="blue-square">

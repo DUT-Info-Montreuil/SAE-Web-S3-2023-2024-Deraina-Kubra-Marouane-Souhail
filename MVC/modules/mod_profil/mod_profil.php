@@ -72,11 +72,36 @@ class ModeleProfil extends Connexion {
     }
 
     public static function photoDeProfil(){
-
+        $userID = $_SESSION['user_id'];
+    
+        $query = "SELECT Logo FROM Joueur WHERE idJoueur = :userID";
+        $statement = parent::$bdd->prepare($query);
+    
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $statement->execute();
+    
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        if (isset($result['Logo'])) {
+            return $result['Logo'];
+        } else {
+            return null;
+        }
     }
+    
 
     public static function pseudo(){
-
+        $userID = $_SESSION['user_id'];
+            
+        $query = "SELECT Nom from Joueur where idJoueur = :userID";
+        $statement = parent::$bdd->prepare($query);
+        
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+        
+        $statement->execute(); 
+        $result = $statement->fetchColumn();
+    
+        return $result;
     }
 
     public static function creerTournoi(){
