@@ -75,7 +75,7 @@
     </a>
 
     <!-- Section Tourelles -->
-    <a href="details_tourelle.php" class="defense-item">
+    <a href="index.php?module=defense&action=tourelle" class="defense-item">
         <h2>TOURELLES</h2>
         <img src="./Images/tourelle.png" alt="Tourelles">
     </a>

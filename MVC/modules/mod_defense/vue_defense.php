@@ -14,6 +14,10 @@ class VueDefense extends VueGenerique {
     public function afficherPiege($detailsPiege) {
         include_once('view/details_piege.php');
     }
+
+    public function afficherTourelle($detailsTourelle) {
+        include_once('view/details_tourelle.php');
+    }
 }
 
 

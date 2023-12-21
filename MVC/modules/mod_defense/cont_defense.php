@@ -22,6 +22,13 @@ class ControleurDefense {
     $this->vue->afficherPiege($detailsPiege);
 }
 
+public function afficherTourelle() {
+    $detailsTourelle = $this->modele_defense->getDetailsTourelle();
+    $this->vue->afficherTourelle($detailsTourelle);
+}
+
+
+
     public function exec() {
         switch ($this->action) {
             case 'afficher':
@@ -29,10 +36,12 @@ class ControleurDefense {
                 break;
             case 'piege':
                 $this->afficherPiege();
-                break;    
+                break;   
+            case 'tourelle': 
+                $this->afficherTourelle();
+                break;     
             default:
-                // Action par défaut si l'action n'est pas reconnue
-                $this->inscription();
+                $this->afficher();
                 break;
         }
     }
