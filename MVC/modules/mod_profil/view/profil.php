@@ -4,7 +4,9 @@
   @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-
+  main{
+    align-items:stretch;
+  }
 
   /* Styles des boutons */
   .custom-button {
@@ -44,47 +46,55 @@
 }
 
 .bottom-left {
-  
   margin-top: 100px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display:flex;
+  align-items: center; 
 }
-
+/*
 .info-blocks {
     display: flex;
     justify-content: space-between;
-    /* Ajoutez d'autres styles si nécessaire */
+   */ /* Ajoutez d'autres styles si nécessaire }*/
+.tournament-info {
+  display:flex;
+  font-size: 25px;
+  color: #000000;
+  font-family: 'Julius Sans One', sans-serif;
 }
-.text-tournoi .tournament-info {
+
+.text-score {
+ /*display: flex;*/
+  right:10%;
+  top:20%;
+  flex-direction: column;
+  align-items: flex-end;
   font-size: 25px;
   color: #000000;
   font-family: 'Julius Sans One', sans-serif;
 }
 
 .text-tournoi {
-  position: absolute;
-  bottom:10%;
-}
-
-.text-score .score-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Pour centrer horizontalement */
+  justify-content: flex-end; /* Pour aligner en bas de la page */
+  margin-top: auto; /* Le maintien vers le bas de la page */
+  text-align: center;
   font-size: 25px;
   color: #000000;
   font-family: 'Julius Sans One', sans-serif;
 }
 
-.text-score{
-  position: absolute;
-  top:20%;
-  margin-top:10px;
-  right: 20%;
+
+.score-info {
+  color: #000000;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 p {
     font-family: 'Inknut Antiqua', sans-serif;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     text-align: left;
     margin-left: 20;
   }
@@ -202,23 +212,34 @@ p {
   font-family: 'Julius Sans One', sans-serif;
 }
 
+.profile-container {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+}
+
+.photo_profil {
+  margin-right: 20px; /* Espacement entre la photo et le pseudo */
+}
+
 .image_circulaire {
-        width: 100px; 
-        height: 100px; 
-        border-radius: 50%; 
-        overflow: hidden; 
-    }
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
 
 .image_circulaire img {
-    width: 100%; 
-    height: auto; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.pseudo-font {
-    font-family: 'Poppins', sans-serif; 
-    font-size: 17px;
-    margin-top:10px;
+.pseudo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
 }
+
 </style>
 
 <?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
@@ -226,6 +247,7 @@ p {
 
 <body>  
 
+<div class="profile-container">
     <div class="pseudo">
       <p><span class="pseudo-font"><?php echo ModeleProfil::pseudo(); ?></span></p>
     </div>
@@ -240,7 +262,7 @@ p {
         }
         ?>
     </div>
-
+    </div>
 
     <div class="blue-squares-container">
         <div class="blue-square">
@@ -276,6 +298,12 @@ p {
           <?php
             echo ModeleProfil::reussite();?>%
         </div>
+
+      <div class="text-score">
+          <p class="score-info">Classement :</p><br></br>
+          <p class="score-info">Score :</p>
+      </div>
+
     </div>
 
     <p>COMMUNAUTÉ :</p>
@@ -290,25 +318,20 @@ p {
         <button class="custom-button">Créer un tournoi</button>
         <button class="custom-button">Rejoindre un tournoi</button>
         </div>
-
-        <div class="bottom-left">
-        <button class="custom-button">Prendre une mission</button>
-        </div>
       </div>
-        <div class="info-blocks">
-            <div class="text-score">
-                <p class="score-info">Classement :</p><br></br>
-                <p class="score-info">Score :</p>
-            </div>
+      <div class="bottom-left">
+        <button class="custom-button">Prendre une mission</button>
+      </div>
 
-            <div class="text-tournoi">
-                <p class="tournament-info">A participé à</p>
-                <p><span class="custom-font"><?php echo ModeleProfil::participeTournoi(); ?></span></p>
-                <p class="tournament-info">tournois</p><br></br>
-                <p class="tournament-info">A créé</p>
-                <p><span class="custom-font"><?php echo ModeleProfil::creerTournoi(); ?></span></p>
-                <p class="tournament-info">tournois</p>
-            </div>
+
+      <div class="text-tournoi">
+        <p class="tournament-info">A participé à</p>
+        <p><span class="custom-font"><?php echo ModeleProfil::participeTournoi(); ?></span></p>
+        <p class="tournament-info">tournois</p>
+        <p class="tournament-info">A créé</p>
+        <p><span class="custom-font"><?php echo ModeleProfil::creerTournoi(); ?></span></p>
+        <p class="tournament-info">tournois</p>
+
         </div>
     </div>
 
