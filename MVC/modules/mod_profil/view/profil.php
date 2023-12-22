@@ -240,6 +240,12 @@ p {
   font-size: 17px;
 }
 
+.icon {
+    display:flex;
+    margin-right:20px;
+    justify-content: flex-end;
+}
+
 </style>
 
 <?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
@@ -262,6 +268,12 @@ p {
         }
         ?>
     </div>
+    </div>
+
+    <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 12 12">
+                    <path fill="gray" d="M2 5.248V7.5A1.5 1.5 0 0 0 3.5 9h5A1.5 1.5 0 0 0 10 7.5V5.248L6.205 6.956a.5.5 0 0 1-.41 0zm.037-1.08L6 5.952l3.963-1.784A1.5 1.5 0 0 0 8.5 3h-5a1.5 1.5 0 0 0-1.463 1.168"/>
+                </svg>
     </div>
 
     <div class="blue-squares-container">
