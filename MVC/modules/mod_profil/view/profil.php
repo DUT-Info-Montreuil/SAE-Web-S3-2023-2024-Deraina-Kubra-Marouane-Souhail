@@ -315,12 +315,49 @@ p {
   right: 0; /* Aligner à droite */
   top: 65%; /* Positionner verticalement au milieu */
   transform: translateY(-50%); /* Centrer verticalement */
-  width: 300px; /* Largeur du pop-up */
+  width: 400; /* Largeur du pop-up */
   height: auto; /* Hauteur automatique */
   z-index: 2; /* Assurez-vous qu'il soit au-dessus des autres éléments */
-  background-color: #fefefe; /* Couleur de fond */
-  box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de profondeur */
   border-radius: 10px 0 0 10px; /* Arrondir les coins à gauche */
+}
+
+/* Styles pour le contenu du pop-up des messages reçus */
+.messagesContent {
+    background-color: rgba(242, 242, 242, 0.8); /* Fond légèrement transparent */
+    padding: 20px; /* Espacement intérieur */
+    border-radius: 10px; /* Coins arrondis */
+}
+
+.messagesContent h2 {
+    margin-top: 0; /* Supprimer la marge supérieure du titre h2 */
+}
+
+.messagesContent ul {
+    list-style-type: none; /* Supprimer les puces de la liste */
+    padding: 0; /* Supprimer le padding de la liste */
+}
+
+.messagesContent li {
+    margin-bottom: 10px; /* Espacement entre les messages */
+    padding: 10px; /* Espacement intérieur du message */
+    border-radius: 10px; /* Coins arrondis pour le message */
+    background-color: #fff; /* Couleur de fond du message */
+    border: 1px solid #ccc; /* Bordure autour du message */
+}
+
+.messagesContent li:last-child {
+    margin-bottom: 0; /* Supprimer l'espacement en bas du dernier message */
+}
+
+.messagesContent strong {
+    color: #007BFF; /* Couleur du nom de l'expéditeur */
+    display: block; /* Afficher le nom de l'expéditeur sur une nouvelle ligne */
+    margin-bottom: 5px; /* Espacement entre le nom et le contenu */
+}
+
+/* Ligne de séparation entre les messages */
+.messagesContent li + li {
+    border-top: 1px solid #ccc;
 }
 
 
@@ -446,16 +483,22 @@ p {
 
 <!-- Pop-up pour les messages reçus -->
 <div id="messagesPopup" class="messagesPopupModal">
-  <div class="modal-content">
+<div class="modal-content messagesContent">
     <span class="close">&times;</span>
     <h2>Messages reçus</h2>
-    <!-- Contenu du pop-up ici -->
+    <ul>
+      <?php
+      // Récupérez les contenus des messages
+      $messages = ModeleProfil::getReceivedMessagesWithSenderName();
+      
+      foreach ($messages as $message) {
+          echo '<li><strong>' . htmlspecialchars($message['nomExpediteur']) . ':</strong> ' .
+               htmlspecialchars($message['contenuMessage']) . '</li>';
+      }
+      ?>
+    </ul>
   </div>
 </div>
-
-
-
-
 
     <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
 
