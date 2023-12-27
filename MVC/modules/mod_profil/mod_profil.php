@@ -147,6 +147,24 @@ class ModeleProfil extends Connexion {
         return $result !== null ? $result : 0; 
     }
 
+    public static function getReceivedMessagesWithSenderName(){
+        $userID = $_SESSION['user_id'];
+    
+    // Remplacez cette requête par celle qui convient à votre base de données
+    $query = "SELECT e.nom AS nomExpediteur, m.contenu AS contenuMessage
+              FROM EffectuerMessage m
+              JOIN Expediteur e ON m.idEmetteur = e.id
+              WHERE m.idDest = :userID";
+    
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    
+    // Récupérez les résultats sous forme de tableau associatif
+    $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $messages;
+}
 }
 
 

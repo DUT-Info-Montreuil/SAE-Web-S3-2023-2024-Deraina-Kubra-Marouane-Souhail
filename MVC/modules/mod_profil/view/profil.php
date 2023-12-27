@@ -309,6 +309,21 @@ p {
   box-sizing: border-box; 
 }
 
+.messagesPopupModal {
+  display: none;
+  position: fixed; /* Position fixe sur la page */
+  right: 0; /* Aligner à droite */
+  top: 65%; /* Positionner verticalement au milieu */
+  transform: translateY(-50%); /* Centrer verticalement */
+  width: 300px; /* Largeur du pop-up */
+  height: auto; /* Hauteur automatique */
+  z-index: 2; /* Assurez-vous qu'il soit au-dessus des autres éléments */
+  background-color: #fefefe; /* Couleur de fond */
+  box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de profondeur */
+  border-radius: 10px 0 0 10px; /* Arrondir les coins à gauche */
+}
+
+
 
 </style>
 
@@ -428,6 +443,18 @@ p {
 
         </div>
     </div>
+
+<!-- Pop-up pour les messages reçus -->
+<div id="messagesPopup" class="messagesPopupModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Messages reçus</h2>
+    <!-- Contenu du pop-up ici -->
+  </div>
+</div>
+
+
+
 
 
     <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
