@@ -360,6 +360,80 @@ p {
     border-top: 1px solid #ccc;
 }
 
+.tournoi-modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionnement fixe */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largeur complète */
+    height: 100%; /* Hauteur complète */
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    z-index: 100; /* S'assure qu'il est au-dessus des autres éléments */
+    align-items: center; /* Centre verticalement (pourrait ne pas être nécessaire sans flex) */
+    justify-content: center; /* Centre horizontalement (pourrait ne pas être nécessaire sans flex) */
+    text-align: center; /* Centrer le texte pour le contenu */
+}
+
+.tournoi-modal-content {
+    background-color: #fff; /* Fond blanc pour le contenu */
+    padding: 30px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
+    width: 60%; /* Largeur du modal */
+    max-width: 700px; /* Largeur maximale pour éviter qu'il soit trop large */
+    margin: auto; /* Centrage horizontal */
+    position: relative; /* Positionnement relatif */
+    top: 50%; /* Déplacer de 50% de la hauteur du parent */
+    transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
+    display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
+
+
+
+/* Style pour le bouton de fermeture */
+.tournoi-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+}
+
+.tournoi-close:hover {
+    color: #666;
+}
+
+/* Styles pour les champs du formulaire */
+input[type=text], input[type=date], input[type=number], textarea {
+    width: 80%; /* Largeur des champs */
+    padding: 10px;
+    margin: 10px 0; /* Espacement */
+    border: 1px solid #ddd; /* Bordure subtile */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+/* Style pour le bouton de soumission */
+button[type=submit] {
+    background-color: #4CAF50; /* Vert */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer;
+    font-size: 18px; /* Taille du texte */
+}
+
+button[type=submit]:hover {
+    background-color: #45a049; /* Vert foncé */
+}
+
+/* Styles pour les étiquettes (labels) */
+label {
+    display: block; /* Chaque label sur une nouvelle ligne */
+    margin-bottom: 5px; /* Espacement en dessous du label */
+    font-weight: bold; /* Texte en gras */
+}
 
 
 </style>
@@ -461,7 +535,7 @@ p {
         <button class="custom-button">Envoyer de l'argent</button>
         </div>
         <div class="right-buttons">
-        <button class="custom-button">Créer un tournoi</button>
+        <button class="custom-button" id="openTournoi">Créer un tournoi</button>
         <button class="custom-button">Rejoindre un tournoi</button>
         </div>
       </div>
@@ -500,6 +574,29 @@ p {
   </div>
 </div>
 
+<!-- Pop-up pour la création tournoi  -->
+<div class="tournoi-modal" id="tournamentModal">
+    <div class="tournoi-modal-content">
+        <span class="tournoi-close" id="closeTournoiModal">&times;</span>
+        <h1>Créer un tournoi</h1>
+        <form action="index.php?module=profil&action=exec" method="post">
+            <input type="text" name="nom" placeholder="Nom du tournoi" required>
+            <textarea name="regle" placeholder="Règles du tournoi" required></textarea>
+            <input type="date" name="dateDebut" placeholder="Date de début" required>
+            <input type="date" name="dateFin" placeholder="Date de fin" required>
+            <input type="number" name="capacite" placeholder="Capacité" required>
+            <input type="number" name="recompense" placeholder="Récompense" required>
+            <button type="submit" name="submitTournoi">Créer le tournoi</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/boiteMessage.js"></script>
     <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
+    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/créerTournoi.js"></script>
+
 
 </body>

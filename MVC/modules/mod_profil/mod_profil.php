@@ -3,10 +3,6 @@ require_once "connexion.php";
 
 class ModeleProfil extends Connexion {
 
-    public function  __construct(){
-        parent::__construct();
-	}
-
     public static function NbPartieJouee(){
     
         $userID = $_SESSION['user_id'];
@@ -164,6 +160,23 @@ class ModeleProfil extends Connexion {
         $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
     
         return $messages;
+    }
+
+    // Ajouter un nouveau tournoi
+    public function creationTournoi($idCreateur, $nom, $regle, $dateDebut, $dateFin, $capacite, $recompense) {
+        $query = "INSERT INTO Tournoi (id_Createur, Nom, Regle, DateDebut, DateFin, Capacite, Recompense) VALUES (:idCreateur, :nom, :regle, :dateDebut, :dateFin, :capacite, :recompense)";
+        
+        $statement = parent::$bdd->prepare($query);
+        
+        $statement->bindParam(':idCreateur', $idCreateur, PDO::PARAM_INT);
+        $statement->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $statement->bindParam(':regle', $regle, PDO::PARAM_STR);
+        $statement->bindParam(':dateDebut', $dateDebut);
+        $statement->bindParam(':dateFin', $dateFin);
+        $statement->bindParam(':capacite', $capacite, PDO::PARAM_INT);
+        $statement->bindParam(':recompense', $recompense, PDO::PARAM_INT);
+        
+        $statement->execute(); 
     }
     
 }
