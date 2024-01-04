@@ -9,5 +9,6 @@ class VueProfil extends VueGenerique{
     public function afficherProfil() {
        include_once('view/profil.php'); 
     }
+    
 }
 ?>

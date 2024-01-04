@@ -413,20 +413,6 @@ input[type=text], input[type=date], input[type=number], textarea {
     border-radius: 5px; /* Coins arrondis */
 }
 
-/* Style pour le bouton de soumission */
-button[type=submit] {
-    background-color: #4CAF50; /* Vert */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px; /* Coins arrondis */
-    cursor: pointer;
-    font-size: 18px; /* Taille du texte */
-}
-
-button[type=submit]:hover {
-    background-color: #45a049; /* Vert foncé */
-}
 
 /* Styles pour les étiquettes (labels) */
 label {
@@ -434,6 +420,133 @@ label {
     margin-bottom: 5px; /* Espacement en dessous du label */
     font-weight: bold; /* Texte en gras */
 }
+.tournoi-modal-content {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.tournoi-close {
+    float: right;
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #666;
+}
+
+.tournoi-list-container {
+    overflow-y: auto;
+    max-height: 400px; /* Hauteur maximale pour la liste des tournois */
+}
+.tournoi-item {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tournoi-item:hover {
+    background-color: #e9e9e9;
+}
+
+
+
+
+.tournoi-item label {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tournoi-item label:hover {
+    background-color: #e9e9e9;
+}
+
+.tournoi-item input[type="radio"] {
+    margin-right: 10px;
+}
+
+.tournoi-item input[type="radio"]:checked + .tournoi-nom {
+    color: #0056b3; /* Couleur lorsque le tournoi est sélectionné */
+}
+
+.join-tournoi-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.join-tournoi-btn:hover {
+    background-color: #45a049;
+}
+
+/* Style pour le bouton Rejoindre le Tournoi */
+.join-tournoi-btn {
+    background-color: #4CAF50; /* Vert */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.join-tournoi-btn:hover {
+    background-color: #45a049; /* Vert plus foncé */
+}
+
+/* Style pour le bouton Quitter le Tournoi */
+.quit-tournament-btn {
+    background-color: #d9534f; /* Rouge */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.quit-tournament-btn:hover {
+    background-color: #c9302c; /* Rouge plus foncé */
+}
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    <?php if (isset($_SESSION['popup_message'])): ?>
+        var listeTournoisDiv = document.getElementById('listeTournois');
+        listeTournoisDiv.innerHTML = `<div class="message-alerte">${"<?php echo $_SESSION['popup_message']; ?>"}</div>`;
+
+        <?php unset($_SESSION['popup_message']); ?>
+        <?php unset($_SESSION['popup_type']); ?>
+    <?php endif; ?>
+});
+</script>
+
 
 
 </style>
@@ -523,7 +636,7 @@ label {
           </div>
           <div class="modal-content">
               <p>Contenu :</p>
-              <textarea id="contenu">Bonjour, ....</textarea>
+              <textarea id="contenu">Bonjour, </textarea>
           </div>
           <div class="bas-droite-popM">
           <button id="envoyerMessageBtn" class="bouton-envoyer">
@@ -536,7 +649,7 @@ label {
         </div>
         <div class="right-buttons">
         <button class="custom-button" id="openTournoi">Créer un tournoi</button>
-        <button class="custom-button">Rejoindre un tournoi</button>
+        <button class="custom-button" id="joinTournamentButton">Rejoindre un tournoi</button>
         </div>
       </div>
       <div class="bottom-left">
@@ -592,11 +705,63 @@ label {
 </div>
 
 
+<!-- Pop-up pour rejoindre un tournoi -->
+<?php
+$tournois = ModeleProfil::getTournois();
+?>
+
+<?php
+$estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
+?>
+
+<form action="index.php?module=profil&action=exec" method="post">
+    <div class="tournoi-modal" id="joinTournamentModal">
+        <div class="tournoi-modal-content">
+            <span class="tournoi-close" id="closeJoinTournoiModal">&times;</span>
+            <h1>Rejoindre un tournoi</h1>
+            <div class="tournoi-list-container">
+                <div id="listeTournois">
+                <?php foreach ($tournois as $tournoi): ?>
+                        <label class="tournoi-item" for="tournoi_<?php echo $tournoi['Id_Tournoi']; ?>">
+                            <input type="radio" id="tournoi_<?php echo $tournoi['Id_Tournoi']; ?>" name="tournoiID" value="<?php echo $tournoi['Id_Tournoi']; ?>" style="display: none;">
+                            <h2 class="tournoi-nom"><?php echo htmlspecialchars($tournoi['Nom']); ?></h2>
+                                <div class="tournoi-info">
+                                    <span class="tournoi-label">Règles:</span>
+                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['Regle']); ?></span>
+                                </div>
+                                <div class="tournoi-info">
+                                    <span class="tournoi-label">Date de début:</span>
+                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['DateDebut']); ?></span>
+                                </div>
+                                <div class="tournoi-info">
+                                    <span class="tournoi-label">Date de fin:</span>
+                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['DateFin']); ?></span>
+                                </div>
+                                <div class="tournoi-info">
+                                    <span class="tournoi-label">Capacité:</span>
+                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['Capacite']); ?></span>
+                                </div>
+                                <div class="tournoi-info">
+                                    <span class="tournoi-label">Récompense:</span>
+                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['Recompense']); ?></span>
+                                </div>                 
+                <?php endforeach; ?>
+                </div>
+                <?php if ($estDejaInscrit): ?>
+                  <button type="submit" name="submitQuitTournoi" id="join-tournament-btn" class="quit-tournament-btn">Quitter le Tournoi Actuelle</button>
+                <?php else: ?>
+                    <button type="submit" name="submitJoinTournoi" id="join-tournament-btn" class="join-tournoi-btn">Rejoindre le Tournoi</button>
+                <?php endif; ?>
+        </div>
+    </div>
+</form>
+
 
 
     <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/boiteMessage.js"></script>
     <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
     <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/créerTournoi.js"></script>
+    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/rejoindreTournoi.js"></script>
 
 
 </body>

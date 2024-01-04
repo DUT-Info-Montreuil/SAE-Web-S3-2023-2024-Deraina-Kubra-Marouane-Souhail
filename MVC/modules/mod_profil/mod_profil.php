@@ -178,9 +178,47 @@ class ModeleProfil extends Connexion {
         
         $statement->execute(); 
     }
+
+    public static function getTournois() {
+        $query = "SELECT * FROM Tournoi";
+        $statement = parent::$bdd->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
     
+
+public static function estDejaInscrit($userID) {
+    $query = "SELECT count(*) FROM Participe WHERE idJoueur = :userID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchColumn() > 0;
 }
 
+ // Rejoindre un tournoi
+ public static function rejoindreTournoi($userID, $tournoiID) {
+    if (!self::estDejaInscrit($userID)) {
+        $query = "INSERT INTO Participe (idJoueur, Id_Tournoi) VALUES (:userID, :Id_Tournoi)";
+        $statement = parent::$bdd->prepare($query);
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $statement->bindParam(':Id_Tournoi', $tournoiID, PDO::PARAM_INT);
+        $statement->execute();
+        return true; // Rejoint avec succès
+    } else {
+        // L'utilisateur est déjà inscrit à un autre tournoi
+        return false;
+    }
+}
+// Méthode pour permettre à l'utilisateur de quitter un tournoi
+public static function quitterTournoi($userID) {
+    $query = "DELETE FROM Participe WHERE idJoueur = :userID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
 
-
+    // Vous pouvez vérifier si la suppression a été effectuée avec succès
+    // et retourner un booléen ou un message en conséquence
+    return $statement->rowCount() > 0;
+}
+}
 ?>

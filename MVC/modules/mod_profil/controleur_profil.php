@@ -28,16 +28,57 @@ class ControleurProfil{
 }
 
 
-    public function exec() {
-        if (isset($_SESSION['user_id'])) {
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitTournoi'])) {
+
+public function exec() {
+    if (isset($_SESSION['user_id'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['submitTournoi'])) {
                 $this->traiterCreationTournoi(); // Traiter la création de tournoi
+            } elseif (isset($_POST['submitJoinTournoi'])) {
+                $this->rejoindreTournoi(); // Traiter la demande de rejoindre un tournoi
+            } elseif (isset($_POST['submitQuitTournoi'])) {
+                $this->quitterTournoi(); // Traiter la demande de quitter un tournoi
             }
-            $this->vue->afficherProfil();
-        } else {
-            header("Location: index.php?module=connexion&action=connexion"); 
-            exit();
         }
+        $tournois = $this->modele->getTournois(); // Récupérer les tournois
+        $this->vue->afficherProfil($tournois); // Passer les tournois à la vue
+    } else {
+        header("Location: index.php?module=connexion&action=connexion"); 
+        exit();
     }
+}
+
+
+private function rejoindreTournoi() {
+    $userID = $_SESSION['user_id'];
+
+    // Vérifiez si 'tournoiID' est défini et non null
+    $tournoiID = isset($_POST['tournoiID']) ? $_POST['tournoiID'] : null;
+
+    if ($tournoiID === null) {
+        $_SESSION['popup_message'] = "Aucun tournoi sélectionné.";
+        return;
+    }
+
+    if (ModeleProfil::estDejaInscrit($userID)) {
+        $_SESSION['popup_message'] = "Vous êtes déjà inscrit à un tournoi.";
+    } elseif (ModeleProfil::rejoindreTournoi($userID, $tournoiID)) {
+        $_SESSION['popup_message'] = "Inscription au tournoi réussie.";
+    } else {
+        $_SESSION['popup_message'] = "Erreur lors de l'inscription au tournoi.";
+    }
+
+}
+
+
+private function quitterTournoi() {
+    $userID = $_SESSION['user_id'];
+
+    if (ModeleProfil::quitterTournoi($userID)) {
+        $_SESSION['popup_message'] = "Vous avez quitté le tournoi.";
+    } else {
+        $_SESSION['popup_message'] = "Erreur lors de la tentative de quitter le tournoi.";
+    }
+}
 }
 ?>
