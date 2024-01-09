@@ -314,7 +314,7 @@ p {
 
 <?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
 ?>
-
+<!DOCTYPE html>
 <body>  
 
 <div class="profile-container">
@@ -390,21 +390,37 @@ p {
           
         <button class="custom-button" id="openModal">Envoyer un message</button>
 
-        <div class="modal" id="myModal">
-          <div class="haut-pop-M">
-          <span class="close" id="closeModal">&times;</span>  
-          <p>Envoyer un message à :</p>
-          </div>
-          <div class="modal-content">
-              <p>Contenu :</p>
-              <textarea id="contenu">Bonjour, ....</textarea>
-          </div>
-          <div class="bas-droite-popM">
-          <button id="envoyerMessageBtn" class="bouton-envoyer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><defs><path id="letsIconsSendDuotone0" fill="currentColor" d="m7.692 11.897l1.41.47c.932.31 1.397.466 1.731.8c.334.334.49.8.8 1.73l.47 1.41c.784 2.354 1.176 3.53 1.897 3.53c.72 0 1.113-1.176 1.897-3.53l2.838-8.512c.552-1.656.828-2.484.391-2.921c-.437-.437-1.265-.161-2.92.39l-8.515 2.84C5.34 8.887 4.162 9.279 4.162 10c0 .72 1.177 1.113 3.53 1.897"/></defs><use href="#letsIconsSendDuotone0" fill-opacity=".25"/><use href="#letsIconsSendDuotone0" fill-opacity=".25"/><path fill="currentColor" d="m9.526 13.842l-2.062-.687a1 1 0 0 0-.87.116l-1.09.726a.8.8 0 0 0 .25 1.442l1.955.488a.5.5 0 0 1 .364.364l.488 1.955a.8.8 0 0 0 1.442.25l.726-1.09a1 1 0 0 0 .116-.87l-.687-2.062a1 1 0 0 0-.632-.632"/></svg>
-          </button>
-          </div>
+    <div class="modal" id="myModal">
+    <form action="index.php?module=mod_profil&action=EnvoyerMessage" method="post">
+        <div class="haut-pop-M">
+            <span class="close" id="closeModal">&times;</span>
+            <p>Envoyer un message à :</p>
+            <input class="form-control" type="texte" value="" id="search-user" placeholder="Rechercher un utilisateur">
         </div>
+
+        <div style="background-color: green;">
+          <div id="result-search"></div>
+        </div>
+
+        <div class="modal-content">
+            <p>Contenu :</p>
+            <textarea name="contenu" id="contenu">Bonjour, ....</textarea>
+        </div>
+        <div class="bas-droite-popM">
+            <button type="submit" id="envoyerMessageBtn" class="bouton-envoyer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                    <defs>
+                        <path id="letsIconsSendDuotone0" fill="currentColor" d="m7.692 11.897l1.41.47c.932.31 1.397.466 1.731.8c.334.334.49.8.8 1.73l.47 1.41c.784 2.354 1.176 3.53 1.897 3.53c.72 0 1.113-1.176 1.897-3.53l2.838-8.512c.552-1.656.828-2.484.391-2.921c-.437-.437-1.265-.161-2.92.39l-8.515 2.84C5.34 8.887 4.162 9.279 4.162 10c0 .72 1.177 1.113 3.53 1.897"/>
+                    </defs>
+                    <use href="#letsIconsSendDuotone0" fill-opacity=".25"/>
+                    <use href="#letsIconsSendDuotone0" fill-opacity=".25"/>
+                    <path fill="currentColor" d="m9.526 13.842l-2.062-.687a1 1 0 0 0-.87.116l-1.09.726a.8.8 0 0 0 .25 1.442l1.955.488a.5.5 0 0 1 .364.364l.488 1.955a.8.8 0 0 0 1.442.25l.726-1.09a1 1 0 0 0 .116-.87l-.687-2.062a1 1 0 0 0-.632-.632"/>
+                </svg>
+            </button>
+        </div>
+    </form>
+    </div>
+
         
         <button class="custom-button">Envoyer de l'argent</button>
         </div>
@@ -429,7 +445,27 @@ p {
         </div>
     </div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#search-user').on('input', function() {
+            var searchTerm = $(this).val().trim();
+
+            $.ajax({
+                type: 'GET',
+                url: '/SAE_DevWeb/MVC/modules/mod_profil/controleur_profil.php', 
+                data: { action: 'rechercherUtilisateur', user: searchTerm },
+                success: function(data) {
+                    $('#result-search').html(data);
+                },
+                error: function() {
+                    $('#result-search').html('Une erreur est survenue lors de la recherche.');
+                }
+            });
+        });
+    });
+</script>
 
 </body>
+</html>

@@ -3,10 +3,6 @@ require_once "connexion.php";
 
 class ModeleProfil extends Connexion {
 
-    public function  __construct(){
-        parent::__construct();
-	}
-
     public static function NbPartieJouee(){
     
         $userID = $_SESSION['user_id'];
@@ -147,8 +143,53 @@ class ModeleProfil extends Connexion {
         return $result !== null ? $result : 0; 
     }
 
+    public function envoyerMessageBd($idDestinateur, $contenu){
+
+        $sql = "INSERT INTO EffectuerMessage (idEmeteur, idDest, contenu) VALUES (?, ?, ?)";
+
+        $stmt =  parent::$bdd->prepare($sql);
+    
+        if ($stmt) {
+            $idEmeteur = $_SESSION['user_id']; 
+            $stmt->bind_param("iis", $idEmeteur, $idDestinateur, $contenu);
+            $stmt->execute();
+    
+            if ($stmt->affected_rows > 0) {
+                echo "Le message a été envoyé avec succès.";
+            } else {
+                echo "Erreur lors de l'envoi du message.";
+            }
+    
+            $stmt->close();
+        } else {
+            echo "Erreur de préparation de la requête.";
+        }
+    }
+
+    public function rechercherUtilisateur(){
+        $results = ''; 
+    
+        if (isset($_GET['user'])) {
+            $searchTerm = $_GET['user'];
+           
+            $sql = "SELECT * FROM Joueur WHERE Nom LIKE '%$searchTerm%'";
+    
+            $result = parent::$bdd->query($sql);
+    
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $results .= "<div>" . $row['Nom'] . "</div>";
+                }
+            } else {
+                $results = "Aucun résultat trouvé";
+            }
+        } else {
+            $results = "Aucune valeur de recherche spécifiée";
+        }
+    
+        return $results; 
+    }
+
 }
-
-
 
 ?>
