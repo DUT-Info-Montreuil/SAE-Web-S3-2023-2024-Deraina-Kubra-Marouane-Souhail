@@ -438,7 +438,8 @@ label {
 
 </style>
 
-<?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
+<?php //require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
+require_once "modules/mod_profil/mod_profil.php";
 ?>
 
 <body>  
