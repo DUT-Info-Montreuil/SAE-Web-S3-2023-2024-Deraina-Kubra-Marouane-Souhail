@@ -1,8 +1,10 @@
 <style>
+
   /* Styles CSS */
   @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  
 
   main{
     align-items:stretch;
@@ -534,8 +536,17 @@ label {
     background-color: #c9302c; /* Rouge plus foncé */
 }
 
+</style>
 
-<script>
+
+
+
+<?php 
+//require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
+?>
+
+
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
     <?php if (isset($_SESSION['popup_message'])): ?>
         var listeTournoisDiv = document.getElementById('listeTournois');
@@ -547,13 +558,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-
-</style>
-
-<?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
-?>
-
+<!DOCTYPE html>
 <body>  
 
 <div class="profile-container">
@@ -627,7 +632,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="button-groups">
         <div class="left-buttons">
           
-        <button class="custom-button" id="openModal">Envoyer un message</button>
+        <button class="custom-button" id="openModal" >Envoyer un message</button>
+
 
         <div class="modal" id="myModal">
           <div class="haut-pop-M">
@@ -758,10 +764,14 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 
 
 
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/boiteMessage.js"></script>
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/créerTournoi.js"></script>
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/rejoindreTournoi.js"></script>
+
+
+<script src="modules/mod_profil/view/boiteMessage.js"></script>
+<script src="modules/mod_profil/view/script.js"></script>
+<script src="modules/mod_profil/view/créerTournoi.js"></script>
+<script src="modules/mod_profil/view/rejoindreTournoi.js"></script>
+  
 
 
 </body>
+</html>
