@@ -395,7 +395,7 @@ p {
         <div class="haut-pop-M">
             <span class="close" id="closeModal">&times;</span>
             <p>Envoyer un message à :</p>
-            <input class="form-control" type="texte" value="" id="search-user" placeholder="Rechercher un utilisateur">
+            <input class="form-control" type="text" value="" id="search-user" placeholder="Rechercher un utilisateur">
         </div>
 
         <div style="background-color: green;">

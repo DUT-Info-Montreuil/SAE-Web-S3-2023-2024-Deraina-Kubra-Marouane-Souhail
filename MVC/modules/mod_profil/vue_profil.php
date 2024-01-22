@@ -1,4 +1,6 @@
 <?php
+include_once('C:\xampp\htdocs\SAE_DevWeb\MVC\vue_generique.php');
+
 class VueProfil extends VueGenerique{
 
     public function __construct () {
@@ -10,13 +12,5 @@ class VueProfil extends VueGenerique{
        include_once('view/profil.php'); 
     }
 
-    public function afficherResultatRecherche($results) {
-        echo "<div>Résultats de recherche :</div>";
-        echo "<ul>";
-        foreach ($results as $result) {
-            echo "<li>" . $result['Nom'] . "</li>";
-        }
-        echo "</ul>";
-    }
 }
 ?>

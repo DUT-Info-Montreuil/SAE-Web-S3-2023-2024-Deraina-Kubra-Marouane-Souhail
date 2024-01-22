@@ -1,5 +1,5 @@
 <?php
-require_once "connexion.php"; 
+include_once('C:\xampp\htdocs\SAE_DevWeb\MVC\connexion.php');
 
 class ModeleProfil extends Connexion {
 
@@ -166,28 +166,19 @@ class ModeleProfil extends Connexion {
         }
     }
 
-    public function rechercherUtilisateur(){
-        $results = ''; 
+    public function rechercherUtilisateur($searchTerm) {
+        $results = array();
     
-        if (isset($_GET['user'])) {
-            $searchTerm = $_GET['user'];
-           
-            $sql = "SELECT * FROM Joueur WHERE Nom LIKE '%$searchTerm%'";
+        $query = "SELECT * FROM Joueur WHERE Nom LIKE :searchTerm";
+        $stmt = parent::$bdd->query($query);
+        $stmt->bindValue(':searchTerm', "%$searchTerm%", PDO::PARAM_STR);
+        $stmt->execute();
     
-            $result = parent::$bdd->query($sql);
-    
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $results .= "<div>" . $row['Nom'] . "</div>";
-                }
-            } else {
-                $results = "Aucun résultat trouvé";
-            }
-        } else {
-            $results = "Aucune valeur de recherche spécifiée";
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $results[] = $row;
         }
     
-        return $results; 
+        return $results;
     }
 
 }
