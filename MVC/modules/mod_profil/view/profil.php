@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <style>
   /* Styles CSS */
   @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
@@ -441,7 +442,7 @@ label {
 <?php //require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
 require_once "modules/mod_profil/mod_profil.php";
 ?>
-
+<html>
 <body>  
 
 <div class="profile-container">
@@ -595,9 +596,10 @@ require_once "modules/mod_profil/mod_profil.php";
 
 
 
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/boiteMessage.js"></script>
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/créerTournoi.js"></script>
+    <script src="modules/mod_profil/view/boiteMessage.js"></script>
+    <script src="modules/mod_profil/view/script.js"></script>
+    <script src="modules/mod_profil/view/créerTournoi.js"></script>
 
 
 </body>
+<html>
