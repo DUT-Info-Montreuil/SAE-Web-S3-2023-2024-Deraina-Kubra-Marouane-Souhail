@@ -9,6 +9,8 @@ class Site {
 
 		switch ($this->module_name) {
 			case "defense" :
+				require_once "modules/mod_".$this->module_name."/modele_".$this->module_name.".php";
+				break;
 			case "ennemi" :
             case "profil" :
             case "map" :

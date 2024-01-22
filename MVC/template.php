@@ -7,6 +7,7 @@
 <title>Fantasy Fortress: The Return</title>
 <style>
   body, h1, h2, p {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
@@ -55,6 +56,7 @@
     height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
     text-align: center; /* Centre le texte à l'intérieur de main */
   }
+
   footer {
     background-color: #333;
     color: white;
@@ -100,11 +102,11 @@
     }
     </script>
 
-
-
 <main>
 <?=$module_html?>
 </main>
 
 <footer><?php echo $footer->getAffichage();?></footer>
+
+
 </body>
