@@ -2,10 +2,12 @@
 class VueCompMenu extends VueCompGenerique {
 
 	public function __construct(){
+
 		$this->affichage .= '<nav div="nav"> <a href="index.php?module=defense&action=afficher">Defense</a>';
 		$this->affichage .= '<a href="index.php?module=ennemi">Ennemis</a>';
 		$this->affichage .= '<a href="index.php?module=profil">Profil</a>';
-		$this->affichage .= '<a href="index.php?module=map">Carte</a>';
+		$this->affichage .= '<a href="index.php?module=carte&action=afficher">Carte</a>';
+
 		$utilisateurConnecte = false;
 		if (isset($_SESSION['user_id'])) {
             $utilisateurConnecte = true;

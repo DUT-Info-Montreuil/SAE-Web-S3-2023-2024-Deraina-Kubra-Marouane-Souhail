@@ -13,7 +13,7 @@ class Site {
 				break;
 			case "ennemi" :
             case "profil" :
-            case "map" :
+            case "carte" :
             case "connexion" :
             case "inscription" :	
             case "accueil" :
