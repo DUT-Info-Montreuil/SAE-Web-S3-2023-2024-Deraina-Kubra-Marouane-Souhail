@@ -22,16 +22,20 @@ class ControleurProfil{
         $dateFin = $_POST['dateFin'];
         $capacite = $_POST['capacite'];
         $recompense = $_POST['recompense'];
-
         $this->modele->creationTournoi($idCreateur, $nom, $regle, $dateDebut, $dateFin, $capacite, $recompense);
+        header("Location: index.php?module=profil&action=afficherProfil");
+        exit();
 }
 
 private function traiterEnvoiArgent() {
     $destinataireID = $_POST['recipient'];
     $montant = $_POST['amount'];
 
-    $this->modele->envoyerArgent($destinataireID, $montant);
+    $envoiReussi = $this->modele->envoyerArgent($destinataireID, $montant);
+    header("Location: index.php?module=profil&action=afficherProfil");
+    exit();
 }
+
         public function exec() {
             if (isset($_SESSION['user_id'])) {
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitTournoi'])) {
