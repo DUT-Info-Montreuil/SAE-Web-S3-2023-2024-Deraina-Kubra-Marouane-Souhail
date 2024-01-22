@@ -29,6 +29,14 @@
     object-fit: cover;
     clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
   }
+  main {
+    display: flex; /* Utilise Flexbox pour aligner les enfants de main */
+    flex-direction: column; /* Empile les enfants de main verticalement */
+    justify-content: center; /* Centre verticalement dans main */
+    align-items: center; /* Centre horizontalement dans main */
+    height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
+    text-align: center; /* Centre le texte à l'intérieur de main */
+  }
   nav {
     background: #444;
     color: white;
@@ -47,14 +55,7 @@
     display: flex;
     flex-direction: column; /* Organise le contenu en colonne */
   }
-  main {
-    display: flex; /* Utilise Flexbox pour aligner les enfants de main */
-    flex-direction: column; /* Empile les enfants de main verticalement */
-    justify-content: center; /* Centre verticalement dans main */
-    align-items: center; /* Centre horizontalement dans main */
-    height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
-    text-align: center; /* Centre le texte à l'intérieur de main */
-  }
+
   footer {
     background-color: #333;
     color: white;
