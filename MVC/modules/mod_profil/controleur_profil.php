@@ -24,20 +24,28 @@ class ControleurProfil{
         $recompense = $_POST['recompense'];
 
         $this->modele->creationTournoi($idCreateur, $nom, $regle, $dateDebut, $dateFin, $capacite, $recompense);
-        exit(); 
 }
 
+private function traiterEnvoiArgent() {
+    $destinataireID = $_POST['recipient'];
+    $montant = $_POST['amount'];
 
-    public function exec() {
-        if (isset($_SESSION['user_id'])) {
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitTournoi'])) {
-                $this->traiterCreationTournoi(); // Traiter la création de tournoi
+    $this->modele->envoyerArgent($destinataireID, $montant);
+}
+        public function exec() {
+            if (isset($_SESSION['user_id'])) {
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitTournoi'])) {
+                    $this->traiterCreationTournoi(); // Traiter la création de tournoi
+                    
+                }
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitEnvoiArgent'])) {
+                    $this->traiterEnvoiArgent(); // Traiter l'envoi d'argent
+                }
+                $this->vue->afficherProfil();
+            } else {
+                header("Location: index.php?module=connexion&action=connexion"); 
+                exit();
             }
-            $this->vue->afficherProfil();
-        } else {
-            header("Location: index.php?module=connexion&action=connexion"); 
-            exit();
         }
     }
-}
-?>
+    ?>

@@ -436,12 +436,54 @@ label {
     font-weight: bold; /* Texte en gras */
 }
 
+/* Styles pour la pop-up d'envoi d'argent */
+.modal-envoi-argent {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionnement fixe */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largeur complète */
+    height: 100%; /* Hauteur complète */
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    z-index: 100; /* S'assure qu'il est au-dessus des autres éléments */
+    align-items: center; /* Centre verticalement (pourrait ne pas être nécessaire sans flex) */
+    justify-content: center; /* Centre horizontalement (pourrait ne pas être nécessaire sans flex) */
+    text-align: center; /* Centrer le texte pour le contenu */
+}
+
+/* Styles pour le contenu de la pop-up d'envoi d'argent */
+.modal-envoi-argent-contenu {
+    background-color: #fff; /* Fond blanc pour le contenu */
+    padding: 30px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
+    width: 60%; /* Largeur du modal */
+    max-width: 700px; /* Largeur maximale pour éviter qu'il soit trop large */
+    margin: auto; /* Centrage horizontal */
+    position: relative; /* Positionnement relatif */
+    top: 50%; /* Déplacer de 50% de la hauteur du parent */
+    transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
+    display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
+
+/* Style pour le bouton de fermeture */
+.fermer-modal-envoi-argent {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+}
+
+.fermer-modal-envoi-argent:hover {
+    color: #666;
+}
+
 
 </style>
 
-<?php //require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
-require_once "modules/mod_profil/mod_profil.php";
-?>
+<?php require_once "modules/mod_profil/mod_profil.php";?>
 <html>
 <body>  
 
@@ -534,7 +576,7 @@ require_once "modules/mod_profil/mod_profil.php";
           </div>
         </div>
         
-        <button class="custom-button">Envoyer de l'argent</button>
+        <button class="custom-button" id="openMoneyModal">Envoyer de l'argent</button>
         </div>
         <div class="right-buttons">
         <button class="custom-button" id="openTournoi">Créer un tournoi</button>
@@ -593,12 +635,37 @@ require_once "modules/mod_profil/mod_profil.php";
     </div>
 </div>
 
+<!-- La pop-up pour envoyer de l'argent -->
+<div class="modal-envoi-argent" id="modalEnvoiArgent">
+    <div class="modal-envoi-argent-contenu">
+        <span class="fermer-modal-envoi-argent" id="fermerModalEnvoiArgent">&times;</span>
+        <h2>Envoyer de l'argent</h2>
+        <form action="index.php?module=profil&action=exec" method="post">
+            <label for="selectionDestinataire">Destinataire:</label>
+            <select id="selectionDestinataire" name="recipient" required>
+                <?php
+                foreach(ModeleProfil::getAllUsernames() as $user) {
+                    echo "<option value='{$user['idJoueur']}'>{$user['Nom']}</option>";
+                }
+                ?>
+            </select>
+
+            <label for="montant">Montant:</label>
+            <input type="number" id="montant" name="amount" required>
+
+            <button type="submit" name="submitEnvoiArgent">Envoyer</button></form>
+    </div>
+</div>
+
+
+
 
 
 
     <script src="modules/mod_profil/view/boiteMessage.js"></script>
     <script src="modules/mod_profil/view/script.js"></script>
     <script src="modules/mod_profil/view/créerTournoi.js"></script>
+    <script src="modules/mod_profil/view/envoieArgent.js"></script>
 
 
 </body>

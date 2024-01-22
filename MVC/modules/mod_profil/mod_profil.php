@@ -178,8 +178,59 @@ class ModeleProfil extends Connexion {
         
         $statement->execute(); 
     }
+
+    public static function getAllUsernames() {
+        $query = "SELECT idJoueur, Nom FROM Joueur";
+        $statement = parent::$bdd->prepare($query);
+        $statement->execute(); 
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+     // Méthode pour envoyer de l'argent à un destinataire
+     public static function envoyerArgent($destinataireID, $montant) {
+        $expediteurID = $_SESSION['user_id'];
+        
+        // Vérifier si l'expéditeur a suffisamment d'argent
+        $queryVerifSolde = "SELECT Argent FROM Joueur WHERE idJoueur = :expediteurID";
+        $statementVerifSolde = parent::$bdd->prepare($queryVerifSolde);
+        $statementVerifSolde->bindParam(':expediteurID', $expediteurID, PDO::PARAM_INT);
+        $statementVerifSolde->execute();
+        
+        // Récupérer le solde de l'expéditeur
+        $expediteurSolde = $statementVerifSolde->fetchColumn();
+        
+        if ($expediteurSolde >= $montant) {
+            // L'expéditeur a suffisamment d'argent, procéder à la transaction
+            $queryDebiter = "UPDATE Joueur SET Argent = Argent - :montant WHERE idJoueur = :expediteurID";
+            $statementDebiter = parent::$bdd->prepare($queryDebiter);
+            $statementDebiter->bindParam(':montant', $montant, PDO::PARAM_INT);
+            $statementDebiter->bindParam(':expediteurID', $expediteurID, PDO::PARAM_INT);
+            
+            // Ajouter le montant au destinataire
+            $queryCrediter = "UPDATE Joueur SET Argent = Argent + :montant WHERE idJoueur = :destinataireID";
+            $statementCrediter = parent::$bdd->prepare($queryCrediter);
+            $statementCrediter->bindParam(':montant', $montant, PDO::PARAM_INT);
+            $statementCrediter->bindParam(':destinataireID', $destinataireID, PDO::PARAM_INT);
+            
+            // Exécution des requêtes
+            $debitSuccess = $statementDebiter->execute();
+            $creditSuccess = $statementCrediter->execute();
+            
+            if ($debitSuccess && $creditSuccess) {
+                return true; // La transaction a réussi
+            } else {
+                return false; // La transaction a échoué
+            }
+        } else {
+            return false; // L'expéditeur n'a pas suffisamment d'argent
+        }
+    }
+    
+    
     
 }
+ 
+
 
 
 
