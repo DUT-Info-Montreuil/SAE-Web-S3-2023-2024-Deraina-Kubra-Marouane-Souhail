@@ -1,3 +1,13 @@
+<style>
+main {
+    display: flex; /* Utilise Flexbox pour aligner les enfants de main */
+    flex-direction: column; /* Empile les enfants de main verticalement */
+    justify-content: center; /* Centre verticalement dans main */
+    align-items: center; /* Centre horizontalement dans main */
+    height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
+    text-align: center; /* Centre le texte à l'intérieur de main */
+  }
+</style>
 <main>
 <section id="welcome" class="content-container">
     <img class="welcome-image" src="Images/map.png" alt="Image à gauche de la description"> <!-- Remplacez par le chemin de votre image -->

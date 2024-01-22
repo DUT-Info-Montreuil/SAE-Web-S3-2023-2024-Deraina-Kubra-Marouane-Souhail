@@ -65,32 +65,8 @@
 
 <body>
   <main>
-    <h2>Ennemis</h2>
-    <p>Il y a plusieurs types d'ennemis qui veulent votre mal.</p>
+    <h2>Ennemis avec pouvoirs</h2>
 
-    <div class="container" id="regular-enemies">
-     <div class="desc_ennemi">
-      <h2>Les Assaillants Communs</h2> <br/>
-      <p>Ennemis basiques</p>
-    </div>
-      <div class="image-container">
-      <a href = "modules/mod_ennemi/view/ennemi_base.php">
-        <img src="./Images/ennemiWithout.png" alt="Regular Enemies Image" >
-        </a>
-      </div>
-    </div>
-
-    <div class="container" id="powerful-enemies">
-      <div class="desc_ennemi">
-        <h2>Les Forces Surnaturelles</h2> <br/>
-        <p>Ennemis avec pouvoirs</p>
-      </div>
-      <div class="image-container">
-        <a href = "modules/mod_ennemi/view/ennemi_avec_pouvoir.php">
-          <img src="./Images/ennemiWithPower.png" alt="Powerful Enemies Image" >
-      </a>
-      </div>
-    </div>
 
    
   </main>
