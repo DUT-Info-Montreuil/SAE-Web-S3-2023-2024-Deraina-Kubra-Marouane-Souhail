@@ -1,19 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('myModal');
-    var btn = document.getElementById('openModal');
-    var closeBtn = document.getElementById('closeModal');
-  
-    btn.addEventListener('click', function() {
+  var modal = document.getElementById('myModal');
+  var btn = document.getElementById('openModal');
+  var closeBtn = document.getElementById('closeModal');
+
+  // Gestionnaire pour ouvrir le modal
+  btn.addEventListener('click', function() {
       modal.style.display = 'block';
-    });
-  
-    closeBtn.addEventListener('click', function() {
+  });
+
+  // Gestionnaire pour fermer le modal
+  closeBtn.addEventListener('click', function() {
       modal.style.display = 'none';
-    });
-  
-    window.addEventListener('click', function(event) {
+  });
+
+  // Gestionnaire pour fermer le modal lors d'un clic à l'extérieur de celui-ci
+  window.addEventListener('click', function(event) {
       if (event.target == modal) {
-        modal.style.display = 'none';
+          modal.style.display = 'none';
       }
     });
   
