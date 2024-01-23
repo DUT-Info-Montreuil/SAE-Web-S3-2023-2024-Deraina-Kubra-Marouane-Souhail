@@ -636,11 +636,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     <div class="modal" id="myModal">
-    <form action="index.php?module=mod_profil&action=EnvoyerMessage" method="post">
+    <form action="index.php?module=profil&action=EnvoyerMessage" method="post">
         <div class="haut-pop-M">
             <span class="close" id="closeModal">&times;</span>
             <p>Envoyer un message à :</p>
-            <input class="form-control" type="text" value="" id="search-user" placeholder="Rechercher un utilisateur">
+            <input class="form-control" type="text" value="" name = "destinataire_message" id="search-user" placeholder="Rechercher un utilisateur">
         </div>
 
         <div style="background-color: green;">

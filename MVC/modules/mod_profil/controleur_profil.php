@@ -38,6 +38,8 @@ public function exec() {
                 $this->rejoindreTournoi(); // Traiter la demande de rejoindre un tournoi
             } elseif (isset($_POST['submitQuitTournoi'])) {
                 $this->quitterTournoi(); // Traiter la demande de quitter un tournoi
+            }elseif (isset($_POST['destinataire_message'])) {
+                $this->form_envoyerMessage($_POST['destinataire_message'], $_POST['contenu']); // Traiter l'envoi de message
             }
         }
         $tournois = $this->modele->getTournois(); // Récupérer les tournois
@@ -47,17 +49,21 @@ public function exec() {
         exit();
     }
 }
-    private function form_envoyerMessage(){
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contenu'])) {
-            $contenu = $_POST['contenu'];
-           
-            $idDestinateur = isset($_POST['id_destinateur']) ? $_POST['id_destinateur'] : null;
+    private function form_envoyerMessage($destinataire, $contenu){
+        if ($contenu != "" && $destinataire) {
+            $idDestinataire = $this->modele->getIdUtilisateurParNom($destinataire);
 
-            if ($idDestinateur) {
-                $this->modele->envoyerMessageBd($idDestinateur, $contenu);
-            } else {
-                echo "Erreur lors de l'envoi du message. Destinataire non spécifié.";
+            if($idDestinataire){
+            $this->modele->envoyerMessageBd($idDestinataire, $contenu);
+
             }
+            else {
+                echo "Utilisateur introuvable";
+            }
+        } 
+        
+        else{
+            echo "Message vide ou destinataire non spécifié.";
         }
     }
 

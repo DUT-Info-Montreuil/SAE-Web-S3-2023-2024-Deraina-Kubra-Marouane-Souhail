@@ -145,25 +145,32 @@ class ModeleProfil extends Connexion {
 
     public function envoyerMessageBd($idDestinateur, $contenu){
 
-        $sql = "INSERT INTO EffectuerMessage (idEmeteur, idDest, contenu) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO EffectuerMessage (idEmeteur, idDest, contenu) VALUES (:emetteur, :destinataire, :contenu)";
 
         $stmt =  parent::$bdd->prepare($sql);
     
-        if ($stmt) {
-            $idEmeteur = $_SESSION['user_id']; 
-            $stmt->bind_param("iis", $idEmeteur, $idDestinateur, $contenu);
-            $stmt->execute();
-    
-            if ($stmt->affected_rows > 0) {
-                echo "Le message a été envoyé avec succès.";
-            } else {
-                echo "Erreur lors de l'envoi du message.";
-            }
-    
-            $stmt->close();
-        } else {
-            echo "Erreur de préparation de la requête.";
+        $idEmeteur = $_SESSION['user_id']; 
+            
+        $stmt->bindParam(":emetteur", $idEmeteur, PDO::PARAM_INT);
+        $stmt->bindParam(":destinataire",$idDestinateur, PDO::PARAM_INT);
+        $stmt->bindParam(":contenu",$contenu, PDO::PARAM_STR);
+        $stmt->execute();
+
+    }
+
+    function getIdUtilisateurParNom($nomUtilisateur) {
+        $requete = "SELECT idJoueur FROM Joueur WHERE Nom = :nom";
+
+        $statement = parent::$bdd->prepare($requete);
+        $statement->bindParam(":nom", $nomUtilisateur, PDO::PARAM_STR);
+
+        $idUtilisateur = null;
+
+        if($statement->execute()){
+            $idUtilisateur = $statement->fetch(PDO::FETCH_ASSOC);
         }
+    
+        return $idUtilisateur['idJoueur'];
     }
 
     public function rechercherUtilisateur($searchTerm) {
