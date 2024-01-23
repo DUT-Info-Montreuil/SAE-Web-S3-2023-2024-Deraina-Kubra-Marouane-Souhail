@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnOpenJoin && modalJoin && btnCloseJoin && form) {
         btnOpenJoin.addEventListener('click', function() {
             modalJoin.style.display = 'block';
-            // Ajoutez ici du code pour charger les données dans le formulaire si nécessaire
+            chargerListeTournois();
         });
 
         btnCloseJoin.addEventListener('click', function() {
@@ -27,6 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
         function resetForm(formElement) {
             formElement.reset();
         }
+
+        function chargerListeTournois() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'index.php?module=profil&action=loadTournois', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById('listeTournois').innerHTML = this.responseText;
+                }
+            };
+            xhr.send();
+        }
+        
     } else {
         console.error("Un ou plusieurs éléments du DOM ne sont pas trouvés.");
     }

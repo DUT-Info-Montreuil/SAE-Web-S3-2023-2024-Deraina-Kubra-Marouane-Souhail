@@ -220,5 +220,14 @@ public static function quitterTournoi($userID) {
     // et retourner un booléen ou un message en conséquence
     return $statement->rowCount() > 0;
 }
+
+public static function getTournoiActuel($userID) {
+    $query = "SELECT Id_Tournoi FROM Participe WHERE idJoueur = :userID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchColumn();
+}
+
 }
 ?>
