@@ -1,5 +1,5 @@
 <?php
-include_once('C:\xampp\htdocs\SAE_DevWeb\MVC\connexion.php');
+require_once 'connexion.php';
 
 class ModeleProfil extends Connexion {
 

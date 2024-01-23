@@ -312,8 +312,6 @@ p {
 
 </style>
 
-<?php require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
-?>
 <!DOCTYPE html>
 <body>  
 
@@ -446,7 +444,7 @@ p {
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/SAE_DevWeb/MVC/modules/mod_profil/view/script.js"></script>
+    <script src="modules/mod_profil/view/script.js"></script>
     <script>
     $(document).ready(function() {
         $('#search-user').on('input', function() {
@@ -454,7 +452,7 @@ p {
 
             $.ajax({
                 type: 'GET',
-                url: '/SAE_DevWeb/MVC/modules/mod_profil/controleur_profil.php', 
+                url: 'modules/mod_profil/controleur_profil.php', 
                 data: { action: 'rechercherUtilisateur', user: searchTerm },
                 success: function(data) {
                     $('#result-search').html(data);
