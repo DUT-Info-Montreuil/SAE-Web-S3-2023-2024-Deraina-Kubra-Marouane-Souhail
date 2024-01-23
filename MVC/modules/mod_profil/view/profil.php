@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <style>
 
   /* Styles CSS */
@@ -374,6 +375,7 @@ p {
     align-items: center; /* Centre verticalement (pourrait ne pas être nécessaire sans flex) */
     justify-content: center; /* Centre horizontalement (pourrait ne pas être nécessaire sans flex) */
     text-align: center; /* Centrer le texte pour le contenu */
+  
 }
 
 .tournoi-modal-content {
@@ -390,6 +392,27 @@ p {
     display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
 }
 
+.tournoi-modal-content-rejoindreTournoi {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #fff; /* Fond blanc pour le contenu */
+    padding: 30px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
+    width: 60%; /* Largeur du modal */
+    max-width: 700px; /* Largeur maximale pour éviter qu'il soit trop large */
+    margin: auto; /* Centrage horizontal */
+    position: relative; /* Positionnement relatif */
+    top: 50%; /* Déplacer de 50% de la hauteur du parent */
+    transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
+    display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
 
 
 /* Style pour le bouton de fermeture */
@@ -422,16 +445,6 @@ label {
     margin-bottom: 5px; /* Espacement en dessous du label */
     font-weight: bold; /* Texte en gras */
 }
-.tournoi-modal-content {
-    max-height: 500px;
-    overflow-y: auto;
-    padding: 20px;
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    font-family: 'Arial', sans-serif;
-    color: #333;
-}
 
 .tournoi-close {
     float: right;
@@ -442,8 +455,11 @@ label {
 
 .tournoi-list-container {
     overflow-y: auto;
-    max-height: 400px; /* Hauteur maximale pour la liste des tournois */
+    max-height: 400px;
+    flex: 1;
+    margin-bottom: 20px; /* Ajoutez une marge en bas de la liste */
 }
+
 .tournoi-item {
     display: block;
     padding: 10px;
@@ -458,8 +474,6 @@ label {
 .tournoi-item:hover {
     background-color: #e9e9e9;
 }
-
-
 
 
 .tournoi-item label {
@@ -482,37 +496,27 @@ label {
 }
 
 .tournoi-item input[type="radio"]:checked + .tournoi-nom {
-    color: #0056b3; /* Couleur lorsque le tournoi est sélectionné */
+    color: #00FF00; /* Couleur verte pour le texte */
 }
 
-.join-tournoi-btn {
-    display: block;
-    width: 100%;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
-}
-
-.join-tournoi-btn:hover {
-    background-color: #45a049;
-}
-
-/* Style pour le bouton Rejoindre le Tournoi */
 .join-tournoi-btn {
     background-color: #4CAF50; /* Vert */
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
-    margin-top: 15px;
+    position: fixed; /* Fixe la position du bouton */
+    bottom: 0; /* Place le bouton en bas de la page */
+    left: 0; /* Place le bouton à gauche de la page */
+    width: 100%; /* Occupe toute la largeur de la page */
+    z-index: 999; /* Assurez-vous qu'il est au-dessus de tous les autres éléments */
     transition: background-color 0.3s ease;
+    
+}
+
+.join-tournoi-btn:hover {
+    background-color: #45a049;
 }
 
 .join-tournoi-btn:hover {
@@ -525,26 +529,164 @@ label {
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
-    margin-top: 15px;
+    position: fixed; /* Fixe la position du bouton */
+    bottom: 0; /* Place le bouton en bas de la page */
+    right: 0; /* Place le bouton à droite de la page */
+    width: 100%; /* Occupe toute la largeur de la page */
+    z-index: 999; /* Assurez-vous qu'il est au-dessus de tous les autres éléments */
     transition: background-color 0.3s ease;
 }
+
 
 .quit-tournament-btn:hover {
     background-color: #c9302c; /* Rouge plus foncé */
 }
 
+.tournoi-actuel {
+    background-color: #ff0000; /* Fond rouge */
+    color: #ffffff; /* Texte blanc pour contraster */
+    border: 2px solid #ff0000; /* Bordure rouge */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Légère ombre rouge */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Animation de transition */
+}
+
+/* Style pour les autres tournois */
+.tournoi-item {
+    background-color: #f2f2f2; /* Fond gris clair pour les autres tournois */
+    color: #333333; /* Texte noir */
+    border: 1px solid #ddd; /* Bordure subtile grise */
+    transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+/* Lorsque le curseur survole un tournoi actuel */
+.tournoi-actuel:hover {
+    background-color: #ff3333; /* Fond rouge légèrement plus foncé */
+    border-color: #ff3333; /* Bordure rouge légèrement plus foncée */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Ombre rouge plus prononcée */
+}
+
+/* Styles pour la pop-up d'envoi d'argent */
+.modal-envoi-argent {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionnement fixe */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largeur complète */
+    height: 100%; /* Hauteur complète */
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    z-index: 100; /* S'assure qu'il est au-dessus des autres éléments */
+    align-items: center; /* Centre verticalement (pourrait ne pas être nécessaire sans flex) */
+    justify-content: center; /* Centre horizontalement (pourrait ne pas être nécessaire sans flex) */
+    text-align: center; /* Centrer le texte pour le contenu */
+}
+
+/* Styles pour le contenu de la pop-up d'envoi d'argent */
+.modal-envoi-argent-contenu {
+    background-color: #fff; /* Fond blanc pour le contenu */
+    padding: 30px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
+    width: 60%; /* Largeur du modal */
+    max-width: 700px; /* Largeur maximale pour éviter qu'il soit trop large */
+    margin: auto; /* Centrage horizontal */
+    position: relative; /* Positionnement relatif */
+    top: 50%; /* Déplacer de 50% de la hauteur du parent */
+    transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
+    display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
+
+/* Style pour le bouton de fermeture */
+.fermer-modal-envoi-argent {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.fermer-modal-envoi-argent:hover {
+    color: #666;
+}
+
+/* Styles pour les champs du formulaire */
+.modal-envoi-argent-contenu input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style pour le bouton d'envoi */
+.modal-envoi-argent-contenu button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-envoi-argent-contenu button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Styles pour les titres */
+.modal-envoi-argent-contenu h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.tournoi-modal-content button{
+background-color: #4CAF50; /* Vert */
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px; /* Coins arrondis */
+cursor: pointer;
+font-size: 18px; /* Taille du texte */
+}
+ 
+.tournoi-modal-content button:hover {
+background-color: #45a049; /* Vert foncé */
+}
+
+/* Style pour la sélection du destinataire (prénom) */
+#selectionDestinataire {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none; /* Masque la flèche de sélection par défaut */
+    background-color: #fff; /* Couleur de fond */
+    background-image: url('icone_fleche.png'); /* Ajoutez une icône de flèche personnalisée si nécessaire */
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* Style pour le texte sélectionné dans la liste déroulante */
+#selectionDestinataire option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style pour le texte sélectionné dans la liste déroulante au survol */
+#selectionDestinataire option:hover {
+    background-color: #45a049; /* Couleur de survol */
+    color: #fff; /* Couleur du texte au survol */
+}
+
+
 </style>
-
-
-
-
-<?php 
-//require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
-?>
-
 
     <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -559,6 +701,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!DOCTYPE html>
+<?php require_once "modules/mod_profil/mod_profil.php";?>
+<html>
 <body>  
 
 <div class="profile-container">
@@ -651,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         
-        <button class="custom-button">Envoyer de l'argent</button>
+        <button class="custom-button" id="openMoneyModal">Envoyer de l'argent</button>
         </div>
         <div class="right-buttons">
         <button class="custom-button" id="openTournoi">Créer un tournoi</button>
@@ -710,6 +854,29 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
+<!-- La pop-up pour envoyer de l'argent -->
+<div class="modal-envoi-argent" id="modalEnvoiArgent">
+    <div class="modal-envoi-argent-contenu">
+        <span class="fermer-modal-envoi-argent" id="fermerModalEnvoiArgent">&times;</span>
+        <h2>Envoyer de l'argent</h2>
+        <form action="index.php?module=profil&action=exec" method="post">
+            <label for="selectionDestinataire">Destinataire:</label>
+            <select id="selectionDestinataire" name="recipient" required>
+                <option value="" disabled selected>Veuillez sélectionner le destinataire</option>
+                <?php
+                foreach(ModeleProfil::getAllUsernames() as $user) {
+                    echo "<option value='{$user['idJoueur']}'>{$user['Nom']}</option>";
+                }
+                ?>
+            </select>
+            <label for="montant">Montant:</label>
+            <input type="number" id="montant" name="amount" placeholder="Entrez le montant à envoyer" required>
+            <button type="submit" name="submitEnvoiArgent">Envoyer</button></form>
+    </div>
+</div>
+
+
+
 
 <!-- Pop-up pour rejoindre un tournoi -->
 <?php
@@ -722,43 +889,19 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 
 <form action="index.php?module=profil&action=exec" method="post">
     <div class="tournoi-modal" id="joinTournamentModal">
-        <div class="tournoi-modal-content">
+        <div class="tournoi-modal-content-rejoindreTournoi">
             <span class="tournoi-close" id="closeJoinTournoiModal">&times;</span>
             <h1>Rejoindre un tournoi</h1>
             <div class="tournoi-list-container">
-                <div id="listeTournois">
-                <?php foreach ($tournois as $tournoi): ?>
-                        <label class="tournoi-item" for="tournoi_<?php echo $tournoi['Id_Tournoi']; ?>">
-                            <input type="radio" id="tournoi_<?php echo $tournoi['Id_Tournoi']; ?>" name="tournoiID" value="<?php echo $tournoi['Id_Tournoi']; ?>" style="display: none;">
-                            <h2 class="tournoi-nom"><?php echo htmlspecialchars($tournoi['Nom']); ?></h2>
-                                <div class="tournoi-info">
-                                    <span class="tournoi-label">Règles:</span>
-                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['Regle']); ?></span>
-                                </div>
-                                <div class="tournoi-info">
-                                    <span class="tournoi-label">Date de début:</span>
-                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['DateDebut']); ?></span>
-                                </div>
-                                <div class="tournoi-info">
-                                    <span class="tournoi-label">Date de fin:</span>
-                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['DateFin']); ?></span>
-                                </div>
-                                <div class="tournoi-info">
-                                    <span class="tournoi-label">Capacité:</span>
-                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['Capacite']); ?></span>
-                                </div>
-                                <div class="tournoi-info">
-                                    <span class="tournoi-label">Récompense:</span>
-                                    <span class="tournoi-detail"><?php echo htmlspecialchars($tournoi['Recompense']); ?></span>
-                                </div>                 
-                <?php endforeach; ?>
+                <div id="listeTournois">              
                 </div>
-                <?php if ($estDejaInscrit): ?>
+               
+        </div>
+        <?php if ($estDejaInscrit): ?>
                   <button type="submit" name="submitQuitTournoi" id="join-tournament-btn" class="quit-tournament-btn">Quitter le Tournoi Actuelle</button>
                 <?php else: ?>
                     <button type="submit" name="submitJoinTournoi" id="join-tournament-btn" class="join-tournoi-btn">Rejoindre le Tournoi</button>
                 <?php endif; ?>
-        </div>
     </div>
 </form>
 
@@ -770,8 +913,8 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 <script src="modules/mod_profil/view/script.js"></script>
 <script src="modules/mod_profil/view/créerTournoi.js"></script>
 <script src="modules/mod_profil/view/rejoindreTournoi.js"></script>
-  
+<script src="modules/mod_profil/view/envoieArgent.js"></script>
 
 
 </body>
-</html>
+<html>
