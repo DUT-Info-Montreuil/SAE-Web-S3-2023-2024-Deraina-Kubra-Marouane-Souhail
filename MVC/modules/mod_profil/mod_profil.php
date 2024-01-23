@@ -282,6 +282,13 @@ public static function getTournoiActuel($userID) {
 public static function calculerScore(){
     $userID = $_SESSION['user_id'];
 
+    // Requête pour obtenir le nombre total de parties jouées
+    $queryTotalParties = "SELECT count(*) FROM Partie WHERE idJoueur = :userID";
+    $statementTotalParties = parent::$bdd->prepare($queryTotalParties);
+    $statementTotalParties->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statementTotalParties->execute(); 
+    $totalParties = $statementTotalParties->fetchColumn();
+
     // Requête pour obtenir le nombre de parties gagnées
     $queryPartiesGagnees = "SELECT count(*) FROM Partie WHERE idJoueur = :userID and Etat_Partie='Gagnée'";
     $statementPartiesGagnees = parent::$bdd->prepare($queryPartiesGagnees);
@@ -290,10 +297,11 @@ public static function calculerScore(){
     $partiesGagnees = $statementPartiesGagnees->fetchColumn();
     
     // Calcul du score
-    $score = $partiesGagnees * 12;
+    $score = $partiesGagnees * $totalParties * 12;
 
     return $score;
 }
+
 
 public static function getPositionClassement() {
     $userID = $_SESSION['user_id'];
