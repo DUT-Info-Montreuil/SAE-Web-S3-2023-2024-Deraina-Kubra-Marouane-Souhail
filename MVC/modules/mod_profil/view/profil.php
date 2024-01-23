@@ -764,9 +764,8 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 
       <div class="text-score">
-          <p class="score-info">Classement :</p><br></br>
-          <p class="score-info">Score :</p>
-      </div>
+      <p class="score-info">Classement : <span class="custom-font"><?php echo ModeleProfil::getPositionClassement() . "/" . ModeleProfil::getTotalJoueurs(); ?></span></p>          
+      <p class="score-info">Score : <span class="custom-font"><?php echo ModeleProfil::calculerScore(); ?></span></p>      </div>
 
     </div>
 
