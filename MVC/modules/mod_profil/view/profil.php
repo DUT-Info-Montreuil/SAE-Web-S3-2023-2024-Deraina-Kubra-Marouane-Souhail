@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <style>
 
   /* Styles CSS */
@@ -391,7 +392,7 @@ p {
     display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
 }
 
-.tournoi-modal-content {
+.tournoi-modal-content-rejoindreTournoi {
     max-height: 500px;
     overflow-y: auto;
     padding: 20px;
@@ -400,6 +401,17 @@ p {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     font-family: 'Arial', sans-serif;
     color: #333;
+    background-color: #fff; /* Fond blanc pour le contenu */
+    padding: 30px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
+    width: 60%; /* Largeur du modal */
+    max-width: 700px; /* Largeur maximale pour éviter qu'il soit trop large */
+    margin: auto; /* Centrage horizontal */
+    position: relative; /* Positionnement relatif */
+    top: 50%; /* Déplacer de 50% de la hauteur du parent */
+    transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
+    display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
 }
 
 
@@ -555,16 +567,126 @@ label {
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Ombre rouge plus prononcée */
 }
 
+/* Styles pour la pop-up d'envoi d'argent */
+.modal-envoi-argent {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionnement fixe */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largeur complète */
+    height: 100%; /* Hauteur complète */
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    z-index: 100; /* S'assure qu'il est au-dessus des autres éléments */
+    align-items: center; /* Centre verticalement (pourrait ne pas être nécessaire sans flex) */
+    justify-content: center; /* Centre horizontalement (pourrait ne pas être nécessaire sans flex) */
+    text-align: center; /* Centrer le texte pour le contenu */
+}
+
+/* Styles pour le contenu de la pop-up d'envoi d'argent */
+.modal-envoi-argent-contenu {
+    background-color: #fff; /* Fond blanc pour le contenu */
+    padding: 30px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
+    width: 60%; /* Largeur du modal */
+    max-width: 700px; /* Largeur maximale pour éviter qu'il soit trop large */
+    margin: auto; /* Centrage horizontal */
+    position: relative; /* Positionnement relatif */
+    top: 50%; /* Déplacer de 50% de la hauteur du parent */
+    transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
+    display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
+
+/* Style pour le bouton de fermeture */
+.fermer-modal-envoi-argent {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.fermer-modal-envoi-argent:hover {
+    color: #666;
+}
+
+/* Styles pour les champs du formulaire */
+.modal-envoi-argent-contenu input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style pour le bouton d'envoi */
+.modal-envoi-argent-contenu button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-envoi-argent-contenu button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Styles pour les titres */
+.modal-envoi-argent-contenu h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.tournoi-modal-content button{
+background-color: #4CAF50; /* Vert */
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px; /* Coins arrondis */
+cursor: pointer;
+font-size: 18px; /* Taille du texte */
+}
+ 
+.tournoi-modal-content button:hover {
+background-color: #45a049; /* Vert foncé */
+}
+
+/* Style pour la sélection du destinataire (prénom) */
+#selectionDestinataire {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none; /* Masque la flèche de sélection par défaut */
+    background-color: #fff; /* Couleur de fond */
+    background-image: url('icone_fleche.png'); /* Ajoutez une icône de flèche personnalisée si nécessaire */
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* Style pour le texte sélectionné dans la liste déroulante */
+#selectionDestinataire option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style pour le texte sélectionné dans la liste déroulante au survol */
+#selectionDestinataire option:hover {
+    background-color: #45a049; /* Couleur de survol */
+    color: #fff; /* Couleur du texte au survol */
+}
+
 
 </style>
-
-
-
-
-<?php 
-//require_once realpath($_SERVER["DOCUMENT_ROOT"] . "/SAE_DevWeb/MVC/modules/mod_profil/mod_profil.php");
-?>
-
 
     <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -579,6 +701,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!DOCTYPE html>
+<?php require_once "modules/mod_profil/mod_profil.php";?>
+<html>
 <body>  
 
 <div class="profile-container">
@@ -671,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         
-        <button class="custom-button">Envoyer de l'argent</button>
+        <button class="custom-button" id="openMoneyModal">Envoyer de l'argent</button>
         </div>
         <div class="right-buttons">
         <button class="custom-button" id="openTournoi">Créer un tournoi</button>
@@ -730,6 +854,29 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
+<!-- La pop-up pour envoyer de l'argent -->
+<div class="modal-envoi-argent" id="modalEnvoiArgent">
+    <div class="modal-envoi-argent-contenu">
+        <span class="fermer-modal-envoi-argent" id="fermerModalEnvoiArgent">&times;</span>
+        <h2>Envoyer de l'argent</h2>
+        <form action="index.php?module=profil&action=exec" method="post">
+            <label for="selectionDestinataire">Destinataire:</label>
+            <select id="selectionDestinataire" name="recipient" required>
+                <option value="" disabled selected>Veuillez sélectionner le destinataire</option>
+                <?php
+                foreach(ModeleProfil::getAllUsernames() as $user) {
+                    echo "<option value='{$user['idJoueur']}'>{$user['Nom']}</option>";
+                }
+                ?>
+            </select>
+            <label for="montant">Montant:</label>
+            <input type="number" id="montant" name="amount" placeholder="Entrez le montant à envoyer" required>
+            <button type="submit" name="submitEnvoiArgent">Envoyer</button></form>
+    </div>
+</div>
+
+
+
 
 <!-- Pop-up pour rejoindre un tournoi -->
 <?php
@@ -742,7 +889,7 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 
 <form action="index.php?module=profil&action=exec" method="post">
     <div class="tournoi-modal" id="joinTournamentModal">
-        <div class="tournoi-modal-content">
+        <div class="tournoi-modal-content-rejoindreTournoi">
             <span class="tournoi-close" id="closeJoinTournoiModal">&times;</span>
             <h1>Rejoindre un tournoi</h1>
             <div class="tournoi-list-container">
@@ -766,8 +913,8 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 <script src="modules/mod_profil/view/script.js"></script>
 <script src="modules/mod_profil/view/créerTournoi.js"></script>
 <script src="modules/mod_profil/view/rejoindreTournoi.js"></script>
-  
+<script src="modules/mod_profil/view/envoieArgent.js"></script>
 
 
 </body>
-</html>
+<html>

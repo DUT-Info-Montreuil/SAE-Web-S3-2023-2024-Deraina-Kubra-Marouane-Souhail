@@ -22,11 +22,19 @@ class ControleurProfil{
         $dateFin = $_POST['dateFin'];
         $capacite = $_POST['capacite'];
         $recompense = $_POST['recompense'];
-
         $this->modele->creationTournoi($idCreateur, $nom, $regle, $dateDebut, $dateFin, $capacite, $recompense);
-        exit(); 
+        header("Location: index.php?module=profil&action=afficherProfil");
+        exit();
 }
 
+private function traiterEnvoiArgent() {
+    $destinataireID = $_POST['recipient'];
+    $montant = $_POST['amount'];
+
+    $envoiReussi = $this->modele->envoyerArgent($destinataireID, $montant);
+    header("Location: index.php?module=profil&action=afficherProfil");
+    exit();
+}
 
 
 public function exec() {
@@ -44,15 +52,25 @@ public function exec() {
                 $this->rejoindreTournoi(); // Traiter la demande de rejoindre un tournoi
             } elseif (isset($_POST['submitQuitTournoi'])) {
                 $this->quitterTournoi(); // Traiter la demande de quitter un tournoi
+            } elseif (isset($_POST['submitTournoi'])) {
+                $this->traiterCreationTournoi(); // Traiter la création de tournoi
+            } elseif (isset($_POST['submitEnvoiArgent'])) {
+                $this->traiterEnvoiArgent(); // Traiter l'envoi d'argent
+            
             }
+        }  
+
+            $this->vue->afficherProfil();
+            $tournois = $this->modele->getTournois(); // Récupérer les tournois
+            $this->vue->afficherProfil($tournois); // Passer les tournois à la vue
+        
+        } else {
+            header("Location: index.php?module=connexion&action=connexion"); 
+            exit();
         }
-        $tournois = $this->modele->getTournois(); // Récupérer les tournois
-        $this->vue->afficherProfil($tournois); // Passer les tournois à la vue
-    } else {
-        header("Location: index.php?module=connexion&action=connexion"); 
-        exit();
+        
     }
-}
+
 
 
 private function rejoindreTournoi() {
