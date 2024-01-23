@@ -470,14 +470,74 @@ label {
 .fermer-modal-envoi-argent {
     position: absolute;
     top: 10px;
-    right: 15px;
-    font-size: 30px;
+    right: 10px;
+    font-size: 24px;
     color: #333;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .fermer-modal-envoi-argent:hover {
     color: #666;
+}
+
+/* Styles pour les champs du formulaire */
+.modal-envoi-argent-contenu input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style pour le bouton d'envoi */
+.modal-envoi-argent-contenu button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-envoi-argent-contenu button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Styles pour les titres */
+.modal-envoi-argent-contenu h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Style pour la sélection du destinataire (prénom) */
+#selectionDestinataire {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none; /* Masque la flèche de sélection par défaut */
+    background-color: #fff; /* Couleur de fond */
+    background-image: url('icone_fleche.png'); /* Ajoutez une icône de flèche personnalisée si nécessaire */
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* Style pour le texte sélectionné dans la liste déroulante */
+#selectionDestinataire option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style pour le texte sélectionné dans la liste déroulante au survol */
+#selectionDestinataire option:hover {
+    background-color: #45a049; /* Couleur de survol */
+    color: #fff; /* Couleur du texte au survol */
 }
 
 
@@ -643,16 +703,15 @@ label {
         <form action="index.php?module=profil&action=exec" method="post">
             <label for="selectionDestinataire">Destinataire:</label>
             <select id="selectionDestinataire" name="recipient" required>
+                <option value="" disabled selected>Veuillez sélectionner le destinataire</option>
                 <?php
                 foreach(ModeleProfil::getAllUsernames() as $user) {
                     echo "<option value='{$user['idJoueur']}'>{$user['Nom']}</option>";
                 }
                 ?>
             </select>
-
             <label for="montant">Montant:</label>
-            <input type="number" id="montant" name="amount" required>
-
+            <input type="number" id="montant" name="amount" placeholder="Entrez le montant à envoyer" required>
             <button type="submit" name="submitEnvoiArgent">Envoyer</button></form>
     </div>
 </div>
