@@ -702,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!DOCTYPE html>
-<?php require_once "modules/mod_profil/mod_profil.php";?>
+<?php require_once "modules/mod_profil/modele_profil.php";?>
 <html>
 <body>  
 

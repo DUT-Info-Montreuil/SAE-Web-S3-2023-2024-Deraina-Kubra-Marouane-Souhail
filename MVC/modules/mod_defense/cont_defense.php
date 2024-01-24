@@ -1,6 +1,6 @@
 <?php
 // ControleurDefense.php
-require_once 'mod_defense.php';
+require_once 'modele_defense.php';
 require_once 'vue_defense.php';
 
 class ControleurDefense {
