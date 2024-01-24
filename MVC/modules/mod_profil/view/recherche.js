@@ -1,17 +1,30 @@
 $(document).ready(function() {
-    $('#search-user').on('input', function() {
-        var searchTerm = $(this).val().trim();
+    $('#search-user').keyup(function() {
 
-        $.ajax({
-            type: 'GET',
-            url: 'modules/mod_profil/controleur_profil.php',
-            data: { action: 'rechercherUtilisateur', user: searchTerm },
-            success: function(data) {
-                $('#result-search').html(data);
-            },
-            error: function() {
-                $('#result-search').html('Une erreur est survenue lors de la recherche.');
-            }
-        });
+        $('#result-search').html('');
+
+        var utilisateur = $(this).val();
+
+        console.log(utilisateur)
+
+        if(utilisateur != ""){
+            $.ajax({
+                type: 'GET',
+                url: 'modules/mod_profil/search.php',
+                data: {'user': + encodeURIComponent(utilisateur)} ,
+                success: function(data) {
+                    if(data != ""){
+                        document.getElementById('result-search').html(data);
+                    }
+                    else{
+                        document.getElementById('result-search').innerHTML = "<div>Aucun utilisateur<div>"
+                    }
+                },
+                error: function() {
+                    $('#result-search').html('Une erreur est survenue lors de la recherche.');
+                }
+            });
+        }
+      
     });
 });

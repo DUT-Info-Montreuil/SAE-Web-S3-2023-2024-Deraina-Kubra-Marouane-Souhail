@@ -39,16 +39,21 @@ public function exec() {
             } elseif (isset($_POST['submitQuitTournoi'])) {
                 $this->quitterTournoi(); // Traiter la demande de quitter un tournoi
             }elseif (isset($_POST['destinataire_message'])) {
+                //$this->rechercherUtilisateur();
                 $this->form_envoyerMessage($_POST['destinataire_message'], $_POST['contenu']); // Traiter l'envoi de message
+            }elseif (isset($_POST['action']) && $_POST['action'] == 'rechercherUtilisateur') {
+                $this->rechercherUtilisateur();
             }
         }
         $tournois = $this->modele->getTournois(); // Récupérer les tournois
         $this->vue->afficherProfil($tournois); // Passer les tournois à la vue
+        
     } else {
         header("Location: index.php?module=connexion&action=connexion"); 
         exit();
     }
 }
+
     private function form_envoyerMessage($destinataire, $contenu){
         if ($contenu != "" && $destinataire) {
             $idDestinataire = $this->modele->getIdUtilisateurParNom($destinataire);
@@ -58,7 +63,7 @@ public function exec() {
 
             }
             else {
-                echo "Utilisateur introuvable";
+                echo '"<script>alert("Utilisateur introuvable");</script>"';
             }
         } 
         
@@ -68,7 +73,7 @@ public function exec() {
     }
 
     private function rechercherUtilisateur(){
-
+        
         $searchTerm = isset($_GET['user']) ? $_GET['user'] : '';
        
 

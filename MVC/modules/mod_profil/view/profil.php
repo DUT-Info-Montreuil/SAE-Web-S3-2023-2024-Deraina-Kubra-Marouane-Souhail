@@ -640,14 +640,16 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="haut-pop-M">
             <span class="close" id="closeModal">&times;</span>
             <p>Envoyer un message à :</p>
-            <input class="form-control" type="text" value="" name = "destinataire_message" id="search-user" placeholder="Rechercher un utilisateur">
+            <input class="form-group" type="text" value="" name = "destinataire_message" id="search-user" placeholder="Rechercher un utilisateur">
         </div>
 
-        <div style="background-color: green;">
-          <div id="result-search"></div>
-        </div>
 
         <div class="modal-content">
+        
+        Résultat de la recherche : <br>
+        
+          <div id="result-search"></div>
+        
             <p>Contenu :</p>
             <textarea name="contenu" id="contenu">Bonjour, ....</textarea>
         </div>
@@ -689,28 +691,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="modules/mod_profil/view/script.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#search-user').on('input', function() {
-            var searchTerm = $(this).val().trim();
-
-            $.ajax({
-                type: 'GET',
-                url: 'modules/mod_profil/controleur_profil.php', 
-                data: { action: 'rechercherUtilisateur', user: searchTerm },
-                success: function(data) {
-                    $('#result-search').html(data);
-                },
-                error: function() {
-                    $('#result-search').html('Une erreur est survenue lors de la recherche.');
-                }
-            });
-        });
-    });
-</script>
 
 </body>
 </html>
@@ -805,11 +785,13 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="modules/mod_profil/view/script.js"></script>
 <script src="modules/mod_profil/view/boiteMessage.js"></script>
 <script src="modules/mod_profil/view/script.js"></script>
 <script src="modules/mod_profil/view/créerTournoi.js"></script>
 <script src="modules/mod_profil/view/rejoindreTournoi.js"></script>
+<script src="modules/mod_profil/view/recherche.js"></script>
   
 
 
