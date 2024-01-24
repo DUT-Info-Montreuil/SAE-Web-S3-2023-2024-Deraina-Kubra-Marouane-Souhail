@@ -243,10 +243,15 @@ p {
 }
 
 .icon {
-    display:flex;
-    margin-right:20px;
-    justify-content: flex-end;
+    position: absolute; /* Position absolue par rapport au conteneur */
+    right: 45; /* Aligner à droite à l'intérieur du conteneur */
+    top: 25%; /* Position verticale, ajustez selon vos besoins */
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
+
+
 
 /* Styles for the modal */
 .modal {
