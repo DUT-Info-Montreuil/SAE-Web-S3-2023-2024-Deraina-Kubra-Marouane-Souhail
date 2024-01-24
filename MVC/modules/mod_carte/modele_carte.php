@@ -1,15 +1,12 @@
 <?php
-require_once 'controleur_carte.php';
-require_once '././fonction.php';
+require_once 'connexion.php';
 
-class ModCarte extends ModuleGenerique {
-
-    public function __construct() {
-        parent::__construct();
-        $this->controleur = new ControleurCarte();
+class ModeleCarte extends Connexion {
+    
+    public function getCartes() {
+        $req = self::$bdd->prepare("SELECT * FROM Terrain"); 
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC); 
     }
-
 }
-
-
-
+?>
