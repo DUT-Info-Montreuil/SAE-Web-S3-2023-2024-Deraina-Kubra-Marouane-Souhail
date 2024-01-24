@@ -76,17 +76,16 @@
     <div class="back-button">
          <a href="index.php?module=ennemi" class="button">Retour à la page Ennemis</a>
     </div>
-    <h1>Ennemis de Base</h1>
+    <h1>Ennemis Sans Pouvoir</h1>
     <div class="ennemi-container">
-        <?php foreach ($detailsEnnemi as $ennemi) : ?>
+        <?php foreach ($detailsEnnemiB as $ennemi) : ?>
             <div class="ennemi-item">
                 <img src="modules/mod_ennemi/logos/<?php echo $ennemi['Image']; ?>" alt="Image ennemi">
                 <div class="description">
                     <p><strong>Pv de Base:  <?php echo $ennemi['PvBase']; ?></p>
                     <p><strong>Degats:</strong> <?php echo $ennemi['Degats']; ?></p>
-                    <p><strong>Description:</strong> <?php echo $ennemi['Pouvoir']; ?></p>
-                    <p><strong>Pouvoir:</strong> <?php echo $ennemi['RessourceDonnee']; ?></p>
-                    <p><strong>Ressource Donnees:</strong> <?php echo $ennemi['Degats']; ?></p>
+                    <p><strong>Description:</strong> <?php echo $ennemi['Description']; ?></p>
+                    <p><strong>Ressource Donnees:</strong> <?php echo $ennemi['RessourceDonnee']; ?></p>
                 </div>
             </div>
         <?php endforeach; ?>

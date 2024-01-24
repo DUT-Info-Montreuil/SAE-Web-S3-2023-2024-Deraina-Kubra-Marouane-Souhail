@@ -90,14 +90,14 @@ body, html {
 
 <div class="images-wrapper">
         <div class="image-container"> 
-        <a href = "modules/mod_ennemi/view/ennemi_avec_pouvoir.php">
-          <img src="./Images/ennemiWithPower.png" alt="Powerful Enemies Image" >
+        <a href = "index.php?module=ennemi&action=ennemiB">
+        <img src="./Images/ennemiWithout.png" alt="Regular Enemies Image">
         </a>
         </div>
         
         <div class="image-container">
-        <a href = "modules/mod_ennemi/view/ennemi_base.php">
-          <img src="./Images/ennemiWithout.png" alt="Regular Enemies Image">
+        <a href = "index.php?module=ennemi&action=ennemiP">
+          <img src="./Images/ennemiWithPower.png" alt="Powerful Enemies Image" >
         </a>
         </div>
 

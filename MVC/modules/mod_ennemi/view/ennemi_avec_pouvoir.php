@@ -1,74 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ennemis</title>
-  <style>
-    main {
-      font-family: Arial, sans-serif;
-      display: flex;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-
-    display: flex; /* Utilise Flexbox pour aligner les enfants de main */
-    flex-direction: column; /* Empile les enfants de main verticalement */
-    justify-content: center; /* Centre verticalement dans main */
-    align-items: center; /* Centre horizontalement dans main */
-    height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
-    text-align: center; /* Centre le texte à l'intérieur de main */
-  
-    }
-  
-    .container {
-  flex: 1; 
-  display: flex; /* Ajout de flex pour disposer les enfants côte à côte */
-  flex-direction: row; /* Disposer les enfants horizontalement */
-  text-align: center;
-  overflow: hidden;
-  position: relative; /* Pour positionner les éléments fils absolument */
-  margin: 10px; /* Ajout de marge pour l'espace entre les containers */
-}
+    <meta charset="UTF-8">
+    <title>Ennemis de Base</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
 
 
-    h2 {
-      margin-top: 0;
-    }
+        .back-button {
+             position: absolute; 
+             top: 200px; 
+            right: 20px; 
+        }
 
-    .image-container img {
-      position : left 100px;
-  max-width: 90%; /* Fait en sorte que les images occupent 100% de la largeur du conteneur */
-  max-height: 100%;
-  transition: transform 0.5s, box-shadow 0.5s, opacity 0.5s;
-  opacity: 0.6;
-  
-}
-    
-    .container:hover img {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-      opacity: 1; /* Opacité au survol */
-    }
+        .button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }   
+
+        .button:hover {
+            background-color: #0056b3;
+        }
 
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-  </style>
+        .ennemi-container {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .ennemi-item {
+            flex: 0 0 calc(33.33% - 20px);
+            margin: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .ennemi-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .ennemi-item img {
+            width: 250px; /* Largeur fixe pour l'image */
+            height: 250px; /* Hauteur fixe pour l'image */
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .description {
+            margin-top: 10px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    </style>
 </head>
-
 <body>
-  <main>
-    <h2>Ennemis avec pouvoirs</h2>
-
-
-   
-  </main>
+    <div class="back-button">
+         <a href="index.php?module=ennemi" class="button">Retour à la page Ennemis</a>
+    </div>
+    <h1>Ennemis Avec Pouvoir</h1>
+    <div class="ennemi-container">
+        <?php foreach ($detailsEnnemiP as $ennemi) : ?>
+            <div class="ennemi-item">
+                <img src="modules/mod_ennemi/logos/<?php echo $ennemi['Image']; ?>" alt="Image ennemi">
+                <div class="description">
+                    <p><strong>Pv de Base:  <?php echo $ennemi['PvBase']; ?></p>
+                    <p><strong>Degats:</strong> <?php echo $ennemi['Degats']; ?></p>
+                    <p><strong>Description:</strong> <?php echo $ennemi['Description']; ?></p>
+                    <p><strong>Pouvoir:</strong> <?php echo $ennemi['Pouvoir']; ?></p>
+                    <p><strong>Ressource Donnees:</strong> <?php echo $ennemi['Degats']; ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </body>
 </html>
