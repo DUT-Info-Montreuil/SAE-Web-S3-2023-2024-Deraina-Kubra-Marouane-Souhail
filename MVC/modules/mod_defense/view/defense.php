@@ -23,6 +23,7 @@
         justify-content: center;
         gap: 40px; /* Espacement plus grand entre les éléments */
         margin-top: 50px;
+        position: relative;
     }
 
     .defense-item {

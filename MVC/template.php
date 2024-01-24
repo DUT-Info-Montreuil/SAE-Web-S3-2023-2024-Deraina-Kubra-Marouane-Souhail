@@ -61,7 +61,7 @@
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px 0;
+    padding: 3px 0;
     width: 100%;
   }
   .content-container {
@@ -85,6 +85,26 @@
   #welcome {
     padding: 20px;
   }
+
+  .footer-column {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .footer-column a{
+    color: white;
+    text-decoration: none;
+  }
+
+.column-separator {
+  width: 2px;
+  background-color: #ccc;
+  height: 100px;
+  display: inline-block;
+}
+
   </style>
 </head>
 <body>
