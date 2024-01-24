@@ -1,5 +1,5 @@
 <?php
-require_once '/home/etudiants/info/dandriambala/local_html/SAE dev web/MVC/connexion.php';
+require_once("../../connexion.php");
 
 class BarreDeRecherche extends Connexion{
     public function rechercherUtilisateur(){
