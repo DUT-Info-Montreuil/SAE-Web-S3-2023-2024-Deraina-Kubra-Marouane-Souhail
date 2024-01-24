@@ -81,7 +81,7 @@
   flex-direction: column;
   align-items: center; /* Pour centrer horizontalement */
   justify-content: flex-end; /* Pour aligner en bas de la page */
-  margin-top: auto; /* Le maintien vers le bas de la page */
+  margin-top: 50px; /* Remplacez cette valeur par la marge souhaitée */
   text-align: center;
   font-size: 25px;
   color: #000000;
@@ -104,7 +104,6 @@ p {
 
 .blue-squares-container {
   margin-left: 20px;
-  margin-top: 20px;
   display: flex;
   gap: 15px;
   justify-content: flex-start;
@@ -313,22 +312,25 @@ p {
 }
 
 .messagesPopupModal {
-  display: none;
-  position: fixed; /* Position fixe sur la page */
-  right: 0; /* Aligner à droite */
-  top: 65%; /* Positionner verticalement au milieu */
-  transform: translateY(-50%); /* Centrer verticalement */
-  width: 400; /* Largeur du pop-up */
-  height: auto; /* Hauteur automatique */
-  z-index: 2; /* Assurez-vous qu'il soit au-dessus des autres éléments */
-  border-radius: 10px 0 0 10px; /* Arrondir les coins à gauche */
+    display: none;
+    position: absolute; /* Utilisez position absolute */
+    right: 0;
+    top: 55%; /* Position verticale souhaitée */
+    transform: translateY(-50%);
+    width: 400px; /* Largeur de la popup */
+    height: auto;
+    z-index: 2;
+    border-radius: 10px 0 0 10px;
 }
+
 
 /* Styles pour le contenu du pop-up des messages reçus */
 .messagesContent {
     background-color: rgba(242, 242, 242, 0.8); /* Fond légèrement transparent */
     padding: 20px; /* Espacement intérieur */
     border-radius: 10px; /* Coins arrondis */
+    max-height: 500px; /* Hauteur maximale de la boîte des messages */
+    overflow-y: auto; /* Ajoute une barre de défilement vertical si nécessaire */
 }
 
 .messagesContent h2 {
@@ -685,6 +687,95 @@ background-color: #45a049; /* Vert foncé */
     color: #fff; /* Couleur du texte au survol */
 }
 
+#classementImage {
+    width: 40px; /* Ajustez la largeur selon vos besoins */
+    height: auto; /* Conservez le ratio hauteur/largeur */
+    margin-left: 5px; /* Espace à gauche de l'image */
+    vertical-align: middle; /* Alignement vertical au milieu */
+    cursor: pointer; /* Curseur indiquant que l'image est cliquable */
+    opacity: 0.8; /* Opacité par défaut */
+    transition: opacity 0.3s ease; /* Transition pour l'opacité */
+}
+
+#classementImage:hover {
+    opacity: 1; /* Opacité au survol */
+}
+
+
+ /* Style du conteneur global */
+.classement-global-container {
+    display: none; /* Masquer le classement par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+    z-index: 999; /* Position au-dessus du reste du contenu */
+    overflow: auto; /* Permet de faire défiler le contenu si nécessaire */
+}
+
+/* Style du contenu du classement */
+.classement-global-content {
+    background-color: #fff;
+    margin: 15% auto; /* Centrer verticalement et horizontalement */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 70%; /* Largeur réduite */
+    max-width: 750px; /* Largeur maximale */
+    max-height: 500px; /* Hauteur maximale */
+    overflow-y: auto; /* Ajouter une barre de défilement vertical si nécessaire */
+}
+
+
+/* Style du bouton de fermeture */
+.classement-global-close {
+    float: right;
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #666;
+}
+
+    
+
+/* Style de l'en-tête */
+.classement-global-content h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Style du tableau */
+#classementGlobalTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Style des en-têtes de colonne */
+#classementGlobalTable th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Style des lignes impaires */
+#classementGlobalTable tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+/* Style des lignes paires */
+#classementGlobalTable tr:nth-child(even) {
+    background-color: #e5e5e5;
+}
+
+/* Style des cellules */
+#classementGlobalTable td {
+    padding: 8px;
+}
+
+
+
 
 </style>
 
@@ -764,10 +855,53 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 
       <div class="text-score">
-      <p class="score-info">Classement : <span class="custom-font"><?php echo ModeleProfil::getPositionClassement() . "/" . ModeleProfil::getTotalJoueurs(); ?></span></p>      
-      <p class="score-info">Score : <span class="custom-font"><?php echo ModeleProfil::calculerScore(); ?></span></p>      </div>
+     <p class="score-info">Classement : 
+        <span class="custom-font clickable" id="openClassementPopup">
+            <?php echo ModeleProfil::getPositionClassement() . "/" . ModeleProfil::getTotalJoueurs(); ?>
+       
+        <img src="././Images/classement.png" id="classementImage" alt="Classement Image" class="clickable"> 
+    </span>
+    </p>  
+      <p class="score-info">Score : <span class="custom-font"><?php echo ModeleProfil::calculerScore(); ?></span></p> </div>
 
     </div>
+
+        <!-- Pop-up pour le classement -->
+<div id="classementGlobalPopup" class="classement-global-container">
+    <div class="classement-global-content">
+        <span class="classement-global-close" id="closeClassementGlobalPopup">&times;</span>
+        <h2>Classement mondial des joueurs</h2>
+        <table id="classementGlobalTable">
+            <tr>
+                <th>Rang</th>
+                <th>Nom du Joueur</th>
+                <th>Score Global</th>
+            </tr>
+            <?php
+            // Obtenir les scores de tous les joueurs
+            $classementScores = ModeleProfil::getAllPlayersScores();
+
+            // Trier les scores en ordre décroissant
+            arsort($classementScores);
+
+            // Initialiser un rang
+            $rang = 1;
+
+            // Parcourir le classement et afficher les données pour chaque joueur
+            foreach ($classementScores as $idJoueur => $score) {
+                $nom = ModeleProfil::getNomJoueur($idJoueur); // Utilisez la fonction pour obtenir le nom du joueur
+
+                // Afficher les données du joueur avec le rang
+                echo "<tr><td>$rang</td><td>$nom</td><td>$score</td></tr>";
+
+                // Augmenter le rang pour le joueur suivant
+                $rang++;
+            }
+            ?>
+        </table>
+    </div>
+</div>
+
 
     <p>COMMUNAUTÉ :</p>
 
@@ -908,11 +1042,15 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 
 
 
+
+
 <script src="modules/mod_profil/view/boiteMessage.js"></script>
 <script src="modules/mod_profil/view/script.js"></script>
 <script src="modules/mod_profil/view/créerTournoi.js"></script>
 <script src="modules/mod_profil/view/rejoindreTournoi.js"></script>
 <script src="modules/mod_profil/view/envoieArgent.js"></script>
+<script src="modules/mod_profil/view/classement.js"></script>
+
 
 
 </body>

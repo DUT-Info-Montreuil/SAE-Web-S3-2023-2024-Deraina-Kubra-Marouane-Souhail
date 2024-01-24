@@ -53,8 +53,8 @@
 }
 
 .defense-item img {
-    width: 150px; /* Réduire la taille de l'image */
-    height: 150px; /* Réduire la taille de l'image */
+    width: 400px; /* Réduire la taille de l'image */
+    height: 400px; /* Réduire la taille de l'image */
     object-fit: cover;
     border: 1px solid #ddd;
     border-radius: 5px;

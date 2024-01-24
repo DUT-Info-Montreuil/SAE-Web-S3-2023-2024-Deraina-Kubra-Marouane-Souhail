@@ -100,6 +100,16 @@ class ModeleProfil extends Connexion {
         return $result;
     }
 
+    public static function getNomJoueur($userID) {
+        $query = "SELECT Nom FROM Joueur WHERE idJoueur = :userID";
+        $statement = parent::$bdd->prepare($query);
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $statement->execute(); 
+        $result = $statement->fetchColumn();
+        return $result;
+    }
+    
+
     public static function creerTournoi(){
         $userID = $_SESSION['user_id'];
             
@@ -353,13 +363,13 @@ public static function calculerScorePourJoueur($userID) {
 }
 
 
-
 public static function getTotalJoueurs(){
     $query = "SELECT COUNT(*) FROM Joueur";
     $statement = parent::$bdd->prepare($query);
     $statement->execute(); 
     return $statement->fetchColumn();
 }
+
 
 }
 ?>
