@@ -57,8 +57,8 @@
         }
 
         .ennemi-item img {
-            width: 400px; /* Largeur fixe pour l'image */
-            height: 400px; /* Hauteur fixe pour l'image */
+            width: 350px; /* Largeur fixe pour l'image */
+            height: 350px; /* Hauteur fixe pour l'image */
             object-fit: cover;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -77,7 +77,7 @@
     <div class="back-button">
          <a href="index.php?module=ennemi" class="button">Retour à la page Ennemis</a>
     </div>
-    <h1>Ennemis Avec Pouvoir</h1>
+    <h1>Forces Surnaturelles</h1>
     <div class="ennemi-container">
         <?php foreach ($detailsEnnemiP as $ennemi) : ?>
             <div class="ennemi-item">

@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Empêche le défilement si le flou déborde */
         }
 
         /* Ajoutez un pseudo-élément pour le flou d'arrière-plan */
@@ -96,7 +95,6 @@
         
     .page-text {
         text-align: center;
-        margin-top: 20px;
         background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond semi-transparente */
         color: #ffffff; /* Couleur du texte en blanc */
         padding: 10px; /* Espacement intérieur pour le texte */

@@ -28,29 +28,31 @@ body {
 }
 
 .main-container {
-    position: relative;
-    width: 100%;
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
     height: 100%;
 }
 
 .content-container {
     position: absolute;
-    top: 40%;
+    top: calc(50% - 1.5em);
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajoute une ombre au texte */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
 }
 
 .title {
-    font-size: 4em;
+    font-size: 2.2vw;
+    max-width: 100%;
     animation: fadeIn 2s;
 }
 
 .description {
-    font-size: 1.5em;
-    font-family: 'Pacifico', cursive; /* Utilisez 'Pacifico' comme nom de police */
+    font-size: 1.5vw;
+    font-family: 'Pacifico', cursive; 
     animation: fadeIn 2s;
     animation-delay: 1s;
     line-height: 1.5;
@@ -60,6 +62,23 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@media screen and (max-width: 768px) {
+            .title {
+                font-size: 3vw;
+            }
+
+            .description {
+                font-size: 2vw;
+            }
+}
+
+@media screen and (max-height: 500px) {
+            .title,
+            .description {
+                font-size: 1.5vw;
+            }
 }
 
 </style>
