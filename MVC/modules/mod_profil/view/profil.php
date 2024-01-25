@@ -368,6 +368,8 @@ p {
     position: fixed; /* Positionnement fixe */
     top: 0;
     left: 0;
+    right: 0; /* Ajouté pour centrer horizontalement */
+    bottom: 0; /* Ajouté pour centrer verticalement */
     width: 100%; /* Largeur complète */
     height: 100%; /* Hauteur complète */
     background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
@@ -390,6 +392,21 @@ p {
     top: 50%; /* Déplacer de 50% de la hauteur du parent */
     transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
     display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
+
+
+.tournoi-modal-content button{
+background-color: #4CAF50; /* Vert */
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px; /* Coins arrondis */
+cursor: pointer;
+font-size: 18px; /* Taille du texte */
+}
+ 
+.tournoi-modal-content button:hover {
+background-color: #45a049; /* Vert foncé */
 }
 
 .tournoi-modal-content-rejoindreTournoi {
@@ -496,8 +513,9 @@ label {
 }
 
 .tournoi-item input[type="radio"]:checked + .tournoi-nom {
-    color: #00FF00; /* Couleur verte pour le texte */
+    color: #FF7F50; /* Coral */
 }
+
 
 .join-tournoi-btn {
     background-color: #4CAF50; /* Vert */
@@ -513,10 +531,6 @@ label {
     z-index: 999; /* Assurez-vous qu'il est au-dessus de tous les autres éléments */
     transition: background-color 0.3s ease;
     
-}
-
-.join-tournoi-btn:hover {
-    background-color: #45a049;
 }
 
 .join-tournoi-btn:hover {
@@ -640,20 +654,6 @@ label {
 .modal-envoi-argent-contenu h2 {
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-.tournoi-modal-content button{
-background-color: #4CAF50; /* Vert */
-color: white;
-padding: 10px 20px;
-border: none;
-border-radius: 5px; /* Coins arrondis */
-cursor: pointer;
-font-size: 18px; /* Taille du texte */
-}
- 
-.tournoi-modal-content button:hover {
-background-color: #45a049; /* Vert foncé */
 }
 
 /* Style pour la sélection du destinataire (prénom) */
@@ -798,6 +798,10 @@ label {
     margin-right: 10px;
 }
 
+.mission-item input[type="radio"]:checked + .mission-nom {
+    color: #FF7F50;
+}
+
 .take-mission-btn {
     background-color: #4CAF50; /* Vert */
     color: white;
@@ -857,6 +861,7 @@ label {
     border-color: #ff3333; /* Bordure rouge légèrement plus foncée */
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Ombre rouge plus prononcée */
 }
+
 </style>
 
     <script>
@@ -994,12 +999,13 @@ $estDejaEnMission = ModeleProfil::estDejaEnMission($_SESSION['user_id']);
                 <div id="listeMissions">
                 </div>
             </div>
+            <!-- Boutons intégrés dans la pop-up -->
+            <?php if ($estDejaEnMission): ?>
+                <button type="submit" name="submitQuitterMission" id="quit-mission-btn" class="quit-mission-btn">Abandonner la mission actuelle</button>
+            <?php else: ?>
+                <button type="submit" name="submitPrendreMission" id="take-mission-btn" class="take-mission-btn">Prendre la mission</button>
+            <?php endif; ?>
         </div>
-        <?php if ($estDejaEnMission): ?>
-            <button type="submit" name="submitQuitterMission" id="quit-mission-btn" class="quit-mission-btn">Abandonner la mission actuelle</button>
-        <?php else: ?>
-            <button type="submit" name="submitPrendreMission" id="take-mission-btn" class="take-mission-btn">Prendre la mission</button>
-        <?php endif; ?>
     </div>
 </form>
 

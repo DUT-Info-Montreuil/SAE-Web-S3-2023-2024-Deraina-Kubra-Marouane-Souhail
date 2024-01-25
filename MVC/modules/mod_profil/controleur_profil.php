@@ -135,7 +135,7 @@ public function chargerListeTournois() {
 
 public function chargerListeMissions() {
     $userID = $_SESSION['user_id'];
-    $missionActuel = $this->modele->estDejaEnMission($userID);
+    $missionActuel = $this->modele->getIdMissionActuelle($userID);
     $missions = $this->modele->getMissions();
 
     foreach ($missions as $mission) {
