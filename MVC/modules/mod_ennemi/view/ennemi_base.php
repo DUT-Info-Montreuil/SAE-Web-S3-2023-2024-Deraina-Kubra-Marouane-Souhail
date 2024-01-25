@@ -80,12 +80,12 @@
     <div class="ennemi-container">
         <?php foreach ($detailsEnnemiB as $ennemi) : ?>
             <div class="ennemi-item">
-                <img src="modules/mod_ennemi/logos/<?php echo $ennemi['Image']; ?>" alt="Image ennemi">
+                <img src="modules/mod_ennemi/logos/<?php echo htmlspecialchars($ennemi['Image']); ?>" alt="Image ennemi">
                 <div class="description">
-                    <p><strong>Pv de Base:  <?php echo $ennemi['PvBase']; ?></p>
-                    <p><strong>Degats:</strong> <?php echo $ennemi['Degats']; ?></p>
-                    <p><strong>Description:</strong> <?php echo $ennemi['Description']; ?></p>
-                    <p><strong>Ressource Donnees:</strong> <?php echo $ennemi['RessourceDonnee']; ?></p>
+                    <p><strong>Pv de Base:  <?php echo htmlspecialchars($ennemi['PvBase']); ?></p>
+                    <p><strong>Degats:</strong> <?php echo htmlspecialchars($ennemi['Degats']); ?></p>
+                    <p><strong>Description:</strong> <?php echo htmlspecialchars($ennemi['Description']); ?></p>
+                    <p><strong>Ressource Donnees:</strong> <?php echo htmlspecialchars($ennemi['RessourceDonnee']); ?></p>
                 </div>
             </div>
         <?php endforeach; ?>

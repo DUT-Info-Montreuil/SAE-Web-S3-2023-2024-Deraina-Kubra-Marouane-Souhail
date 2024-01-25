@@ -2,6 +2,7 @@
 require_once("../../connexion.php");
 
 class BarreDeRecherche extends Connexion{
+
     public function rechercherUtilisateur(){
         if (isset($_GET['user'])) {
             $user = trim($_GET['user']);
@@ -11,25 +12,26 @@ class BarreDeRecherche extends Connexion{
             $query = "SELECT Nom FROM Joueur WHERE Nom LIKE :nom LIMIT 10";
             $req = Connexion::getBdd()->prepare($query);
 
-            
-
             $req->bindParam(":nom", $user, PDO::PARAM_STR);
             $req->execute();
-
             $result = $req->fetchAll();
-     
-
-            foreach ($result as $index => $r) {
-                echo htmlspecialchars($r['Nom']);
-                if ($index < count($result) - 1) {
-                    echo " / ";
-                }
-            }
-
+            return $result;
         }   
-    }   
+    }
+    
+    public function afficherRecherche($result){
+
+        foreach ($result as $index => $r) {
+            echo htmlspecialchars($r['Nom']);
+            if ($index < count($result) - 1) {
+                echo " / ";
+            }
+        }
+
+    }
 }
 
 $barre = new BarreDeRecherche();
-$barre->rechercherUtilisateur();
+$resultatRecherche = $barre->rechercherUtilisateur();
+$barre->afficherRecherche($result);
 ?>
