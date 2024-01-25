@@ -85,6 +85,21 @@
   #welcome {
     padding: 20px;
   }
+
+  .download-button {
+      background-color: #FFD700; /* Couleur jaune */
+      color: #333; /* Couleur du texte */
+      padding: 10px 20px; /* Marge intérieure du bouton */
+      text-decoration: none; /* Supprimer la décoration du texte */
+      border-radius: 5px; /* Coins arrondis */
+      font-weight: bold; /* Texte en gras */
+      transition: background-color 0.3s; /* Transition de couleur au survol */
+    }
+
+    .download-button:hover {
+      background-color: #FFA500; /* Nouvelle couleur au survol */
+    }
+    
   </style>
 </head>
 <body>
