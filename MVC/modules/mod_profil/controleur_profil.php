@@ -1,6 +1,6 @@
 <?php
-require_once "modules/mod_profil/vue_profil.php"; 
-require_once 'mod_profil.php';
+require_once "vue_profil.php"; 
+require_once 'modele_profil.php';
 
 
 class ControleurProfil{
@@ -64,6 +64,11 @@ public function exec() {
                 $this->prendreMission(); // Traiter la prise d'une mission
             }else if (isset($_POST['submitQuitterMission'])) {
                 $this->quitterMission(); // Traiter la quitte d'une mission
+            }elseif (isset($_POST['destinataire_message'])) {
+                //$this->rechercherUtilisateur();
+                $this->form_envoyerMessage($_POST['destinataire_message'], $_POST['contenu']); // Traiter l'envoi de message
+            }elseif (isset($_POST['action']) && $_POST['action'] == 'rechercherUtilisateur') {
+                $this->rechercherUtilisateur();
             }
         }  
 
@@ -75,8 +80,49 @@ public function exec() {
             header("Location: index.php?module=connexion&action=connexion"); 
             exit();
         }
-        
     }
+
+
+    private function form_envoyerMessage($destinataire, $contenu){
+        if ($contenu != "" && $destinataire) {
+            $idDestinataire = $this->modele->getIdUtilisateurParNom($destinataire);
+
+            if($idDestinataire){
+            $this->modele->envoyerMessageBd($idDestinataire, $contenu);
+
+            }
+            else {
+                echo '"<script>alert("Utilisateur introuvable");</script>"';
+            }
+        } 
+        
+        else{
+            echo "Message vide ou destinataire non spécifié.";
+        }
+        
+        header("Location: index.php?module=profil&action=afficherProfil");
+        exit();
+    }
+
+    private function rechercherUtilisateur(){
+        
+        $searchTerm = isset($_GET['user']) ? $_GET['user'] : '';
+       
+
+        $results = $this->modele->rechercherUtilisateur($searchTerm);
+    
+        if (!empty($results)) {
+            $htmlResults = "<div>Résultats de recherche :</div><ul>";
+            foreach ($results as $result) {
+                $htmlResults .= "<li>" . $result['Nom'] . "</li>";
+            }
+            $htmlResults .= "</ul>";
+            echo $htmlResults;
+        } else {
+            echo "Aucun résultat trouvé.";
+        }
+    }
+
 
 
 
