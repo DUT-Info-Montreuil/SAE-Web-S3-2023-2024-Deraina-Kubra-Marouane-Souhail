@@ -14,24 +14,18 @@ class BarreDeRecherche extends Connexion{
 
             $req->bindParam(":nom", $user, PDO::PARAM_STR);
             $req->execute();
-            $result = $req->fetchAll();
-            return $result;
-        }   
-    }
-    
-    public function afficherRecherche($result){
-
-        foreach ($result as $index => $r) {
-            echo htmlspecialchars($r['Nom']);
-            if ($index < count($result) - 1) {
-                echo " / ";
-            }
+            $result = $req->fetchAll(PDO::FETCH_ASSOC);
         }
-
+            
+        return $result;
     }
 }
 
 $barre = new BarreDeRecherche();
 $resultatRecherche = $barre->rechercherUtilisateur();
-$barre->afficherRecherche($result);
+
+// Retournez les résultats au format JSON
+header('Content-Type: application/json');
+echo json_encode($resultatRecherche);
+
 ?>

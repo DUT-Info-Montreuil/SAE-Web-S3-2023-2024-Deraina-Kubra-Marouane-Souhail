@@ -100,6 +100,16 @@ class ModeleProfil extends Connexion {
         return $result;
     }
 
+    public static function getNomJoueur($userID) {
+        $query = "SELECT Nom FROM Joueur WHERE idJoueur = :userID";
+        $statement = parent::$bdd->prepare($query);
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $statement->execute(); 
+        $result = $statement->fetchColumn();
+        return $result;
+    }
+    
+
     public static function creerTournoi(){
         $userID = $_SESSION['user_id'];
             
@@ -323,6 +333,88 @@ public static function getTournoiActuel($userID) {
     $statement->execute();
     return $statement->fetchColumn();
 }
+
+public static function calculerScore(){
+    $userID = $_SESSION['user_id'];
+
+    // Requête pour obtenir le nombre total de parties jouées
+    $queryTotalParties = "SELECT count(*) FROM Partie WHERE idJoueur = :userID";
+    $statementTotalParties = parent::$bdd->prepare($queryTotalParties);
+    $statementTotalParties->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statementTotalParties->execute(); 
+    $totalParties = $statementTotalParties->fetchColumn();
+
+    // Requête pour obtenir le nombre de parties gagnées
+    $queryPartiesGagnees = "SELECT count(*) FROM Partie WHERE idJoueur = :userID and Etat_Partie='Gagnée'";
+    $statementPartiesGagnees = parent::$bdd->prepare($queryPartiesGagnees);
+    $statementPartiesGagnees->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statementPartiesGagnees->execute(); 
+    $partiesGagnees = $statementPartiesGagnees->fetchColumn();
+    
+    // Calcul du score
+    $score = $partiesGagnees * $totalParties * 12;
+
+    return $score;
+}
+
+public static function getAllPlayersScores() {
+    $query = "SELECT idJoueur FROM Joueur";
+    $statement = parent::$bdd->prepare($query);
+    $statement->execute();
+    $joueurs = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+    $scores = [];
+    foreach ($joueurs as $idJoueur) {
+        // Calculer le score pour chaque joueur
+        $scores[$idJoueur] = self::calculerScorePourJoueur($idJoueur);
+    }
+
+    return $scores;
+}
+
+public static function getPositionClassement() {
+    $userID = $_SESSION['user_id'];
+    $scores = self::getAllPlayersScores();
+
+    // Trier les scores en ordre décroissant
+    arsort($scores);
+
+    // Trouver la position du joueur actuel
+    $position = array_search($userID, array_keys($scores)) + 1;
+
+    return $position;
+}
+
+
+public static function calculerScorePourJoueur($userID) {
+    // Requête pour obtenir le nombre total de parties jouées par le joueur spécifié
+    $queryTotalParties = "SELECT count(*) FROM Partie WHERE idJoueur = :userID";
+    $statementTotalParties = parent::$bdd->prepare($queryTotalParties);
+    $statementTotalParties->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statementTotalParties->execute(); 
+    $totalParties = $statementTotalParties->fetchColumn();
+
+    // Requête pour obtenir le nombre de parties gagnées par le joueur spécifié
+    $queryPartiesGagnees = "SELECT count(*) FROM Partie WHERE idJoueur = :userID and Etat_Partie='Gagnée'";
+    $statementPartiesGagnees = parent::$bdd->prepare($queryPartiesGagnees);
+    $statementPartiesGagnees->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statementPartiesGagnees->execute(); 
+    $partiesGagnees = $statementPartiesGagnees->fetchColumn();
+    
+    // Calcul du score
+    $score = $partiesGagnees * $totalParties * 12;
+
+    return $score;
+}
+
+
+public static function getTotalJoueurs(){
+    $query = "SELECT COUNT(*) FROM Joueur";
+    $statement = parent::$bdd->prepare($query);
+    $statement->execute(); 
+    return $statement->fetchColumn();
+}
+
 
 }
 ?>
