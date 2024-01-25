@@ -11,6 +11,9 @@ class Fonction {
      * $token Le token à stocker.
      */
     public static function storeToken($token) {
+
+        unset($_SESSION['token']);
+        unset($_SESSION['token_expiry']);
         $_SESSION['token'] = $token;
         $_SESSION['token_expiry'] = time() + 3600; // Le token expire après 1 heure
     }
@@ -24,7 +27,8 @@ class Fonction {
         if (!isset($_SESSION['token']) || !isset($_SESSION['token_expiry'])) {
             return false;
         }
-        return ($_SESSION['token'] === $receivedToken) && (time() < $_SESSION['token_expiry']);
+        $verifToken = $_SESSION['token'] === $receivedToken && time() < $_SESSION['token_expiry'];
+        return $verifToken;
     }
 }
 
