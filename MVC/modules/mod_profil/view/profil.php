@@ -11,6 +11,19 @@
     align-items:stretch;
   }
 
+  body::before {
+            content: '';
+            position: fixed; /* Fixe le pseudo-élément par rapport à la fenêtre du navigateur */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1; /* Placez le pseudo-élément en arrière-plan */
+            background: url('././Images/fond1.avif') no-repeat center center fixed; 
+            background-size: cover;
+            filter: blur(5px); /* Réglez ceci pour l'intensité du flou */
+        }
+
   /* Styles des boutons */
   .custom-button {
     background-color: #6F6B47;
