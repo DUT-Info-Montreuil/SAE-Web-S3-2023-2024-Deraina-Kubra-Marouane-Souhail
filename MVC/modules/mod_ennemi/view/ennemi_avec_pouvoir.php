@@ -6,9 +6,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+            background: url('././Images/fond.avif') no-repeat center center fixed; 
+            background-size: cover;
         }
 
 
@@ -56,8 +57,8 @@
         }
 
         .ennemi-item img {
-            width: 250px; /* Largeur fixe pour l'image */
-            height: 250px; /* Hauteur fixe pour l'image */
+            width: 400px; /* Largeur fixe pour l'image */
+            height: 400px; /* Hauteur fixe pour l'image */
             object-fit: cover;
             border: 1px solid #ddd;
             border-radius: 5px;

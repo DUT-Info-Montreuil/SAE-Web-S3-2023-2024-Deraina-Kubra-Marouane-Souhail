@@ -8,8 +8,9 @@
     font-family: Arial, sans-serif; /* Police de caractères par défaut */
     margin: 0; /* Aucune marge extérieure */
     padding: 0; /* Aucun espacement intérieur */
-    background-color: #f0f0f0; /* Couleur de fond de la page */
     color: #333; /* Couleur de texte par défaut */
+    background: url('././Images/fond.avif') no-repeat center center fixed; 
+    background-size: cover;
     }
 
      

@@ -9,7 +9,8 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-  
+  background: url('././Images/fond.avif') no-repeat center center fixed; 
+  background-size: cover;
 }
 
 .header {
@@ -36,8 +37,8 @@ body, html {
 }
 
 .image-container img {
-  max-width: 50%; /* Fait en sorte que les images occupent 100% de la largeur du conteneur */
-  max-height: 70%;
+  width: 400px; /* Largeur fixe pour l'image */
+  height: 430px; /* Hauteur fixe pour l'image */
   transition: transform 0.5s, box-shadow 0.5s, opacity 0.5s;
   opacity: 0.6;
   

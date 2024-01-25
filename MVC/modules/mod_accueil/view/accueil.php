@@ -16,7 +16,6 @@ body::before {
     z-index: -1; /* Place le pseudo-élément en arrière-plan */
 }
 
-
 body {
     font-family: 'Arial', sans-serif;
     background: url('././Images/photo.png') no-repeat center center fixed;

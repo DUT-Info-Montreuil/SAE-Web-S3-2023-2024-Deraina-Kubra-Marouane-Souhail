@@ -21,7 +21,6 @@
             z-index: -1; /* Placez le pseudo-élément en arrière-plan */
             background: url('././Images/fond.avif') no-repeat center center fixed; 
             background-size: cover;
-            filter: blur(5px); /* Réglez ceci pour l'intensité du flou */
         }
 
   /* Styles des boutons */
@@ -229,12 +228,9 @@ p {
 
 .profile-container {
   display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-}
-
-.photo_profil {
-  margin-right: 20px; /* Espacement entre la photo et le pseudo */
+  justify-content: flex-end; /* Alignez les éléments à droite */
+  align-items: center; /* Centre les éléments verticalement */
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur les petits écrans */
 }
 
 .image_circulaire {
@@ -242,6 +238,7 @@ p {
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
+  margin-right: 20px; /* Ajoute un espace à droite de l'image de profil */
 }
 
 .image_circulaire img {
@@ -253,18 +250,22 @@ p {
 .pseudo {
   font-family: 'Poppins', sans-serif;
   font-size: 17px;
+  margin-right: 20px; /* Ajoute un espace à droite du pseudo */
 }
 
 .icon {
-    position: absolute; /* Position absolue par rapport au conteneur */
-    right: 45; /* Aligner à droite à l'intérieur du conteneur */
-    top: 25%; /* Position verticale, ajustez selon vos besoins */
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
+  display: block; /* Assurez-vous que l'icône est sur sa propre ligne en dessous de l'image de profil */
+  width: 100%; /* Permet à l'icône de prendre toute la largeur disponible */
+  text-align: right; /* Alignez l'icône à droite */
 }
 
-
+.icon svg {
+  fill: gray;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px; /* Espace entre l'image de profil et l'icône */
+  margin-right: 45px; /* Décaler légèrement l'icône vers la gauche */
+}
 
 /* Styles for the modal */
 .modal {
@@ -338,7 +339,7 @@ p {
     display: none;
     position: absolute; /* Utilisez position absolute */
     right: 0;
-    top: 55%; /* Position verticale souhaitée */
+    top: 60%; /* Position verticale souhaitée */
     transform: translateY(-50%);
     width: 400px; /* Largeur de la popup */
     height: auto;
@@ -792,14 +793,15 @@ label {
  /* Style du conteneur global */
 .classement-global-container {
     display: none; /* Masquer le classement par défaut */
-    position: fixed;
+    position: fixed; /* Positionnement fixe */
     top: 0;
     left: 0;
+    right: 0; /* Ajouté pour centrer horizontalement */
+    bottom: 0; /* Ajouté pour centrer verticalement */
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
     z-index: 999; /* Position au-dessus du reste du contenu */
-    overflow: auto; /* Permet de faire défiler le contenu si nécessaire */
 }
 
 /* Style du contenu du classement */
@@ -1003,14 +1005,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         ?>
     </div>
-    </div>
 
     <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 12 12">
                     <path fill="gray" d="M2 5.248V7.5A1.5 1.5 0 0 0 3.5 9h5A1.5 1.5 0 0 0 10 7.5V5.248L6.205 6.956a.5.5 0 0 1-.41 0zm.037-1.08L6 5.952l3.963-1.784A1.5 1.5 0 0 0 8.5 3h-5a1.5 1.5 0 0 0-1.463 1.168"/>
                 </svg>
     </div>
-
+</div>
     <div class="blue-squares-container">
         <div class="blue-square">
             <div class="vertical-rectangle"></div>

@@ -10,6 +10,18 @@
         background-size: cover;
     }
 
+    body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit; /* Copie l'arrière-plan du body */
+    filter: blur(3px); /* Ajoute le flou */
+    z-index: -1; /* Place le pseudo-élément en arrière-plan */
+}
+
     form {
         max-width: 300px;
         margin: 50px auto;
