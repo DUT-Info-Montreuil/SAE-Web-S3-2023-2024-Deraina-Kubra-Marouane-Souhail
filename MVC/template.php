@@ -104,6 +104,7 @@
   background-color: #ccc;
   height: 100px;
   display: inline-block;
+  margin:5px;
 }
 
 @media screen and (max-width: 768px) {
@@ -114,6 +115,7 @@
     header, footer {
         padding: 5px;
         height: auto;
+        width:100%;
     }
 
     main {

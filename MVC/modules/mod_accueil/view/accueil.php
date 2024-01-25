@@ -26,8 +26,6 @@ body {
     display: flex;
     justify-content: center;
     height: 100vh;
-    margin-bottom: 20px;
-    overflow:hidden;
 }
 
 .main-container {
