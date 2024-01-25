@@ -9,6 +9,10 @@ class Connexion {
 		self::$bdd = new PDO ($dsn, $user, $password);
 	}
 
-
-
+	public static function getBdd() {
+        if (!self::$bdd) {
+            self::init_connexion();
+        }
+        return self::$bdd;
+    }
 }
