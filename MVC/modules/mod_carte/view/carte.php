@@ -10,28 +10,28 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Empêche le défilement si le flou déborde */
+            
         }
 
-        /* Ajoutez un pseudo-élément pour le flou d'arrière-plan */
+
         body::before {
             content: '';
-            position: fixed; /* Fixe le pseudo-élément par rapport à la fenêtre du navigateur */
+            position: fixed; 
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: -1; /* Placez le pseudo-élément en arrière-plan */
+            z-index: -1; 
             background: url('././Images/fondCarte.png') no-repeat center center fixed; 
             background-size: cover;
-            filter: blur(5px); /* Réglez ceci pour l'intensité du flou */
+            filter: blur(5px);
         }
 
         .header {
-            position: relative; /* S'assure que le texte de l'en-tête est au-dessus du flou */
+            position: relative;
             color: #ffffff;
-            text-align: left; /* Alignement du texte à gauche */
-            padding: 20px; /* Ajustez selon vos besoins */
+            text-align: left; 
+            padding: 20px; 
             font-size: 32px;
             font-weight: bold;
             text-shadow: 2px 2px 4px #000000;
@@ -41,17 +41,18 @@
         .images-wrapper {
         position: relative;
         width: 100%;
-        text-align: center; /* Ajout de cette ligne pour centrer les images */
+        text-align: center; 
     }
         .image-container {
-            display: inline-block; /* Placer les images côte à côte */
-            position: relative; /* Important pour le positionnement de .overlay */
-            width: 20%; /* Largeur du conteneur de l'image */
-            margin: 60px; /* Espacement autour des images */
+            display: inline-block; 
+            position: relative; 
+            width: 30%;* Largeur du conteneur de l'image */
+            margin: 2%; 
         }
 
         .image-container img {
-            width: 100%; /* Faire en sorte que l'image remplisse le conteneur */
+            max-width: 50%; 
+            max-height: 70%;
             height: auto;
             transition: filter 0.3s ease; /* Effet de transition pour le flou */
         }
@@ -75,17 +76,21 @@
             text-align: center; /* Centrez le texte */
         }
 
-        .overlay h3 {
-            margin: 0;
-            font-size: 24px; /* Taille de police pour les titres */
-            color: #ff9900; /* Couleur du texte des titres */
-        }
 
-        .overlay p {
-        margin: 10px 0;
-        font-size: 18px; /* Taille de police pour le texte */
-        color: #ffffff; /* Couleur du texte */
-        }
+
+.overlay h3 {
+    margin: 0;
+    font-size: 1.5vw; /* Taille de police pour les titres (ajustez selon vos besoins) */
+    color: #ff9900;
+}
+
+.overlay p {
+    margin: 8px 0;
+    font-size: 1vw; /* Taille de police pour le texte (ajustez selon vos besoins) */
+    color: #ffffff;
+}
+
+
 
         .image-container:hover img {
             filter: blur(8px); /* Ajustez si nécessaire */
@@ -97,10 +102,11 @@
         
     .page-text {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
         background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond semi-transparente */
         color: #ffffff; /* Couleur du texte en blanc */
-        padding: 10px; /* Espacement intérieur pour le texte */
+        padding: 8px; /* Espacement intérieur pour le texte */
+        border-radius: 10px;
     }
 
     .page-text h3 {
@@ -110,6 +116,110 @@
     .page-text p {
         font-size: 18px; /* Taille de police pour le texte */
     }
+
+@media screen and (max-height: 650px) {
+  .image-container {
+    flex: 0 0 100%;
+  }
+  .overlay h3{
+    font-size:10em;
+  }
+  .overlay p{
+    margin: 3px 0;
+    font-size: 0.5vw; 
+  }
+  .page-text{
+    padding:3px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .overlay h3 {
+        font-size: 1em;
+    }
+
+    .overlay p {
+        margin: 3px 0;
+        font-size: 0.5em;
+    }
+
+.header {
+  font-size: 5px; 
+}
+.overlay{
+    max-width:50%;
+}
+
+}
+
+
+@media screen and (max-width: 768px) {
+    .image-container {
+        flex: 0 0 calc(45% - 20px);
+    }
+
+    .overlay h3 {
+        font-size: 1.2em;
+    }
+
+    .overlay p {
+        margin: 3px 0;
+        font-size: 1em;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .image-container {
+        flex: 0 0 calc(100% - 20px);
+    }
+    .overlay h3 {
+        font-size: 1em;
+    }
+
+    .overlay p {
+        margin: 3px 0;
+        font-size: 0.8em;
+    }
+    .page-text{
+    padding:3px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .page-text h3 {
+    font-size: 8px; 
+  }
+
+  .page-text p {
+  font-size: 5px; 
+}
+ 
+}
+
+
+@media (max-width: 900px) {
+    .overlay h3 {
+        font-size: 1vw; /* Taille de police réduite pour les titres à une largeur d'écran de 1024px ou moins */
+    }
+
+    .overlay p {
+        font-size: 0.5vw; /* Taille de police réduite pour le texte à une largeur d'écran de 1024px ou moins */
+    }
+    .page-text{
+    padding:3px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .page-text h3 {
+    font-size: 8px; 
+  }
+
+  .page-text p {
+  font-size: 5px; 
+}
+}
 
     </style>
 </head>
@@ -139,7 +249,7 @@
     <?php endforeach; ?>
 </div>
 
-<div class="page-text" style="text-align: center; margin-top: 20px;">
+<div class="page-text">
     <h3>Fonctionnement des cartes:</h3>
     <p>Il existe une entrée à gauche pour les ennemis et une sortie à droite qui mène tout droit vers votre base.</p>
 </div>
