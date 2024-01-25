@@ -11,7 +11,6 @@ class Fonction {
      * $token Le token à stocker.
      */
     public static function storeToken($token) {
-
         unset($_SESSION['token']);
         unset($_SESSION['token_expiry']);
         $_SESSION['token'] = $token;
