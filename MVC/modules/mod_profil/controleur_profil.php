@@ -70,7 +70,7 @@ public function exec() {
             $this->vue->afficherProfil($tournois); // Passer les tournois à la vue
         
         } else {
-            header("Location: index.php?module=connexion&action=connexion"); 
+            header("Location: index.php?module=connexion&action=form_connexion"); 
             exit();
         }
     }
