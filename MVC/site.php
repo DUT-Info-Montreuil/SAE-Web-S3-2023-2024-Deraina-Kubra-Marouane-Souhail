@@ -9,15 +9,13 @@ class Site {
 
 		switch ($this->module_name) {
 			case "defense" :
-				require_once "modules/mod_".$this->module_name."/modele_".$this->module_name.".php";
-				break;
 			case "ennemi" :
             case "profil" :
             case "carte" :
             case "connexion" :
             case "inscription" :	
             case "accueil" :
-				require_once "modules/mod_".$this->module_name."/modele_".$this->module_name.".php";
+				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
 			default :
 				die ("Module inexistant");

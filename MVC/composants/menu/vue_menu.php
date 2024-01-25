@@ -18,6 +18,7 @@ class VueCompMenu extends VueCompGenerique {
             $this->affichage .= '<a href="index.php?module=connexion&action=connexion">Connexion</a>';
             $this->affichage .= '<a href="index.php?module=connexion&action=afficher">Inscription</a>';
         }
+		$this->affichage .= '<a href="https://github.com/dandriambala/KQD_Defense/archive/develop_design_pattern.zip" class="download-button" target="_blank">Télécharger</a>';
 		$this->affichage .= "</nav>";
 
 	}	

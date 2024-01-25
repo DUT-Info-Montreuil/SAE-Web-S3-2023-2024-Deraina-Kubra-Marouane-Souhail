@@ -27,7 +27,7 @@
     }
 
     .defense-item {
-        width: 240px; /* Légèrement plus large */
+        width: 400px; /* Légèrement plus large */
         cursor: pointer; /* Indique que l'élément est cliquable */
         overflow: hidden; /* Empêche les débordements */
         border-radius: 10px; /* Coins arrondis plus prononcés */
@@ -55,10 +55,11 @@
     }
 
     .defense-item img {
-        width: 100%;
+        width: 120%; /* Augmentation de la largeur de l'image */
         height: auto;
-        display: block; /* Élimine les espaces supplémentaires sous l'image */
-        transition: transform 0.3s ease; /* Transition douce pour l'image */
+        display: block;
+        transition: transform 0.3s ease;
+        margin-left: -10%; /* Centrer l'image agrandie dans son conteneur */
     }
 
     .defense-item img:hover {

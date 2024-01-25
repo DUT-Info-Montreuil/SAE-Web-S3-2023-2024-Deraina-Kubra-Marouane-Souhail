@@ -7,8 +7,6 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
         }
 
 
@@ -56,8 +54,8 @@
         }
 
         .defense-item img {
-            width: 250px; /* Largeur fixe pour l'image */
-            height: 250px; /* Hauteur fixe pour l'image */
+            width: 400px; /* Largeur fixe pour l'image */
+            height: 450px; /* Hauteur fixe pour l'image */
             object-fit: cover;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -68,7 +66,7 @@
         }
 
         p {
-            margin: 10px 0;
+            margin: 10  px 0;
         }
     </style>
 </head>
@@ -80,12 +78,12 @@
     <div class="defense-container">
         <?php foreach ($detailsPiege as $piege) : ?>
             <div class="defense-item">
-                <img src="modules/mod_defense/logos/<?php echo $piege['Image']; ?>" alt="Image du piège">
-                <h2><?php echo $piege['Description']; ?></h2>
+                <img src="modules/mod_defense/logos/<?php echo htmlspecialchars($piege['Image']); ?>" alt="Image du piège">
+                <h2><?php echo htmlspecialchars($piege['Description']); ?></h2>
                 <div class="description">
-                    <p><strong>Description:  <?php echo $piege['Detail']; ?></p>
-                    <p><strong>Cout:</strong> <?php echo $piege['Cout']; ?></p>
-                    <p><strong>Degats:</strong> <?php echo $piege['Degats']; ?></p>
+                    <p><strong>Description:  <?php echo htmlspecialchars($piege['Detail']); ?></p>
+                    <p><strong>Cout:</strong> <?php echo htmlspecialchars($piege['Cout']); ?></p>
+                    <p><strong>Degats:</strong> <?php echo htmlspecialchars($piege['Degats']); ?></p>
                 </div>
             </div>
         <?php endforeach; ?>

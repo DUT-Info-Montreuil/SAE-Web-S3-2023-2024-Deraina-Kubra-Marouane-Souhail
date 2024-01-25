@@ -1,6 +1,6 @@
 <?php
-require_once "modules/mod_ennemi/vue_ennemi.php"; 
-require_once 'mod_ennemi.php';
+require_once 'vue_ennemi.php'; 
+require_once 'modele_ennemi.php';
 
 class ControleurEnnemi{
     private $vue;
