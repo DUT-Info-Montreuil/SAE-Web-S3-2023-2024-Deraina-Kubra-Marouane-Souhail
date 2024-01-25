@@ -24,7 +24,7 @@ class VueCompFooter extends VueCompGenerique {
 
 
        $this->affichage .= '<div id="footer_texte">';
-       $this->affichage .= 'Copyright - Novembre 2023 - Deraina, Marouane, Souhail, Kubra';
+       $this->affichage .= '©  - 2023-2024 - Deraina, Marouane, Souhail, Kubra';
        $this->affichage .= '</div>';
        $this->affichage .= '</footer>';
 

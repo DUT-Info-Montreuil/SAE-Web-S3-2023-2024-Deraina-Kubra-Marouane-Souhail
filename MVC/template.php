@@ -44,7 +44,7 @@
   body {
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* Assure que la hauteur minimum est l'écran entier */
+    height: 100vh;
     display: flex;
     flex-direction: column; /* Organise le contenu en colonne */
   }
@@ -73,13 +73,14 @@
 
   .welcome-image {
     margin-right: 20px; /* Espace entre l'image et le texte */
-    height: 200px; /* Hauteur de l'image, ajustez selon vos besoins */
-    width: auto; /* Assure que l'aspect ratio de l'image est maintenu */
+    height: auto;
+    max-width: 100%; /* Assure que l'aspect ratio de l'image est maintenu */
   }
 
 
   .welcome-text {
     max-width: 600px; /* Largeur maximale du texte pour une meilleure lisibilité */
+    margin: 0 auto;
   }
 
   #welcome {
@@ -105,6 +106,84 @@
   display: inline-block;
 }
 
+@media screen and (max-width: 768px) {
+    body {
+        margin: 5px; 
+    }
+
+    header, footer {
+        padding: 5px;
+        height: auto;
+    }
+
+    main {
+        margin: 10px;
+    }
+}
+
+@media screen and (max-height: 650px) {
+  body {
+        margin: 2px; 
+    }
+
+    header {
+        padding: 5px;
+    }
+
+    header h1 {
+        font-size: 1.5em; 
+    }
+
+    header img {
+        height: 60px; 
+        margin-left: 10px;
+    }
+
+    .footer-column {
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+
+    .footer-column h3 {
+        font-size: 8px;
+    }
+
+    .footer-column ul {
+        font-size: 10px; 
+    }
+
+    footer {
+      height: auto;
+     
+    }
+    footer p {
+        font-size: 10px;
+    }
+    #footer_texte {
+        font-size: 10px;
+    }
+
+    main {
+        margin: 5px;
+    }
+
+    nav {
+        padding: 2px;
+        font-size: 1em;  
+    }
+
+    nav a {
+        font-size: 1em; 
+    }
+    nav img {
+        max-height: 30px; 
+        max-width: 100%; 
+    }
+
+    .image-menu {
+      padding: 0 9px;
+    }
+}
   </style>
 </head>
 <body>
