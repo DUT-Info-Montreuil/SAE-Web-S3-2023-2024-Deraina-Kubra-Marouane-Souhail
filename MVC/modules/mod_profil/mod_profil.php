@@ -279,5 +279,66 @@ public static function getTournoiActuel($userID) {
     return $statement->fetchColumn();
 }
 
+public static function getMissions() {
+    $query = "SELECT * FROM Mission WHERE Etat = 'Disponible'";
+    $statement = parent::$bdd->prepare($query);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Méthode pour prendre une mission
+public static function prendreMission($userID, $missionID) {
+    // Mettre à jour la base de données pour indiquer que l'utilisateur a pris la mission
+    $query = "INSERT INTO UtilisateurMission (idJoueur, Id_Mission) VALUES (:userID, :missionID)";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':missionID', $missionID, PDO::PARAM_INT);
+    $success = $statement->execute();
+
+    // Mettre à jour l'état de la mission
+    if ($success) {
+        $updateQuery = "UPDATE Mission SET Etat = 'En cours' WHERE Id_Mission = :missionID";
+        $updateStatement = parent::$bdd->prepare($updateQuery);
+        $updateStatement->bindParam(':missionID', $missionID, PDO::PARAM_INT);
+        $updateStatement->execute();
+    }
+
+    return $success;
+}
+public static function estDejaEnMission($userID) {
+    $query = "SELECT count(*) FROM UtilisateurMission WHERE idJoueur = :userID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchColumn() > 0;
+}
+
+public static function quitterMission($userID, $missionID) {
+    // Supprimer l'association entre l'utilisateur et la mission dans la base de données
+    $query = "DELETE FROM UtilisateurMission WHERE idJoueur = :userID AND Id_Mission = :missionID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':missionID', $missionID, PDO::PARAM_INT);
+    $success = $statement->execute();
+
+    // Vérifier s'il n'y a plus d'utilisateurs associés à cette mission
+    $checkQuery = "SELECT COUNT(*) FROM UtilisateurMission WHERE Id_Mission = :missionID";
+    $checkStatement = parent::$bdd->prepare($checkQuery);
+    $checkStatement->bindParam(':missionID', $missionID, PDO::PARAM_INT);
+    $checkStatement->execute();
+    $rowCount = $checkStatement->fetchColumn();
+
+    // Si aucun utilisateur n'est associé à la mission, mettez à jour l'état de la mission
+    if ($rowCount == 0) {
+        $updateQuery = "UPDATE Mission SET Etat = 'Disponible' WHERE Id_Mission = :missionID";
+        $updateStatement = parent::$bdd->prepare($updateQuery);
+        $updateStatement->bindParam(':missionID', $missionID, PDO::PARAM_INT);
+        $updateStatement->execute();
+    }
+
+    return $success;
+}
+
+
 }
 ?>

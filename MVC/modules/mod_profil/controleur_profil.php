@@ -43,6 +43,10 @@ public function exec() {
         $this->chargerListeTournois();
         exit;
     }
+    if (isset($_GET['action']) && $_GET['action'] == 'loadMissions') {
+        $this->chargerListeMissions();
+        exit;
+    }
 
     if (isset($_SESSION['user_id'])) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -55,8 +59,11 @@ public function exec() {
             } elseif (isset($_POST['submitTournoi'])) {
                 $this->traiterCreationTournoi(); // Traiter la création de tournoi
             } elseif (isset($_POST['submitEnvoiArgent'])) {
-                $this->traiterEnvoiArgent(); // Traiter l'envoi d'argent
-            
+                $this->traiterEnvoiArgent(); // Traiter l'envoi d'argent 
+            }else if (isset($_POST['submitPrendreMission'])) {
+                $this->prendreMission(); // Traiter la prise d'une mission
+            }else if (isset($_POST['submitQuitterMission'])) {
+                $this->quitterMission(); // Traiter la quitte d'une mission
             }
         }  
 
@@ -124,6 +131,66 @@ public function chargerListeTournois() {
         echo '</div>';
     }
     exit; // Pour ne pas charger le reste de la page
+}
+
+public function chargerListeMissions() {
+    $userID = $_SESSION['user_id'];
+    $missionActuel = $this->modele->estDejaEnMission($userID);
+    $missions = $this->modele->getMissions();
+
+    foreach ($missions as $mission) {
+        $class = ($mission['Id_Mission'] == $missionActuel) ? 'mission-actuel' : '';
+        echo '<div class= "mission-item '. $class . '">';
+        echo '<label for="mission_' . htmlspecialchars($mission['Id_Mission']) . '">';
+        echo '<input type="radio" id="mission_' . htmlspecialchars($mission['Id_Mission']) . '" name="missionID" value="' . htmlspecialchars($mission['Id_Mission']) . '" style="display: none;">';
+        echo '<h2 class="mission-nom">' . htmlspecialchars($mission['Description']) . '</h2>';
+        echo '<div class="mission-info"><span class="mission-label">Récompense:</span><span class="mission-detail">' . htmlspecialchars($mission['Recompense']) . '</span></div>';
+        echo '<div class="mission-info"><span class="mission-label">Coût de Renouvellement:</span><span class="mission-detail">' . htmlspecialchars($mission['CoutRenouvellement']) . '</span></div>';
+        echo '<div class="mission-info"><span class="mission-label">Date:</span><span class="mission-detail">' . htmlspecialchars($mission['Date']) . '</span></div>';
+        echo '</label>';
+        echo '</div>';
+    }
+    exit; // Pour ne pas charger le reste de la page
+}
+
+
+private function prendreMission() {
+    $userID = $_SESSION['user_id'];
+    $missionID = isset($_POST['missionID']) ? $_POST['missionID'] : null;
+
+    if ($missionID === null) {
+        $_SESSION['popup_message'] = "Aucune mission sélectionnée.";
+        return;
+    }
+
+    // Logique pour prendre une mission
+    $priseReussie = $this->modele->prendreMission($userID, $missionID);
+
+    if ($priseReussie) {
+        $_SESSION['popup_message'] = "Mission prise avec succès.";
+    } else {
+        $_SESSION['popup_message'] = "Erreur lors de la prise de la mission.";
+    }
+}
+private function quitterMission() {
+    $userID = $_SESSION['user_id'];
+
+    // Vérifiez si 'missionID' est défini et non null
+    $missionID = isset($_POST['missionID']) ? $_POST['missionID'] : null;
+
+    if ($missionID === null) {
+        $_SESSION['popup_message'] = "Aucune mission sélectionnée.";
+        return;
+    }
+
+    // Logique pour quitter une mission
+    $quitterReussi = $this->modele->quitterMission($userID, $missionID);
+
+    if ($quitterReussi) {
+        $_SESSION['popup_message'] = "Mission quittée avec succès.";
+    } else {
+        $_SESSION['popup_message'] = "Erreur lors de la tentative de quitter la mission.";
+    }
 }
 
 }
