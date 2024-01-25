@@ -1,5 +1,5 @@
 <?php
-require_once 'mod_connexion.php';
+require_once 'modele_connexion.php';
 require_once 'vue_connexion.php';
 require_once '././fonction.php';
 

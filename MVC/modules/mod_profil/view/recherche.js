@@ -5,19 +5,21 @@ $(document).ready(function() {
 
         var utilisateur = $(this).val();
 
-        console.log(utilisateur)
-
         if(utilisateur != ""){
             $.ajax({
                 type: 'GET',
                 url: 'modules/mod_profil/search.php',
                 data: {'user': utilisateur} ,
+                dataType: 'json', 
                 success: function(data) {
-                    if(data != ""){
-                        document.getElementById('result-search').append(data);
-                    }
-                    else{
-                        document.getElementById('result-search').innerHTML = "<div>Aucun utilisateur<div>"
+                    if(data.length > 0){
+                        var resultHTML = data.map(function(user) {
+                            return user.Nom;
+                        }).join(' / ');
+
+                        $('#result-search').html(resultHTML);
+                    } else {
+                        $('#result-search').html("<div>Aucun utilisateur</div>");
                     }
                 },
                 error: function() {

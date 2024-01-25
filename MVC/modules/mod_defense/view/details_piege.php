@@ -78,12 +78,12 @@
     <div class="defense-container">
         <?php foreach ($detailsPiege as $piege) : ?>
             <div class="defense-item">
-                <img src="modules/mod_defense/logos/<?php echo $piege['Image']; ?>" alt="Image du piège">
-                <h2><?php echo $piege['Description']; ?></h2>
+                <img src="modules/mod_defense/logos/<?php echo htmlspecialchars($piege['Image']); ?>" alt="Image du piège">
+                <h2><?php echo htmlspecialchars($piege['Description']); ?></h2>
                 <div class="description">
-                    <p><strong>Description:  <?php echo $piege['Detail']; ?></p>
-                    <p><strong>Cout:</strong> <?php echo $piege['Cout']; ?></p>
-                    <p><strong>Degats:</strong> <?php echo $piege['Degats']; ?></p>
+                    <p><strong>Description:  <?php echo htmlspecialchars($piege['Detail']); ?></p>
+                    <p><strong>Cout:</strong> <?php echo htmlspecialchars($piege['Cout']); ?></p>
+                    <p><strong>Degats:</strong> <?php echo htmlspecialchars($piege['Degats']); ?></p>
                 </div>
             </div>
         <?php endforeach; ?>

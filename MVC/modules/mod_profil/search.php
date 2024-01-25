@@ -1,7 +1,8 @@
 <?php
-require_once '/home/etudiants/info/dandriambala/local_html/SAE dev web/MVC/connexion.php';
+require_once("../../connexion.php");
 
 class BarreDeRecherche extends Connexion{
+
     public function rechercherUtilisateur(){
         if (isset($_GET['user'])) {
             $user = trim($_GET['user']);
@@ -11,25 +12,20 @@ class BarreDeRecherche extends Connexion{
             $query = "SELECT Nom FROM Joueur WHERE Nom LIKE :nom LIMIT 10";
             $req = Connexion::getBdd()->prepare($query);
 
-            
-
             $req->bindParam(":nom", $user, PDO::PARAM_STR);
             $req->execute();
-
-            $result = $req->fetchAll();
-     
-
-            foreach ($result as $index => $r) {
-                echo htmlspecialchars($r['Nom']);
-                if ($index < count($result) - 1) {
-                    echo " / ";
-                }
-            }
-
-        }   
-    }   
+            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        }
+            
+        return $result;
+    }
 }
 
 $barre = new BarreDeRecherche();
-$barre->rechercherUtilisateur();
+$resultatRecherche = $barre->rechercherUtilisateur();
+
+// Retournez les résultats au format JSON
+header('Content-Type: application/json');
+echo json_encode($resultatRecherche);
+
 ?>

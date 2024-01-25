@@ -1,6 +1,6 @@
 <?php
 require_once "vue_profil.php"; 
-require_once 'mod_profil.php';
+require_once 'modele_profil.php';
 
 
 class ControleurProfil{
