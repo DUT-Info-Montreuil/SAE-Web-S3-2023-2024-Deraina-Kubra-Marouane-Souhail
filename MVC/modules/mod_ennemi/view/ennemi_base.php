@@ -13,8 +13,8 @@
 
 
         .back-button {
-             position: absolute; 
-             top: 200px; 
+            position: absolute; 
+            top: 200px; 
             right: 20px; 
         }
 
@@ -35,7 +35,7 @@
         .ennemi-container {
             position: relative;
             display: flex;
-            flex-wrap: wrap;
+            f
             justify-content: center;
             margin-top: 20px;
         }
@@ -56,8 +56,8 @@
         }
 
         .ennemi-item img {
-            width: 250px; /* Largeur fixe pour l'image */
-            height: 250px; /* Hauteur fixe pour l'image */
+            width: 100%; /* Largeur fixe pour l'image */
+            height: auto; /* Hauteur fixe pour l'image */
             object-fit: cover;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -70,13 +70,33 @@
         p {
             margin: 10px 0;
         }
+
+@media screen and (max-height: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    .ennemi-item {
+        flex: 0 0 calc(50% - 20px);
+        margin: 10px;
+    }
+
+    .description p {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+}
+
     </style>
 </head>
 <body>
     <div class="back-button">
          <a href="index.php?module=ennemi" class="button">Retour à la page Ennemis</a>
     </div>
-    <h1>Ennemis Sans Pouvoir</h1>
+    <h1>Assaillants Communs</h1>
     <div class="ennemi-container">
         <?php foreach ($detailsEnnemiB as $ennemi) : ?>
             <div class="ennemi-item">

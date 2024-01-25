@@ -76,7 +76,7 @@
     <div class="back-button">
          <a href="index.php?module=ennemi" class="button">Retour à la page Ennemis</a>
     </div>
-    <h1>Ennemis Avec Pouvoir</h1>
+    <h1>Forces Surnaturelles</h1>
     <div class="ennemi-container">
         <?php foreach ($detailsEnnemiP as $ennemi) : ?>
             <div class="ennemi-item">

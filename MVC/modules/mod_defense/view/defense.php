@@ -21,7 +21,9 @@
     .container {
         display: flex;
         justify-content: center;
-        gap: 60px; /* Espacement plus grand entre les éléments */
+        gap: 40px; /* Espacement plus grand entre les éléments */
+        margin-top: 50px;
+        position: relative;
     }
 
     .defense-item {

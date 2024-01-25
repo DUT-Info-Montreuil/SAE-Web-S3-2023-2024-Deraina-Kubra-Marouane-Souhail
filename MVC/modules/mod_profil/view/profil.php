@@ -11,6 +11,19 @@
     align-items:stretch;
   }
 
+  body::before {
+            content: '';
+            position: fixed; /* Fixe le pseudo-élément par rapport à la fenêtre du navigateur */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1; /* Placez le pseudo-élément en arrière-plan */
+            background: url('././Images/fond.avif') no-repeat center center fixed; 
+            background-size: cover;
+            filter: blur(5px); /* Réglez ceci pour l'intensité du flou */
+        }
+
   /* Styles des boutons */
   .custom-button {
     background-color: #6F6B47;
@@ -380,6 +393,8 @@ p {
     position: fixed; /* Positionnement fixe */
     top: 0;
     left: 0;
+    right: 0; /* Ajouté pour centrer horizontalement */
+    bottom: 0; /* Ajouté pour centrer verticalement */
     width: 100%; /* Largeur complète */
     height: 100%; /* Hauteur complète */
     background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
@@ -402,6 +417,21 @@ p {
     top: 50%; /* Déplacer de 50% de la hauteur du parent */
     transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
     display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
+
+
+.tournoi-modal-content button{
+background-color: #4CAF50; /* Vert */
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px; /* Coins arrondis */
+cursor: pointer;
+font-size: 18px; /* Taille du texte */
+}
+ 
+.tournoi-modal-content button:hover {
+background-color: #45a049; /* Vert foncé */
 }
 
 .tournoi-modal-content-rejoindreTournoi {
@@ -508,8 +538,9 @@ label {
 }
 
 .tournoi-item input[type="radio"]:checked + .tournoi-nom {
-    color: #00FF00; /* Couleur verte pour le texte */
+    color: #FF7F50; /* Coral */
 }
+
 
 .join-tournoi-btn {
     background-color: #4CAF50; /* Vert */
@@ -525,10 +556,6 @@ label {
     z-index: 999; /* Assurez-vous qu'il est au-dessus de tous les autres éléments */
     transition: background-color 0.3s ease;
     
-}
-
-.join-tournoi-btn:hover {
-    background-color: #45a049;
 }
 
 .join-tournoi-btn:hover {
@@ -550,7 +577,6 @@ label {
     z-index: 999; /* Assurez-vous qu'il est au-dessus de tous les autres éléments */
     transition: background-color 0.3s ease;
 }
-
 
 .quit-tournament-btn:hover {
     background-color: #c9302c; /* Rouge plus foncé */
@@ -655,20 +681,6 @@ label {
     margin-bottom: 20px;
 }
 
-.tournoi-modal-content button{
-background-color: #4CAF50; /* Vert */
-color: white;
-padding: 10px 20px;
-border: none;
-border-radius: 5px; /* Coins arrondis */
-cursor: pointer;
-font-size: 18px; /* Taille du texte */
-}
- 
-.tournoi-modal-content button:hover {
-background-color: #45a049; /* Vert foncé */
-}
-
 /* Style pour la sélection du destinataire (prénom) */
 #selectionDestinataire {
     width: 100%;
@@ -695,6 +707,71 @@ background-color: #45a049; /* Vert foncé */
 #selectionDestinataire option:hover {
     background-color: #45a049; /* Couleur de survol */
     color: #fff; /* Couleur du texte au survol */
+}
+
+.mission-modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionnement fixe */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largeur complète */
+    height: 100%; /* Hauteur complète */
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    z-index: 100; /* S'assure qu'il est au-dessus des autres éléments */
+    align-items: center; /* Centre verticalement (pourrait ne pas être nécessaire sans flex) */
+    justify-content: center; /* Centre horizontalement (pourrait ne pas être nécessaire sans flex) */
+    text-align: center; /* Centrer le texte pour le contenu */
+  
+}
+
+
+.mission-modal-content-rejoindreMission {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #fff; /* Fond blanc pour le contenu */
+    padding: 30px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
+    width: 60%; /* Largeur du modal */
+    max-width: 700px; /* Largeur maximale pour éviter qu'il soit trop large */
+    margin: auto; /* Centrage horizontal */
+    position: relative; /* Positionnement relatif */
+    top: 50%; /* Déplacer de 50% de la hauteur du parent */
+    transform: translateY(-50%); /* Déplacer vers le haut de la moitié de sa propre hauteur pour centrer */
+    display: inline-block; /* Pour permettre le centrage horizontal avec text-align */
+}
+
+.mission-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+}
+
+.mission-close:hover {
+    color: #666;
+}
+
+input[type=text], input[type=date], input[type=number], textarea {
+    width: 80%; /* Largeur des champs */
+    padding: 10px;
+    margin: 10px 0; /* Espacement */
+    border: 1px solid #ddd; /* Bordure subtile */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+label {
+    display: block; /* Chaque label sur une nouvelle ligne */
+    margin-bottom: 5px; /* Espacement en dessous du label */
+    font-weight: bold; /* Texte en gras */
 }
 
 #classementImage {
@@ -747,6 +824,111 @@ background-color: #45a049; /* Vert foncé */
     color: #666;
 }
 
+.mission-list-container {
+    overflow-y: auto;
+    max-height: 400px;
+    flex: 1;
+    margin-bottom: 20px; /* Ajoutez une marge en bas de la liste */
+}
+
+.mission-item {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mission-item:hover {
+    background-color: #e9e9e9;
+}
+
+
+.mission-item label {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mission-item label:hover {
+    background-color: #e9e9e9;
+}
+
+.mission-item input[type="radio"] {
+    margin-right: 10px;
+}
+
+.mission-item input[type="radio"]:checked + .mission-nom {
+    color: #FF7F50;
+}
+
+.take-mission-btn {
+    background-color: #4CAF50; /* Vert */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    position: fixed; /* Fixe la position du bouton */
+    bottom: 0; /* Place le bouton en bas de la page */
+    left: 0; /* Place le bouton à gauche de la page */
+    width: 100%; /* Occupe toute la largeur de la page */
+    z-index: 999; /* Assurez-vous qu'il est au-dessus de tous les autres éléments */
+    transition: background-color 0.3s ease;
+    
+}
+
+.take-mission-btn:hover {
+    background-color: #45a049;
+}
+
+.quit-mission-btn {
+    background-color: #d9534f; /* Rouge */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    position: fixed; /* Fixe la position du bouton */
+    bottom: 0; /* Place le bouton en bas de la page */
+    right: 0; /* Place le bouton à droite de la page */
+    width: 100%; /* Occupe toute la largeur de la page */
+    z-index: 999; /* Assurez-vous qu'il est au-dessus de tous les autres éléments */
+    transition: background-color 0.3s ease;
+}
+
+.quit-mission-btn:hover {
+    background-color: #c9302c; /* Rouge plus foncé */
+}
+
+.mission-actuel {
+    background-color: #ff0000; /* Fond rouge */
+    color: #ffffff; /* Texte blanc pour contraster */
+    border: 2px solid #ff0000; /* Bordure rouge */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Légère ombre rouge */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Animation de transition */
+}
+
+.mission-item {
+    background-color: #f2f2f2; /* Fond gris clair pour les autres tournois */
+    color: #333333; /* Texte noir */
+    border: 1px solid #ddd; /* Bordure subtile grise */
+    transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+.mission-actuel:hover {
+    background-color: #ff3333; /* Fond rouge légèrement plus foncé */
+    border-color: #ff3333; /* Bordure rouge légèrement plus foncée */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Ombre rouge plus prononcée */
+}
     
 
 /* Style de l'en-tête */
@@ -964,9 +1146,35 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
       <div class="bottom-left">
-        <button class="custom-button">Prendre une mission</button>
+         <button class="custom-button" id="takeMissionButton">Prendre une mission</button>
       </div>
 
+<!-- Pop-up pour prendre une mission -->
+<?php
+$missions = ModeleProfil::getMissions();
+?>
+<?php
+$estDejaEnMission = ModeleProfil::estDejaEnMission($_SESSION['user_id']);
+?>
+
+<form action="index.php?module=profil&action=exec" method="post">
+    <div class="mission-modal" id="takeMissionModal">
+        <div class="mission-modal-content-rejoindreMission">
+            <span class="mission-close" id="closeTakeMissionModal">&times;</span>
+            <h1>Prendre une mission</h1>
+            <div class="mission-list-container">
+                <div id="listeMissions">
+                </div>
+            </div>
+            <!-- Boutons intégrés dans la pop-up -->
+            <?php if ($estDejaEnMission): ?>
+                <button type="submit" name="submitQuitterMission" id="quit-mission-btn" class="quit-mission-btn">Abandonner la mission actuelle</button>
+            <?php else: ?>
+                <button type="submit" name="submitPrendreMission" id="take-mission-btn" class="take-mission-btn">Prendre la mission</button>
+            <?php endif; ?>
+        </div>
+    </div>
+</form>
 
       <div class="text-tournoi">
         <p class="tournament-info">A participé à</p>
@@ -1078,6 +1286,7 @@ $estDejaInscrit = ModeleProfil::estDejaInscrit($_SESSION['user_id']);
 <script src="modules/mod_profil/view/créerTournoi.js"></script>
 <script src="modules/mod_profil/view/rejoindreTournoi.js"></script>
 <script src="modules/mod_profil/view/envoieArgent.js"></script>
+<script src="modules/mod_profil/view/mission.js"></script>
 <script src="modules/mod_profil/view/classement.js"></script>
 <script src="modules/mod_profil/view/recherche.js"></script>
   

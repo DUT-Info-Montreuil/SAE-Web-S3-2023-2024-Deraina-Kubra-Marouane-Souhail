@@ -415,6 +415,51 @@ public static function getTotalJoueurs(){
     return $statement->fetchColumn();
 }
 
+public static function getMissions() {
+    $query = "SELECT * FROM Mission WHERE Etat = 'Disponible'";
+    $statement = parent::$bdd->prepare($query);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
 
+public static function getIdMissionActuelle($userID) {
+    $query = "SELECT Id_Mission FROM effectuerMission WHERE idJoueur = :userID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchColumn();
+}
+
+
+// Méthode pour prendre une mission
+public static function prendreMission($userID, $missionID) {
+    // Mettre à jour la base de données pour indiquer que l'utilisateur a pris la mission
+    $query = "INSERT INTO effectuerMission (idJoueur, Id_Mission) VALUES (:userID, :missionID)";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':missionID', $missionID, PDO::PARAM_INT);
+    $success = $statement->execute();
+
+    return $success;
+}
+
+public static function estDejaEnMission($userID) {
+    $query = "SELECT COUNT(*) FROM effectuerMission WHERE idJoueur = :userID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchColumn() > 0;
+}
+
+public static function quitterMission($userID, $missionID) {
+    // Supprimer l'association entre l'utilisateur et la mission dans la base de données
+    $query = "DELETE FROM effectuerMission WHERE idJoueur = :userID AND Id_Mission = :missionID";
+    $statement = parent::$bdd->prepare($query);
+    $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':missionID', $missionID, PDO::PARAM_INT);
+    $success = $statement->execute();
+
+    return $success;
+}
 }
 ?>
