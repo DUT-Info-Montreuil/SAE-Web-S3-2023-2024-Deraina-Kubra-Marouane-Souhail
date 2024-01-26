@@ -1107,6 +1107,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div class="modal" id="myModal">
     <form action="index.php?module=profil&action=EnvoyerMessage" method="post">
+        <input type="hidden" name="token" value="<?= $token ?>">
         <div class="haut-pop-M">
             <span class="close" id="closeModal">&times;</span>
             <p>Envoyer un message à :</p>
@@ -1215,6 +1216,7 @@ $estDejaEnMission = ModeleProfil::estDejaEnMission($_SESSION['user_id']);
         <span class="tournoi-close" id="closeTournoiModal">&times;</span>
         <h1>Créer un tournoi</h1>
         <form action="index.php?module=profil&action=exec" method="post">
+            <input type="hidden" name="token" value="<?= $token ?>">
             <input type="text" name="nom" placeholder="Nom du tournoi" required>
             <textarea name="regle" placeholder="Règles du tournoi" required></textarea>
             <input type="date" name="dateDebut" placeholder="Date de début" required>
@@ -1232,6 +1234,7 @@ $estDejaEnMission = ModeleProfil::estDejaEnMission($_SESSION['user_id']);
         <span class="fermer-modal-envoi-argent" id="fermerModalEnvoiArgent">&times;</span>
         <h2>Envoyer de l'argent</h2>
         <form action="index.php?module=profil&action=exec" method="post">
+        <input type="hidden" name="token" value="<?= $token ?>">
             <label for="selectionDestinataire">Destinataire:</label>
             <select id="selectionDestinataire" name="recipient" required>
                 <option value="" disabled selected>Veuillez sélectionner le destinataire</option>

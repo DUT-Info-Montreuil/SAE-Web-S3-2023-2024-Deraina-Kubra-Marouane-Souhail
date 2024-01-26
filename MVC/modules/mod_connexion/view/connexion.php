@@ -90,7 +90,8 @@
 <body>
 
 <h2>Connexion</h2>
-<form method="post" action="index.php?module=connexion&action=connexion">
+<form method="post" action="index.php?module=connexion&action=connexion" enctype="multipart/form-data">
+    <input type="hidden" name="token" value="<?= $token ?>">
     <label for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" required>
     

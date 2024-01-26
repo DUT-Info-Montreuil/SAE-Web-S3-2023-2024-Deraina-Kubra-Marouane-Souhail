@@ -18,7 +18,12 @@ class ControleurConnexion {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'] ?? '';
             $mot_de_passe = $_POST['mot_de_passe'] ?? '';
-            
+            $token = $_POST['token'] ?? '';
+    
+            // Vérification du token CSRF
+            if (!Fonction::isTokenValid($token)) {
+                die('Session expiré. Veuillez réessayer.');
+            }
             // Vérifiez les informations de connexion et récupérez l'utilisateur depuis la base de données
             $utilisateur = $this->modele_connexion->verifierLoginExistant($nom);
     
@@ -49,7 +54,7 @@ class ControleurConnexion {
     
             // Vérification du token CSRF
             if (!Fonction::isTokenValid($token)) {
-                die('Erreur de sécurité : token invalide.');
+                die('Session expiré. Veuillez réessayer.');
             }
     
             // Vérification de la concordance des mots de passe
@@ -121,6 +126,12 @@ class ControleurConnexion {
         Fonction::storeToken($token);
         $this->vue_connexion->form_inscription($token);
   }
+
+    public function form_connexion() {
+        $token = Fonction::generateToken();
+        Fonction::storeToken($token);
+        $this->vue_connexion->form_connexion($token);
+    }
   
   public function getAffichage() {
     return $this->vue_connexion->getAffichage();
@@ -128,11 +139,14 @@ class ControleurConnexion {
 
     public function exec() {
         switch ($this->action) {
-            case 'afficher':
+            case 'form_inscription':
                 $this->form_inscription();
                 break;
             case'inscription':
                 $this->inscription();
+                break;
+            case 'form_connexion':
+                $this->form_connexion();
                 break;
             case 'connexion':
                 $this->connexion();

@@ -17,11 +17,10 @@ class VueCompFooter extends VueCompGenerique {
        $this->affichage .= '<h4>Liens Utiles</h4>';
        $this->affichage .= '<ul>';
        $this->affichage .= '<li><a href="index.php?">Accueil</a></li>';
-       $this->affichage .= '<li><a href="index.php?module=connexion&action=afficher">Inscription</a></li>';
-       $this->affichage .= '<li><a href="index.php?module=connexion&action=connexion">Connexion</a></li>';
+       $this->affichage .= '<li><a href="index.php?module=connexion&action=form_inscription">Inscription</a></li>';
+       $this->affichage .= '<li><a href="index.php?module=connexion&action=form_connexion">Connexion</a></li>';
        $this->affichage .= '</ul>';
        $this->affichage .= '</div>';
-
 
        $this->affichage .= '<div id="footer_texte">';
        $this->affichage .= '©  - 2023-2024 - Deraina, Marouane, Souhail, Kubra';
