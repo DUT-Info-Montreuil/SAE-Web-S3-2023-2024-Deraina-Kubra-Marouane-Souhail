@@ -107,7 +107,7 @@
   font-family: 'Julius Sans One', sans-serif;
 }
 
-p {
+.communaute{
     font-family: 'Inknut Antiqua', sans-serif;
     font-weight: bold;
     font-size: 25px;
@@ -238,31 +238,34 @@ p {
 }
 
 .image_circulaire {
-  width: 100px;
-  height: 100px;
+  width: 5vw;
+  height: 5vw;
   border-radius: 50%;
   overflow: hidden;
 }
 
 .image_circulaire img {
-  width: 100%;
-  height: 100%;
+  width: 5vw;
+  height: 5vw;
   object-fit: cover;
 }
 
 .pseudo {
-  font-family: 'Poppins', sans-serif;
-  font-size: 17px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20;
 }
 
 .icon {
-    position: absolute; /* Position absolue par rapport au conteneur */
-    right: 45; /* Aligner à droite à l'intérieur du conteneur */
-    top: 25%; /* Position verticale, ajustez selon vos besoins */
+    cursor: pointer;
     width: 40px;
     height: 40px;
-    cursor: pointer;
+    margin-left: 10px;
 }
+
 
 
 
@@ -965,9 +968,81 @@ label {
 #classementGlobalTable td {
     padding: 8px;
 }
+.content-3element {
+  display: flex;
+  align-items: center;
+}
 
+@media screen and (max-width: 768px){
+  .blue-squares-container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+ .content-3element {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .blue-square {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 
+  .rectangleReussite,
+  .text-score {
+    margin-top: 10px;
+  }
+  .photo_profil {
+    margin-right: 10px; 
+  }
 
+  .image_circulaire {
+    width: 10vw; 
+    height: 10vw;
+  } 
+
+  .pseudo {
+    font-size: 15px; 
+  }
+  .photo_profil {
+    margin-top: 0; 
+  }
+
+  .image_circulaire {
+    width: 60px;
+    height: 60px;
+  }
+
+  .pseudo {
+    font-size: 15px;
+  }
+
+  .icon {
+    position: static;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 10px; 
+  }
+
+  .text-score {
+    right: auto;
+    top: auto;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .text-tournoi {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-height: 600px) {
+    .blue-square {
+    margin-right: 0;
+    margin-top: 300px;
+  }
+}
 
 </style>
 
@@ -989,6 +1064,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>  
 
 <div class="profile-container">
+
+    <div class="content-3element">
     <div class="pseudo">
       <p><span class="pseudo-font"><?php echo ModeleProfil::pseudo(); ?></span></p>
     </div>
@@ -1009,6 +1086,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 12 12">
                     <path fill="gray" d="M2 5.248V7.5A1.5 1.5 0 0 0 3.5 9h5A1.5 1.5 0 0 0 10 7.5V5.248L6.205 6.956a.5.5 0 0 1-.41 0zm.037-1.08L6 5.952l3.963-1.784A1.5 1.5 0 0 0 8.5 3h-5a1.5 1.5 0 0 0-1.463 1.168"/>
                 </svg>
+    </div>
     </div>
 
     <div class="blue-squares-container">
@@ -1057,6 +1135,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <p class="score-info">Score : <span class="custom-font"><?php echo ModeleProfil::calculerScore(); ?></span></p> </div>
 
     </div>
+    </div>
 
         <!-- Pop-up pour le classement -->
 <div id="classementGlobalPopup" class="classement-global-container">
@@ -1095,7 +1174,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-    <p>COMMUNAUTÉ :</p>
+    <p class="communaute">COMMUNAUTÉ :</p>
 
     <div class="container">
       <div class="button-groups">
