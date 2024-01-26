@@ -106,7 +106,7 @@
   font-family: 'Julius Sans One', sans-serif;
 }
 
-p {
+.communaute{
     font-family: 'Inknut Antiqua', sans-serif;
     font-weight: bold;
     font-size: 25px;
@@ -234,30 +234,41 @@ p {
 }
 
 .image_circulaire {
-  width: 100px;
-  height: 100px;
+  width: 5vw;
+  height: 5vw;
   border-radius: 50%;
   overflow: hidden;
   margin-right: 20px; /* Ajoute un espace à droite de l'image de profil */
 }
 
 .image_circulaire img {
-  width: 100%;
-  height: 100%;
+  width: 5vw;
+  height: 5vw;
   object-fit: cover;
 }
 
 .pseudo {
   font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+    font-size: 25px;
+    text-align: left;
+    margin-left: 20;
   font-size: 17px;
   margin-right: 20px; /* Ajoute un espace à droite du pseudo */
+
 }
 
 .icon {
-  display: block; /* Assurez-vous que l'icône est sur sa propre ligne en dessous de l'image de profil */
-  width: 100%; /* Permet à l'icône de prendre toute la largeur disponible */
-  text-align: right; /* Alignez l'icône à droite */
+display: block; 
+width: 100%; 
+text-align: right; 
+font-family: 'Poppins', sans-serif;
+font-size: 25px;
+font-weight: bold;
+text-align: left;
+margin-left: 20;
 }
+
 
 .icon svg {
   fill: gray;
@@ -266,6 +277,7 @@ p {
   margin-top: 10px; /* Espace entre l'image de profil et l'icône */
   margin-right: 45px; /* Décaler légèrement l'icône vers la gauche */
 }
+
 
 /* Styles for the modal */
 .modal {
@@ -967,9 +979,120 @@ label {
 #classementGlobalTable td {
     padding: 8px;
 }
+.content-3element {
+  display: flex;
+  align-items: center;
+}
 
+@media screen and (max-width: 768px){
+  .blue-squares-container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+ .content-3element {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .blue-square {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 
+  .rectangleReussite,
+  .text-score {
+    margin-top: 10px;
+  }
+  .photo_profil {
+    margin-right: 10px; 
+  }
 
+  .image_circulaire {
+    width: 10vw; 
+    height: 10vw;
+  } 
+
+  .pseudo {
+    font-size: 15px; 
+  }
+  .photo_profil {
+    margin-top: 0; 
+  }
+
+  .pseudo {
+    font-size: 15px;
+  }
+
+  .icon {
+    position: static;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 10px; 
+  }
+
+  .text-score {
+    right: auto;
+    top: auto;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .communaute {
+    font-size:10px;
+  }
+
+  .text-tournoi {
+    margin-top: 20px;
+  }
+
+}
+@media screen and (max-height: 600px) {
+    .blue-square {
+    margin-right: 0;
+    margin-top: 300px;
+  }
+  .rectangleReussite,
+  .text-score {
+    margin-top: 300px;
+  }
+
+  .communaute {
+    font-size:10px;
+  }
+
+  .button-groups {
+    flex-direction: row; 
+    align-items: center;
+  }
+
+  .left-buttons,
+  .right-buttons {
+    flex: none; 
+    width: 50%; 
+  }
+
+  .bottom-left {
+    margin-top: 10px; 
+    width: 5100%; 
+  }
+  .image_circulaire {
+    width: 40px;
+    height: 40px; 
+  }
+
+  .pseudo {
+    font-size: 12px;
+  }
+
+  .icon {
+    margin-top: 5px;
+  }
+  .image_circulaire img {
+    width: 30px; 
+    height: 30px; 
+  }
+}
 
 </style>
 
@@ -991,6 +1114,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>  
 
 <div class="profile-container">
+
+    <div class="content-3element">
     <div class="pseudo">
       <p><span class="pseudo-font"><?php echo ModeleProfil::pseudo(); ?></span></p>
     </div>
@@ -1012,6 +1137,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 </svg>
     </div>
 </div>
+    </div>
+
     <div class="blue-squares-container">
         <div class="blue-square">
             <div class="vertical-rectangle"></div>
@@ -1058,6 +1185,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <p class="score-info">Score : <span class="custom-font"><?php echo ModeleProfil::calculerScore(); ?></span></p> </div>
 
     </div>
+    </div>
 
         <!-- Pop-up pour le classement -->
 <div id="classementGlobalPopup" class="classement-global-container">
@@ -1096,7 +1224,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-    <p>COMMUNAUTÉ :</p>
+    <p class="communaute">COMMUNAUTÉ :</p>
 
     <div class="container">
       <div class="button-groups">
@@ -1187,7 +1315,7 @@ $estDejaEnMission = ModeleProfil::estDejaEnMission($_SESSION['user_id']);
         <p class="tournament-info">tournois</p>
 
         </div>
-    </div>
+    
 
 </body>
 </html>

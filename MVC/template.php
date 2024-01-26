@@ -44,17 +44,20 @@
   body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column; /* Organise le contenu en colonne */
   }
   main {
+    flex:1;
     display: flex; /* Utilise Flexbox pour aligner les enfants de main */
     flex-direction: column; /* Empile les enfants de main verticalement */
     align-items:center;
+    margin-top: auto;
     justify-content: center; /* Centre verticalement dans main */
     height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
     text-align: center; /* Centre le texte à l'intérieur de main */
+    padding:20px;
   }
 
   footer {
@@ -62,7 +65,7 @@
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 3px 0;
+    padding: 10px 0;
     width: 100%;
   }
   .content-container {
