@@ -1007,11 +1007,6 @@ label {
     margin-top: 0; 
   }
 
-  .image_circulaire {
-    width: 60px;
-    height: 60px;
-  }
-
   .pseudo {
     font-size: 15px;
   }
@@ -1032,15 +1027,59 @@ label {
     text-align: center;
     margin-top: 20px;
   }
+  .communaute {
+    font-size:10px;
+  }
 
   .text-tournoi {
     margin-top: 20px;
   }
+
 }
 @media screen and (max-height: 600px) {
     .blue-square {
     margin-right: 0;
     margin-top: 300px;
+  }
+  .rectangleReussite,
+  .text-score {
+    margin-top: 300px;
+  }
+
+  .communaute {
+    font-size:10px;
+  }
+
+  .button-groups {
+    flex-direction: row; 
+    align-items: center;
+  }
+
+  .left-buttons,
+  .right-buttons {
+    flex: none; 
+    width: 50%; 
+  }
+
+  .bottom-left {
+    margin-top: 10px; 
+    width: 5100%; 
+  }
+  .image_circulaire {
+    width: 40px;
+    height: 40px; 
+  }
+
+  .pseudo {
+    font-size: 12px;
+  }
+
+  .icon {
+    margin-top: 5px;
+  }
+  .image_circulaire img {
+    width: 30px; 
+    height: 30px; 
   }
 }
 
@@ -1264,7 +1303,7 @@ $estDejaEnMission = ModeleProfil::estDejaEnMission($_SESSION['user_id']);
         <p class="tournament-info">tournois</p>
 
         </div>
-    </div>
+    
 
 </body>
 </html>
