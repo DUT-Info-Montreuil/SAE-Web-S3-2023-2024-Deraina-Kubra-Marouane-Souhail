@@ -85,7 +85,7 @@ class ControleurConnexion {
                 // Connection utilisateur et redirection vers la page d'accueil ou autre
                 $_SESSION['user_id'] = $this->modele_connexion->verifierLoginExistant($nom);
                 unset($_SESSION['user_id']);
-                header("Location: index.php?module=connexion&action=connexion"); 
+                header("Location: index.php?module=connexion&action=form_connexion"); 
                 exit;
             } else {
                 echo "Erreur lors de l'inscription.";

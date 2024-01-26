@@ -227,7 +227,7 @@
 
 <div class="header">
     <div class="header-text">
-        LES DIFFÉRENTES MAP DU JEU
+        LES DIFFÉRENTES CARTES DU JEU
     </div>
 </div>
 
