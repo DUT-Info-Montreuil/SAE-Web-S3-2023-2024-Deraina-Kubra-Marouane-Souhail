@@ -8,7 +8,6 @@ class BarreDeRecherche extends Connexion{
             $user = trim($_GET['user']);
             $user = $user . '%'; // Ajout du % pour la recherche LIKE
 
-            // Utilisation de requête préparée pour éviter les attaques SQL
             $query = "SELECT Nom FROM Joueur WHERE Nom LIKE :nom LIMIT 10";
             $req = Connexion::getBdd()->prepare($query);
 
@@ -24,7 +23,7 @@ class BarreDeRecherche extends Connexion{
 $barre = new BarreDeRecherche();
 $resultatRecherche = $barre->rechercherUtilisateur();
 
-// Retournez les résultats au format JSON
+// Retourner les résultats au format JSON
 header('Content-Type: application/json');
 echo json_encode($resultatRecherche);
 

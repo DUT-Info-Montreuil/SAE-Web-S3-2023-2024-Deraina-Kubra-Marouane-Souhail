@@ -39,7 +39,7 @@
         }
 
 .defense-item {
-    flex: 0 0 calc(100% / 3 - 20px); /* Ajustez pour trois éléments par ligne */
+    flex: 0 0 calc(100% / 3 - 20px); /* Ajuster pour trois éléments par ligne */
     margin: 10px;
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);

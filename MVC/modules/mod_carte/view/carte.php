@@ -21,7 +21,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: -1; /* Placez le pseudo-élément en arrière-plan */
+            z-index: -1;
             background: url('././Images/fond.avif') no-repeat center center fixed; 
             background-size: cover;
             filter: blur(5px);
@@ -72,8 +72,8 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             flex-direction: column; /* Pour afficher les détails verticalement */
-            padding: 20px; /* Ajustez l'espacement intérieur */
-            text-align: center; /* Centrez le texte */
+            padding: 20px; 
+            text-align: center; 
         }
 
 
@@ -93,7 +93,7 @@
 
 
         .image-container:hover img {
-            filter: blur(8px); /* Ajustez si nécessaire */
+            filter: blur(8px); 
         }
 
         .image-container:hover .overlay {
@@ -233,7 +233,7 @@
 
 <div class="images-wrapper">
     <?php foreach ($cartes as $index => $carte): ?>
-        <div class="image-container" style="transform: translate(<?php echo $index * 100; ?>px, 0);"> <!-- Ajustez la valeur (200px) selon vos besoins -->
+        <div class="image-container" style="transform: translate(<?php echo $index * 100; ?>px, 0);">
             <img src="modules/mod_carte/imageCarte/<?php echo htmlspecialchars($carte['Image']); ?>" alt="Image de la carte">
             <div class="overlay">
                 <h3>Description</h3>

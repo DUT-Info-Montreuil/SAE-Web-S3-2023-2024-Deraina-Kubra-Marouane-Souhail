@@ -24,7 +24,7 @@ class ControleurConnexion {
             if (!Fonction::isTokenValid($token)) {
                 die('Session expiré. Veuillez réessayer.');
             }
-            // Vérifiez les informations de connexion et récupérez l'utilisateur depuis la base de données
+            // Vérification des informations de connexion et récupération de l'utilisateur depuis la base de données
             $utilisateur = $this->modele_connexion->verifierLoginExistant($nom);
     
             if ($utilisateur !== null && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
@@ -82,7 +82,7 @@ class ControleurConnexion {
             // Ajout de l'utilisateur à la base de données
             if ($this->modele_connexion->ajouterUtilisateur($nom, $mot_de_passe_hash, $logo)) {
                 echo "Inscription réussie !";
-                // Connectez l'utilisateur et redirigez-le vers la page d'accueil ou autre
+                // Connection utilisateur et redirection vers la page d'accueil ou autre
                 $_SESSION['user_id'] = $this->modele_connexion->verifierLoginExistant($nom);
                 unset($_SESSION['user_id']);
                 header("Location: index.php?module=connexion&action=connexion"); 

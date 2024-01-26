@@ -80,7 +80,6 @@ public function exec() {
             }else if (isset($_POST['submitQuitterMission'])) {
                 $this->quitterMission(); // Traiter la quitte d'une mission
             }elseif (isset($_POST['destinataire_message'])) {
-                //$this->rechercherUtilisateur();
                 $this->form_envoyerMessage($_POST['destinataire_message'], $_POST['contenu']); // Traiter l'envoi de message
             }elseif (isset($_POST['action']) && $_POST['action'] == 'rechercherUtilisateur') {
                 $this->rechercherUtilisateur();
@@ -158,7 +157,7 @@ public function exec() {
 private function rejoindreTournoi() {
     $userID = $_SESSION['user_id'];
 
-    // Vérifiez si 'tournoiID' est défini et non null
+    // Vérifier si 'tournoiID' est défini et non null
     $tournoiID = isset($_POST['tournoiID']) ? $_POST['tournoiID'] : null;
 
     if ($tournoiID === null) {
@@ -250,7 +249,7 @@ private function prendreMission() {
 private function quitterMission() {
     $userID = $_SESSION['user_id'];
 
-    // Vérifiez si 'missionID' est défini et non null
+    // Vérifier si 'missionID' est défini et non null
     $missionID = isset($_POST['missionID']) ? $_POST['missionID'] : null;
 
     if ($missionID === null) {

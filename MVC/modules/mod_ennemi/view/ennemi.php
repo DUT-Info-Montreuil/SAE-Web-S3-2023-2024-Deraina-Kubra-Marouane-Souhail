@@ -122,7 +122,8 @@ footer {
 
     <div class="page-text">
     <h3>Ennemis</h3>
-    <p>Il y a plusieurs types d'ennemis qui veulent votre mal.</p>
+    <p>Il y a plusieurs types d'ennemis qui veulent votre mal. <br>
+        Protéger votre forteresse à tout prix contre cette invasion ! </p>
     </div>
 
 

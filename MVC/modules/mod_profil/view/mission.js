@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var btnOpenTakeMission = document.getElementById('takeMissionButton');
     var modalTakeMission = document.getElementById('takeMissionModal');
     var btnCloseTakeMission = document.getElementById('closeTakeMissionModal');
-    var formMission = document.querySelector('form'); // Assurez-vous que c'est le bon formulaire pour les missions
+    var formMission = document.querySelector('form'); // formulaire pour les missions
 
     // Vérifie si les éléments existent
     if (btnOpenTakeMission && modalTakeMission && btnCloseTakeMission && formMission) {
