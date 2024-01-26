@@ -46,17 +46,17 @@
     padding: 0;
     min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Organise le contenu en colonne */
+    flex-direction: column; 
   }
   main {
     flex:1;
-    display: flex; /* Utilise Flexbox pour aligner les enfants de main */
-    flex-direction: column; /* Empile les enfants de main verticalement */
+    display: flex;
+    flex-direction: column; 
     align-items:center;
     margin-top: auto;
-    justify-content: center; /* Centre verticalement dans main */
-    height: calc(100vh - 60px); /* Hauteur totale de la fenêtre moins la hauteur du header et du footer */
-    text-align: center; /* Centre le texte à l'intérieur de main */
+    justify-content: center;  
+    height: calc(100vh - 60px); 
+    text-align: center; 
     padding:20px;
   }
 
@@ -69,20 +69,20 @@
   }
   .content-container {
     display: flex;
-    align-items: center; /* Aligner les éléments au centre */
-    justify-content: center; /* Centrer les éléments horizontalement */
-    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+    align-items: center; 
+    justify-content: center; 
+    flex-wrap: wrap; 
   }
 
   .welcome-image {
-    margin-right: 20px; /* Espace entre l'image et le texte */
+    margin-right: 20px; 
     height: auto;
-    max-width: 100%; /* Assure que l'aspect ratio de l'image est maintenu */
+    max-width: 100%; 
   }
 
 
   .welcome-text {
-    max-width: 600px; /* Largeur maximale du texte pour une meilleure lisibilité */
+    max-width: 600px; 
     margin: 0 auto;
   }
 
@@ -191,11 +191,11 @@
 }
   .download-button {
       background-color: #FFD700; /* Couleur jaune */
-      color: #333; /* Couleur du texte */
-      padding: 10px 20px; /* Marge intérieure du bouton */
-      text-decoration: none; /* Supprimer la décoration du texte */
-      border-radius: 5px; /* Coins arrondis */
-      font-weight: bold; /* Texte en gras */
+      color: #333; 
+      padding: 10px 20px; 
+      text-decoration: none; 
+      border-radius: 5px; 
+      font-weight: bold; 
       transition: background-color 0.3s; /* Transition de couleur au survol */
     }
 

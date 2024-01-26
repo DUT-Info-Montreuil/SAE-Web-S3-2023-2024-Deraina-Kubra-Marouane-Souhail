@@ -13,7 +13,7 @@ body::before {
     height: 100%;
     background: inherit; /* Copie l'arrière-plan du body */
     filter: blur(5px); /* Ajoute le flou */
-    z-index: -1; /* Place le pseudo-élément en arrière-plan */
+    z-index: -1; 
 }
 
 

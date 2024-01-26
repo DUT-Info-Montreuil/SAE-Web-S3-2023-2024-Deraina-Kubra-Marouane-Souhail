@@ -23,22 +23,22 @@
     }
 
     h2 {
-        font-size: 2.5rem; /* Taille plus grande pour le titre */
-        color: #f8f8f8; /* Couleur claire pour contraster avec l'arrière-plan */
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Ombre pour améliorer la lisibilité */
+        font-size: 2.5rem; 
+        color: #f8f8f8; 
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
         text-align: center;
-        margin-bottom: 1rem; /* Espacement ajusté */
-        padding: 0.5rem; /* Petit rembourrage autour du texte */
-        background-color: rgba(0, 0, 0, 0.4); /* Fond semi-transparent pour la lisibilité */
-        display: inline-block; /* Pour appliquer le padding et background */
-        border-radius: 10px; /* Bordures arrondies */
-        margin-top: 2rem; /* Ajout d'espace en haut */
-        transition: transform 0.3s, box-shadow 0.3s; /* Transition pour les effets au survol */
+        margin-bottom: 1rem;
+        padding: 0.5rem; 
+        background-color: rgba(0, 0, 0, 0.4); 
+        display: inline-block;
+        border-radius: 10px; 
+        margin-top: 2rem;
+        transition: transform 0.3s, box-shadow 0.3s; 
     }
 
     h2:hover {
-        transform: scale(1.05); /* Légère augmentation de la taille au survol */
-        text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6); /* Ombre plus marquée au survol */
+        transform: scale(1.05); 
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
     }
 
     input[type=text],

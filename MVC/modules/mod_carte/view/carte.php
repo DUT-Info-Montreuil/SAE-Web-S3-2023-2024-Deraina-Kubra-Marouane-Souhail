@@ -72,28 +72,28 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             flex-direction: column; /* Pour afficher les détails verticalement */
-            padding: 20px; /* Ajustez l'espacement intérieur */
-            text-align: center; /* Centrez le texte */
+            padding: 20px; 
+            text-align: center; 
         }
 
 
 
 .overlay h3 {
     margin: 0;
-    font-size: 1.5vw; /* Taille de police pour les titres (ajustez selon vos besoins) */
+    font-size: 1.5vw;
     color: #ff9900;
 }
 
 .overlay p {
     margin: 8px 0;
-    font-size: 1vw; /* Taille de police pour le texte (ajustez selon vos besoins) */
+    font-size: 1vw; 
     color: #ffffff;
 }
 
 
 
         .image-container:hover img {
-            filter: blur(8px); /* Ajustez si nécessaire */
+            filter: blur(8px); 
         }
 
         .image-container:hover .overlay {
@@ -103,18 +103,18 @@
     .page-text {
         text-align: center;
         margin-top: 10px;
-        background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond semi-transparente */
-        color: #ffffff; /* Couleur du texte en blanc */
-        padding: 8px; /* Espacement intérieur pour le texte */
+        background-color: rgba(0, 0, 0, 0.7); 
+        color: #ffffff;
+        padding: 8px;
         border-radius: 10px;
     }
 
     .page-text h3 {
-        font-size: 24px; /* Taille de police pour le titre */
+        font-size: 24px; 
     }
 
     .page-text p {
-        font-size: 18px; /* Taille de police pour le texte */
+        font-size: 18px;
     }
 
 @media screen and (max-height: 650px) {

@@ -19,7 +19,7 @@ class ControleurConnexion {
             $nom = $_POST['nom'] ?? '';
             $mot_de_passe = $_POST['mot_de_passe'] ?? '';
             
-            // Vérifiez les informations de connexion et récupérez l'utilisateur depuis la base de données
+           
             $utilisateur = $this->modele_connexion->verifierLoginExistant($nom);
     
             if ($utilisateur !== null && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
@@ -29,7 +29,7 @@ class ControleurConnexion {
                 header('Location: index.php');
                 exit;
             } else {
-                // Informations de connexion incorrectes
+                
                 echo "Informations de connexion incorrectes.";
                 $this->vue_connexion->form_connexion();
             }
@@ -89,7 +89,7 @@ class ControleurConnexion {
     }
 
     public function telechargementImage() {
-        $logo = ''; // Déclarer la variable $logo en dehors de la condition if
+        $logo = '';
     
         if (isset($_FILES['logo']) && $_FILES['logo']['error'] == UPLOAD_ERR_OK) {
             $extension = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);

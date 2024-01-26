@@ -5,65 +5,65 @@
 <title>Defense</title>
 <style>
      body {
-    font-family: Arial, sans-serif; /* Police de caractères par défaut */
-    margin: 0; /* Aucune marge extérieure */
-    padding: 0; /* Aucun espacement intérieur */
-    background-color: #f0f0f0; /* Couleur de fond de la page */
-    color: #333; /* Couleur de texte par défaut */
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: #f0f0f0; 
+    color: #333; 
     }
 
      
      a {
-        text-decoration: none; /* Enlève le soulignement */
+        text-decoration: none; 
     }
 
 
     .container {
         display: flex;
         justify-content: center;
-        gap: 40px; /* Espacement plus grand entre les éléments */
+        gap: 40px; 
         margin-top: 50px;
         position: relative;
     }
 
     .defense-item {
-        width: 400px; /* Légèrement plus large */
-        cursor: pointer; /* Indique que l'élément est cliquable */
-        overflow: hidden; /* Empêche les débordements */
-        border-radius: 10px; /* Coins arrondis plus prononcés */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée subtile */
-        background: white; /* Fond blanc pour contraster avec l'arrière-plan */
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition douce pour hover */
+        width: 400px; 
+        cursor: pointer; 
+        overflow: hidden; 
+        border-radius: 10px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: white; 
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .defense-item:hover {
-        transform: translateY(-5px); /* Effet de lévitation au survol */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
+        transform: translateY(-5px); 
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
     }
     .defense-item h2 {
-        font-size: 1.5rem; /* Taille de police plus grande */
-        color: white; /* Texte blanc pour contraste */
-        background-color: #007bff; /* Bleu flat design */
-        margin: 0; /* Aucune marge */
-        padding: 20px; /* Espacement autour du texte */
-        width: 100%; /* Pleine largeur */
-        display: flex; /* Utiliser Flexbox */
-        justify-content: center; /* Centrer horizontalement */
-        align-items: center; /* Centrer verticalement */
-        height: 60px; /* Hauteur fixe pour mieux contrôler le centrage vertical */
-        box-sizing: border-box; /* S'assurer que padding et border sont inclus dans la largeur/hauteur */
+        font-size: 1.5rem; 
+        color: white; 
+        background-color: #007bff; 
+        margin: 0; 
+        padding: 20px; 
+        width: 100%;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 60px; 
+        box-sizing: border-box; 
     }
 
     .defense-item img {
-        width: 120%; /* Augmentation de la largeur de l'image */
+        width: 120%; 
         height: auto;
         display: block;
         transition: transform 0.3s ease;
-        margin-left: -10%; /* Centrer l'image agrandie dans son conteneur */
+        margin-left: -10%; 
     }
 
     .defense-item img:hover {
-        transform: scale(1.05); /* Légère augmentation de l'échelle de l'image au survol */
+        transform: scale(1.05); 
     }
 </style>
 </head>
