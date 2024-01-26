@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var btnOpenJoin = document.getElementById('joinTournamentButton');
     var modalJoin = document.getElementById('joinTournamentModal');
     var btnCloseJoin = document.getElementById('closeJoinTournoiModal');
-    var form = document.querySelector('form'); // Assurez-vous que c'est le bon formulaire
+    var form = document.querySelector('form'); // formulaire
 
     // Vérifie si les éléments existent
     if (btnOpenJoin && modalJoin && btnCloseJoin && form) {

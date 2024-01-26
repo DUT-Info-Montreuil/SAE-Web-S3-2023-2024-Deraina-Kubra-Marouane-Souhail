@@ -15,6 +15,18 @@
         height: 100vh;
     }
 
+    body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit; /* Copie l'arrière-plan du body */
+    filter: blur(3px); /* Ajoute le flou */
+    z-index: -1; /* Place le pseudo-élément en arrière-plan */
+}
+
     form {
         max-width: 300px;
         margin: 2rem auto;
@@ -78,7 +90,8 @@
 <body>
 
 <h2>Connexion</h2>
-<form method="post" action="index.php?module=connexion&action=connexion">
+<form method="post" action="index.php?module=connexion&action=connexion" enctype="multipart/form-data">
+    <input type="hidden" name="token" value="<?= $token ?>">
     <label for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" required>
     

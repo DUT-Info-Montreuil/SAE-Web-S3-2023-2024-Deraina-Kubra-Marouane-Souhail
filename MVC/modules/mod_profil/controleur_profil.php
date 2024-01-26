@@ -1,7 +1,7 @@
 <?php
 require_once "vue_profil.php"; 
 require_once 'modele_profil.php';
-
+require_once '././fonction.php';
 
 class ControleurProfil{
     private $vue;
@@ -15,6 +15,12 @@ class ControleurProfil{
     
 
     private function traiterCreationTournoi() {
+        // Vérification du token CSRF
+        $token = $_POST['token'] ?? '';
+        if (!Fonction::isTokenValid($token)) {
+            die('Session expiré. Veuillez réessayer.');
+        }
+
         $idCreateur = $_SESSION['user_id'];
         $nom = $_POST['nom'];
         $regle = $_POST['regle'];
@@ -28,6 +34,12 @@ class ControleurProfil{
 }
 
 private function traiterEnvoiArgent() {
+    // Vérification du token CSRF
+    $token = $_POST['token'] ?? '';
+    if (!Fonction::isTokenValid($token)) {
+        die('Session expiré. Veuillez réessayer.');
+    }
+    
     $destinataireID = $_POST['recipient'];
     $montant = $_POST['amount'];
 
@@ -38,6 +50,9 @@ private function traiterEnvoiArgent() {
 
 
 public function exec() {
+
+   
+    
     // Vérifier d'abord si c'est une requête AJAX pour charger les tournois
     if (isset($_GET['action']) && $_GET['action'] == 'loadTournois') {
         $this->chargerListeTournois();
@@ -65,25 +80,38 @@ public function exec() {
             }else if (isset($_POST['submitQuitterMission'])) {
                 $this->quitterMission(); // Traiter la quitte d'une mission
             }elseif (isset($_POST['destinataire_message'])) {
-                //$this->rechercherUtilisateur();
                 $this->form_envoyerMessage($_POST['destinataire_message'], $_POST['contenu']); // Traiter l'envoi de message
             }elseif (isset($_POST['action']) && $_POST['action'] == 'rechercherUtilisateur') {
                 $this->rechercherUtilisateur();
             }
         }  
 
-            $this->vue->afficherProfil();
+            $this->generateTokenDansVue();
             $tournois = $this->modele->getTournois(); // Récupérer les tournois
             $this->vue->afficherProfil($tournois); // Passer les tournois à la vue
-        
+            
         } else {
-            header("Location: index.php?module=connexion&action=connexion"); 
+            header("Location: index.php?module=connexion&action=form_connexion"); 
             exit();
         }
     }
 
+    private function generateTokenDansVue(){
+        $token = Fonction::generateToken();
+        Fonction::storeToken($token);
+        $this->vue->afficherProfil($token);
+    }
 
     private function form_envoyerMessage($destinataire, $contenu){
+        
+    
+        // Vérification du token CSRF
+        $token = $_POST['token'] ?? '';
+        if (!Fonction::isTokenValid($token)) {
+            die('Session expiré. Veuillez réessayer.');
+        }
+
+            
         if ($contenu != "" && $destinataire) {
             $idDestinataire = $this->modele->getIdUtilisateurParNom($destinataire);
 
@@ -129,7 +157,7 @@ public function exec() {
 private function rejoindreTournoi() {
     $userID = $_SESSION['user_id'];
 
-    // Vérifiez si 'tournoiID' est défini et non null
+    // Vérifier si 'tournoiID' est défini et non null
     $tournoiID = isset($_POST['tournoiID']) ? $_POST['tournoiID'] : null;
 
     if ($tournoiID === null) {
@@ -221,7 +249,7 @@ private function prendreMission() {
 private function quitterMission() {
     $userID = $_SESSION['user_id'];
 
-    // Vérifiez si 'missionID' est défini et non null
+    // Vérifier si 'missionID' est défini et non null
     $missionID = isset($_POST['missionID']) ? $_POST['missionID'] : null;
 
     if ($missionID === null) {

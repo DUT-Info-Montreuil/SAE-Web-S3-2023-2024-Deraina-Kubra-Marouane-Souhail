@@ -5,8 +5,12 @@
     <title>Ennemis</title>
     <style>
       
-body {
-  justify-content: center;
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: url('././Images/fond.avif') no-repeat center center fixed; 
+  background-size: cover;
   height: 100vh;
 }
 
@@ -34,7 +38,9 @@ body {
 }
 
 .image-container img {
-  max-width: 50%; 
+  width: 400px; /* Largeur fixe pour l'image */
+  height: 430px; /* Hauteur fixe pour l'image */
+  max-width: 60%; 
   max-height: 70%;
   transition: transform 0.5s, box-shadow 0.5s, opacity 0.5s;
   opacity: 0.6;
@@ -115,7 +121,8 @@ footer {
 
     <div class="page-text">
     <h3>Ennemis</h3>
-    <p>Il y a plusieurs types d'ennemis qui veulent votre mal.</p>
+    <p>Il y a plusieurs types d'ennemis qui veulent votre mal. <br>
+        Protéger votre forteresse à tout prix contre cette invasion ! </p>
     </div>
 
 

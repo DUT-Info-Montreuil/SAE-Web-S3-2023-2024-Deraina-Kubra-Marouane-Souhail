@@ -1,5 +1,5 @@
 <?php
-require_once "modules/mod_accueil/controleur_accueil.php"; 
+require_once "modules/mod_accueil/controleur_accueil.php";
 
 class ModAccueil extends ModuleGenerique {
  

@@ -12,7 +12,7 @@ class VueConnexion extends VueGenerique {
     }   
 
 
-    public function form_connexion() {
+    public function form_connexion($token) {
         include_once('view/connexion.php');
     }
     

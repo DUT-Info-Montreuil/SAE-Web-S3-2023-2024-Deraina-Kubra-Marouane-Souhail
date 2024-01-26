@@ -211,7 +211,7 @@ class ModeleProfil extends Connexion {
         $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
         $statement->execute();
     
-        // Récupérez les données des messages sous forme de tableau associatif
+        // Récupérer les données des messages sous forme de tableau associatif
         $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
     
         return $messages;
@@ -314,6 +314,7 @@ public static function estDejaInscrit($userID) {
         return false;
     }
 }
+
 // Méthode pour permettre à l'utilisateur de quitter un tournoi
 public static function quitterTournoi($userID) {
     $query = "DELETE FROM Participe WHERE idJoueur = :userID";
@@ -321,8 +322,6 @@ public static function quitterTournoi($userID) {
     $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
     $statement->execute();
 
-    // Vous pouvez vérifier si la suppression a été effectuée avec succès
-    // et retourner un booléen ou un message en conséquence
     return $statement->rowCount() > 0;
 }
 

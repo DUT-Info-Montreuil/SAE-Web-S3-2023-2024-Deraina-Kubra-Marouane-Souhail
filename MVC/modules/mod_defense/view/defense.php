@@ -8,8 +8,9 @@
     font-family: Arial, sans-serif; 
     margin: 0; 
     padding: 0; 
-    background-color: #f0f0f0; 
     color: #333; 
+    background: url('././Images/fond.avif') no-repeat center center fixed; 
+    background-size: cover;
     }
 
      

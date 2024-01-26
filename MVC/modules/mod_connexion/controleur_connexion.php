@@ -18,8 +18,13 @@ class ControleurConnexion {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'] ?? '';
             $mot_de_passe = $_POST['mot_de_passe'] ?? '';
-            
-           
+            $token = $_POST['token'] ?? '';
+    
+            // Vérification du token CSRF
+            if (!Fonction::isTokenValid($token)) {
+                die('Session expiré. Veuillez réessayer.');
+            }
+            // Vérification des informations de connexion et récupération de l'utilisateur depuis la base de données
             $utilisateur = $this->modele_connexion->verifierLoginExistant($nom);
     
             if ($utilisateur !== null && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
@@ -49,7 +54,7 @@ class ControleurConnexion {
     
             // Vérification du token CSRF
             if (!Fonction::isTokenValid($token)) {
-                die('Erreur de sécurité : token invalide.');
+                die('Session expiré. Veuillez réessayer.');
             }
     
             // Vérification de la concordance des mots de passe
@@ -77,7 +82,7 @@ class ControleurConnexion {
             // Ajout de l'utilisateur à la base de données
             if ($this->modele_connexion->ajouterUtilisateur($nom, $mot_de_passe_hash, $logo)) {
                 echo "Inscription réussie !";
-                // Connectez l'utilisateur et redirigez-le vers la page d'accueil ou autre
+                // Connection utilisateur et redirection vers la page d'accueil ou autre
                 $_SESSION['user_id'] = $this->modele_connexion->verifierLoginExistant($nom);
                 unset($_SESSION['user_id']);
                 header("Location: index.php?module=connexion&action=connexion"); 
@@ -121,6 +126,12 @@ class ControleurConnexion {
         Fonction::storeToken($token);
         $this->vue_connexion->form_inscription($token);
   }
+
+    public function form_connexion() {
+        $token = Fonction::generateToken();
+        Fonction::storeToken($token);
+        $this->vue_connexion->form_connexion($token);
+    }
   
   public function getAffichage() {
     return $this->vue_connexion->getAffichage();
@@ -128,11 +139,14 @@ class ControleurConnexion {
 
     public function exec() {
         switch ($this->action) {
-            case 'afficher':
+            case 'form_inscription':
                 $this->form_inscription();
                 break;
             case'inscription':
                 $this->inscription();
+                break;
+            case 'form_connexion':
+                $this->form_connexion();
                 break;
             case 'connexion':
                 $this->connexion();
